@@ -77,15 +77,9 @@ public class Client extends Application {
 		Client.pStage = primaryStage;
 		Parent root = null;
 		try {
-			System.out.println("salam?");
 			root = FXMLLoader.load( getClass().getResource( "/UIUX/FXMLs/FirstPage.fxml" ) );
-
 		} catch (IOException e) {
-			System.out.println("heh error?");
-			System.out.println(" error is : " + e);
-			System.out.println("-=-----");
 			e.printStackTrace();
-			System.out.println("-----------");
 		}
 		Client.pStage.setTitle( "Main Menu" );
 		Client.pStage.setScene( new Scene( root, 1280, 720 ) );
