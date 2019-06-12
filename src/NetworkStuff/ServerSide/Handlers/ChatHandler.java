@@ -30,28 +30,19 @@ public class ChatHandler implements Runnable {
 
     }
 
-
     @Override
     public void run() {
         try {
-
             while (true) {
-
                 SendChatCommand chatCommand = this.getChat();
                 sendChat(chatCommand);
-
-
-            }
+        }
         } catch (IOException e) {
             if (e instanceof EOFException) {
                 System.out.println("join socket disconnected.");
             }
-
         }
-
-
     }
-
 
     private SendChatCommand getChat()throws IOException{
         SendChatCommand chatCommand=null;
@@ -60,8 +51,6 @@ public class ChatHandler implements Runnable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
         return chatCommand;
     }
 
@@ -87,15 +76,11 @@ public class ChatHandler implements Runnable {
             }
             else {
                 ServerLogWriter.getInstance().writeLog("User: "+chatCommand.getSender()+" send a massage in Rivals channel in "+chatCommand.getMatch().getHostProfile().getUserName()+"s match!");
-
-                //if (chatCommand.getSender().equals(chatCommand.getMatch().getHostProfile().getUserName())) {
                     ChatHandler targetHandler = Server.chatHandlers.get(Server.userHandlers.get(chatCommand.getMatch().getGuestProfile()));
                     targetHandler.oos.writeObject(new RecieveChatCommand(chatCommand.getMsg(), chatCommand.getSender(),ChatChannelType.RIVAL_CHANNEL));
-                //}
-                //else {
+
                     ChatHandler targetHandler1 = Server.chatHandlers.get(Server.userHandlers.get(chatCommand.getMatch().getHostProfile()));
                     targetHandler1.oos.writeObject(new RecieveChatCommand(chatCommand.getMsg(), chatCommand.getSender(),ChatChannelType.RIVAL_CHANNEL));
-                //}
             }
 
     }

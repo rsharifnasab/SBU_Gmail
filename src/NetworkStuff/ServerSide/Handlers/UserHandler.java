@@ -107,7 +107,6 @@ public class UserHandler implements Runnable, Serializable {
     }
 
     private Response produceResponse(Command command) {
-        //System.out.println(this.profile);
         Response returnValue = null;
         if (command instanceof CheckLoginValidnessCommand) {
             LoginInformation temp = ((CheckLoginValidnessCommand) command).getLoginInformation();
@@ -115,7 +114,6 @@ public class UserHandler implements Runnable, Serializable {
             boolean answer = this.isLoginValid(temp);
 
             returnValue = new LoginIsValidResponse(answer);
-//			return ( new LoginIsValidResponse( answer ) );
         } else if (command instanceof CreateProfileCommand) {
             Profile newProfile = ((CreateProfileCommand) command).getProfile();
             ServerLogWriter.getInstance().writeLog("create profile command recieved from: "+newProfile.getUserName());
@@ -140,7 +138,6 @@ public class UserHandler implements Runnable, Serializable {
             GetChallengesResponse challengesResponse = new GetChallengesResponse();
             Map<Match, Profile> serverChallenges = new ConcurrentHashMap<>(Server.challenges);
             challengesResponse.setChallenges(serverChallenges);
-            //System.out.println(challengesResponse.getChallenges());
             returnValue = challengesResponse;
         } else if (command instanceof CreateMatchCommand) {
             Match match = ((CreateMatchCommand) command).getMatch();
@@ -152,7 +149,6 @@ public class UserHandler implements Runnable, Serializable {
             Server.challenges.keySet().removeAll(((DeleteChallengesCommand) command).getList());
             if (((DeleteChallengesCommand) command).getActive() != null)
                 Server.challenges.put(((DeleteChallengesCommand) command).getActive(), ((DeleteChallengesCommand) command).getActive().getHostProfile());
-
         }
         return returnValue;
     }
@@ -173,11 +169,6 @@ public class UserHandler implements Runnable, Serializable {
             Server.profiles.put(profile.getUserName(), profile);
             DataBaseUpdator.getInstance().updateDataBase();
             ServerLogWriter.getInstance().writeLog("User: "+profile.getUserName()+" created an account.");
-
-
-/*			for (Map.Entry<String,Profile> iterator : Server.profiles.entrySet() )
-				System.out.print ( iterator.getKey() + " " + iterator.getValue()+ "     " );*/
-            //System.out.println();
         }
         return returnValue;
     }
@@ -211,16 +202,4 @@ public class UserHandler implements Runnable, Serializable {
 
 
     }
-
-
-	/*@Override
-	public int hashCode() {
-		return this.profile.getUserName().hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		UserHandler handler=(UserHandler) obj;
-		return (handler.profile.getUserName().equals(this.profile.getUserName()));
-	}*/
 }

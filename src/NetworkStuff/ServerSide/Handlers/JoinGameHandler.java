@@ -74,28 +74,13 @@ public class JoinGameHandler implements Runnable {
     private void sendResponseToClient( Response response)throws IOException {
 
             JoinedGameResponse joinedGameResponse=(JoinedGameResponse) response;
-            //System.out.println(joinedGameResponse.getMatch().getHostProfile().getUserName());
-            //System.out.println(Server.userHandlers.get(joinedGameResponse.getMatch().getHostProfile()));
             if (joinedGameResponse.getJoinerType()== JoinerType.GUEST){
                 for (Match match:Server.challenges.keySet()) {
-                   // System.out.println("searching for the right challllenge");
                     if (joinedGameResponse.getMatch().equals(match)) {
-                     //   System.out.println("found the challenge");
                         match.setGuestProfile(joinedGameResponse.getProfile());
                         joinedGameResponse.getMatch().setGuestProfile(joinedGameResponse.getProfile());
-
                         joinedGameResponse.getMatch().getAudience().clear();
                         joinedGameResponse.getMatch().getAudience().addAll(match.getAudience());
-                       // System.out.println(joinedGameResponse.getMatch().getAudience());
-
-
-
-
-
-
-
-
-
 
                         for (Profile audience : match.getAudience()){
                             JoinGameHandler targetHandler=Server.joinGameHandlers.get(Server.userHandlers.get(audience));
@@ -149,6 +134,5 @@ public class JoinGameHandler implements Runnable {
         }
         return returnValue;
     }
-
 
 }
