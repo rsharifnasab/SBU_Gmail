@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UIUX.Controllers.NewChallengePageController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#goBack" text="Back" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="16.0" prefWidth="89.0" text="Rating:" />
+            <RadioButton fx:id="ratedRadio" mnemonicParsing="false" onAction="#disableClock" prefHeight="18.0" prefWidth="85.0" text="Rated" />
+            <RadioButton fx:id="unratedRadio" mnemonicParsing="false" onAction="#enableClock" prefHeight="17.0" prefWidth="110.0" text="Un-Rated" />
+         </children>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="100.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="16.0" prefWidth="97.0" text="Clocking:" />
+            <RadioButton fx:id="clockedRadio" mnemonicParsing="false" onAction="#showClock" prefHeight="18.0" prefWidth="85.0" text="Clocked" />
+            <RadioButton fx:id="unClockedRadio" mnemonicParsing="false" onAction="#hideClock" prefHeight="18.0" prefWidth="242.0" text="Un-Clocked" />
+            <HBox fx:id="clockBox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="minutes" alignment="CENTER" prefHeight="26.0" prefWidth="34.0" promptText="M" />
+                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="13.0" text=":">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="seconds" alignment="CENTER" prefHeight="26.0" prefWidth="34.0" promptText="S" />
+                  <Label fx:id="clockWarning" alignment="CENTER" prefHeight="16.0" prefWidth="115.0" textAlignment="CENTER" textFill="#f50808" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="82.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="16.0" prefWidth="89.0" text="Color" />
+            <RadioButton fx:id="blackRadio" mnemonicParsing="false" prefHeight="18.0" prefWidth="85.0" text="Black" />
+            <RadioButton fx:id="whiteRadio" mnemonicParsing="false" prefHeight="17.0" prefWidth="110.0" text="White" />
+         </children>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#createChallenge" text="Create" />
+         </children>
+         <padding>
+            <Insets right="40.0" />
+         </padding></HBox>
+   </children>
+</VBox>
