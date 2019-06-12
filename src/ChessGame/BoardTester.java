@@ -48,28 +48,10 @@ public class BoardTester {
 			board.getBlocks()[destY][destX].setMohre( mohre );
 			board.getBlocks()[destY][destX].getMohre().setCord( new Cord( destX, destY ) );
 			board.getBlocks()[y][x].setMohre( null );
-//			mohre.move( board, new Cord( destX, destY ) );
-
 			System.out.println( board );
 			turn = ( turn == Color.WHITE ? Color.BLACK : Color.WHITE );
 
 		}
-
-//		System.out.println( board.toString() );
-
-//		board.getBlocks()[3][3].setMohre( new Asb(Color.BLACK, new Cord( 3, 3 ) ) );
-/*		board.getBlocks()[4][6].setMohre( new Shaah( Color.WHITE, new Cord( 6, 4 ) ) );
-		board.getBlocks()[4][5].setMohre( new Rokh( Color.WHITE, new Cord( 5, 4 ) ) );
-
-		board.getBlocks()[4][0].setMohre( new Vazir( Color.BLACK, new Cord( 0, 4 ) ) );
-
-		System.out.println( board.getBlocks()[4][5].getMohre() );
-		ArrayList< Cord > temp = board.getCopy().getBlocks()[4][5].getMohre().getValidDests( board.getCopy(), true );
-		System.out.println( board );
-
-		for ( Cord i : temp )
-			System.out.println( i );*/
-//		System.out.println( board.getBlocks()[1][1].getMohre().getValidDests( board ) );
 
 	}
 

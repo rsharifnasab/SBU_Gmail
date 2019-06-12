@@ -17,8 +17,6 @@ public abstract class Mohre implements Serializable {
 
 	public final static String MOHRE_IMAGES_ADDRESS = "/Assets/Chess/Mohre/";
 
-//	private static Map< String, ImageView>;
-
 	private Color color;
 	private Cord cord;
 	private boolean isMoved;
@@ -30,17 +28,9 @@ public abstract class Mohre implements Serializable {
 		this.setCord( dest );
 	}
 
-/*	public boolean isMoveValid( Board board, Cord dest ){
-		return ( this.getValidDests( board ).contains( dest ) );
-	}*/
-
 	public boolean aayaaKishMishim( Board board, Mohre mohre, Cord destCord ) {
 		Board boardCopy = board.getCopy();
 		mohre.move( board, destCord );
-/*		System.out.println( board );
-		System.out.println();
-		System.out.println();
-		System.out.println( boardCopy );*/
 		boolean returnValue = ( this.getHarifValidCords( board ).contains( board.getShaah( this.getColor() ).getCord() ) );
 		board = new Board( boardCopy );
 		return returnValue;
@@ -48,7 +38,6 @@ public abstract class Mohre implements Serializable {
 
 	public void addCorToValidCors( Board board, Mohre mohre, ArrayList< Cord > cords, Cord theCord, boolean isKishImportant ){ //Cor manfi nadaashte baashe... va mohre-e khoD oonjaa nabaashe!
 		if ( theCord.getX() >= 0 && theCord.getX() < Board.SIZE && theCord.getY() >= 0 && theCord.getY() < Board.SIZE ) {
-//			System.out.println( board.getBlocks()[2][1].getMohre() );
 			Mohre currentMohre = board.getBlocks()[theCord.getY()][theCord.getX()].getMohre();
 			if ( currentMohre == null || currentMohre.getColor() != this.getColor() )
 				if ( !isKishImportant || ( isKishImportant && !this.aayaaKishMishim(board, mohre, theCord) ) )
@@ -84,11 +73,6 @@ public abstract class Mohre implements Serializable {
 	public Mohre() {
 
 	}
-
-/*	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return this.clone();
-	}*/
 
 	public abstract String label();
 	public abstract char symbol();

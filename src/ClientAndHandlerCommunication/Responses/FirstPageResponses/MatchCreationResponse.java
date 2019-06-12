@@ -1,4 +1,3 @@
 package ClientAndHandlerCommunication.Responses.FirstPageResponses;
 
-public final class MatchCreationResponse {
-}
+public final class MatchCreationResponse { }

@@ -41,4 +41,3 @@ public class Vazir extends Mohre {
         return new Vazir( this.getColor(), this.getCord().getCopy(), isMoved() );
     }
 }
-
