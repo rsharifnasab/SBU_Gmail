@@ -1,4 +1,0 @@
-java -cp ".:./src" NetworkStuff.ServerSide.Server
-java -cp ".:./src" NetworkStuff.ClientSide.Client
-javac -cp ".:./src" src/NetworkStuff/ClientSide/Client.java
-javac -cp ".:./src" src/NetworkStuff/ServerSide/Server.java
