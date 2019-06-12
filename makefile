@@ -1,6 +1,6 @@
 
 client:	compile_uiux compile_client
-	java -cp ".:./src:./src/UIUX/FXMLs" NetworkStuff.ClientSide.Client
+	java -cp ".:./src" NetworkStuff.ClientSide.Client
 compile_client:
 	javac -cp ".:./src" src/NetworkStuff/ClientSide/Client.java
 compile_uiux:
