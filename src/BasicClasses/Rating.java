@@ -12,8 +12,6 @@ public class Rating implements Serializable {
 //	Defaut-e rating-e har kasi in meghdaare...
 	public static final long DEFAULT_RATING = 1200;
 
-//	public static long calculateRating
-
 //	Meghdaar-e fe'li-e rating
 	private long value;
 
@@ -22,7 +20,6 @@ public class Rating implements Serializable {
 		this.setValue( value );
 	}
 
-//	toString
 	@Override
 	public String toString() {
 		return Long.toString( this.getValue() );

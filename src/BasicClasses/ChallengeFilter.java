@@ -17,11 +17,8 @@ public class ChallengeFilter implements Serializable {
         this.maxClock=maxClock;
         this.minRating=minRating;
         this.maxRating=maxRating;
-
-
-
-
     }
+
     public ChallengeFilter(){
         this.minClock=new Clock(new Time(0));
         this.maxClock=new Clock(new Time(3600));

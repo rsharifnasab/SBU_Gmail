@@ -21,7 +21,6 @@ public class LoginInformation implements Serializable {
 		this.setPassword( password );
 	}
 
-//	toString!
 	@Override
 	public String toString() {
 		return username + " " + password;

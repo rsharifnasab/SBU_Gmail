@@ -118,3 +118,12 @@ alborz Dissconnected.
 Server is Up!
 A Client Has Connected
 A Client Has DissConnected
+Server is Up!
+A Client Has Connected
+User existance command recieved from: sasan
+create profile command recieved from: sasan
+User: sasan created an account.
+Check login validness command recieved from: sasan
+Get profile command recieved from: sasan
+set profile command recieved from: sasan
+sasan Dissconnected.

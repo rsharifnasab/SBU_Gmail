@@ -9,7 +9,6 @@ public class Time implements Serializable {
     public Time(int timeInSeconds){
         this.seconds=timeInSeconds%60;
         this.minutes=timeInSeconds/60;
-
     }
 
     public int getMinutes() {
