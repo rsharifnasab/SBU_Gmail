@@ -164,11 +164,13 @@ public class FirstPageController extends ParentController implements Initializab
 	}
 
 //	Az chizHaaE ke tooye safhe hastan, ye profile misaaze!
+	@SuppressWarnings("deprecation")
 	private Profile makeProfileFromPageContent() {
 		Profile returnValue = new Profile();
 		returnValue.setUserName( signupUsernameField.getText() );
 		returnValue.setPassword( signupPasswordField.getText() );
 		returnValue.setName( signupNameField.getText() );
+
 		returnValue.setImageAddress( profilePicture.getImage().impl_getUrl().toString() ); // hesabi TODO
 		return returnValue;
 	}
