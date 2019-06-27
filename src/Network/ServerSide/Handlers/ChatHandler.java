@@ -1,13 +1,11 @@
 package NetworkStuff.ServerSide.Handlers;
 
-import ClientAndHandlerCommunication.Commands.RecieveChatCommand;
-import ClientAndHandlerCommunication.Commands.SendChatCommand;
 import Enums.*;
-import NetworkStuff.ServerSide.Log.ServerLogWriter;
+import NetworkStuff.ServerSide.Log.*;
 import NetworkStuff.ServerSide.Server;
 
 import java.io.*;
-import java.net.Socket;
+import java.net.*;
 
 public class ChatHandler implements Runnable {
     private ObjectInputStream ois;

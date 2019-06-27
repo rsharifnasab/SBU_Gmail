@@ -1,12 +1,7 @@
 package NetworkStuff.ServerSide.Handlers;
 
 import BasicClasses.LoginInformation;
-import ClientAndHandlerCommunication.Commands.*;
-import ClientAndHandlerCommunication.Commands.FirstPageCommands.*;
-import ClientAndHandlerCommunication.Commands.ParentCommands.*;
-import ClientAndHandlerCommunication.Responses.*;
-import ClientAndHandlerCommunication.Responses.FirstPageResponses.*;
-import ClientAndHandlerCommunication.Responses.ParentResponds.*;
+
 import BasicClasses.*;
 import Enums.*;
 import NetworkStuff.ServerSide.Log.*;
@@ -66,11 +61,11 @@ public class UserHandler implements Runnable, Serializable {
             if (e instanceof EOFException) {
                 try {
 
-                    ServerLogWriter.getInstance().writeLog(this.profile.getUserName() + " Dissconnected.");
+                    ServerLogWriter.getInstance().writeLog(this.profile.getUserName() + " Disconnected.");
 
                 } catch (NullPointerException e1) {
 
-                    ServerLogWriter.getInstance().writeLog("A Client Has DissConnected");
+                    ServerLogWriter.getInstance().writeLog("A Client Has DisConnected");
                 }
                 this.isclientConnected = false;
 
@@ -85,7 +80,7 @@ public class UserHandler implements Runnable, Serializable {
             this.oos.writeObject(response);
         } catch (IOException e) {
             if (e instanceof EOFException) {
-                ServerLogWriter.getInstance().writeLog(this.profile.getUserName() + " Dissconnected.");
+                ServerLogWriter.getInstance().writeLog(this.profile.getUserName() + " Disconnected.");
                 this.isclientConnected = false;
 
             } else

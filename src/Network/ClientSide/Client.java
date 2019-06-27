@@ -1,21 +1,17 @@
 package NetworkStuff.ClientSide;
 
 import Enums.Ports;
-import Game.Profile;
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import BasicClasses.*;
+
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
 
 import java.io.*;
-import java.net.Socket;
-import java.util.Optional;
+import java.net.*;
+import java.util.*;
 
 public class Client extends Application {
 
@@ -32,39 +28,17 @@ public class Client extends Application {
 	public static ObjectInputStream chatIn;
 	public static ObjectOutputStream chatOut;
 
-	public static Socket joinGameSocket;
-	public static ObjectInputStream joinGameIn;
-	public static ObjectOutputStream joinGameOut;
-
-	public static Socket gameSocket;
-	public static ObjectInputStream gameIn;
-	public static ObjectOutputStream gameOut;
-
-
-
 	public static void main(String[] args) {
 		try {
 			Client.userSocket = new Socket( "localhost", Ports.USER_PORT);
-			System.out.println("ewfwfw");
 			Client.userIn = new ObjectInputStream( Client.userSocket.getInputStream() );
 			Client.userOut = new ObjectOutputStream( Client.userSocket.getOutputStream() );
-			System.out.println("hiii");
+
+
 			Client.chatSocket=new Socket("localhost",Ports.CHAT_PORT);
-			System.out.println("chatsocket created");
 			Client.chatIn=new ObjectInputStream(Client.chatSocket.getInputStream());
 			Client.chatOut=new ObjectOutputStream(Client.chatSocket.getOutputStream());
 
-			Client.joinGameSocket=new Socket("localhost",Ports.JOINGAME_PORT);
-			System.out.println("hoingamesocket created");
-			Client.joinGameIn=new ObjectInputStream(Client.joinGameSocket.getInputStream());
-			Client.joinGameOut=new ObjectOutputStream(Client.joinGameSocket.getOutputStream());
-
-			Client.gameSocket=new Socket("localhost",Ports.GAME_PORT);
-			Client.gameIn=new ObjectInputStream(Client.gameSocket.getInputStream());
-			Client.gameOut=new ObjectOutputStream(Client.gameSocket.getOutputStream());
-
-
-			System.out.println( "Created userIn and userOut!" );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -105,15 +79,12 @@ public class Client extends Application {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setTitle("Exit Application");
 		alert.setHeaderText("Are you sure you want to Exit the program? ");
-		alert.setContentText("you will lose current running tournoments and challenges");
+		alert.setContentText("you won't lose everything!");
 
 		ButtonType yes = new ButtonType("yes");
 		ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-
-
 		alert.getButtonTypes().setAll(yes, no);
-
 
 		Optional<ButtonType> as = alert.showAndWait();
 
@@ -123,7 +94,6 @@ public class Client extends Application {
 		}
 		else {
 			event.consume();
-
 		}
 	}
 

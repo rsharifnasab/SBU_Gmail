@@ -2,15 +2,15 @@
 package NetworkStuff.ServerSide;
 
 import Enums.Ports;
-import BasicClasses.Profile;
+import BasicClasses.*;
 import NetworkStuff.ServerSide.*;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 import NetworkStuff.ServerSide.Handlers.*;
-import BasicClasses.*;
+
 import NetworkStuff.ServerSide.SemiDataBase.*;
 import NetworkStuff.ServerSide.Log.*;
 
@@ -34,13 +34,13 @@ public class Server {
 
 		ServerSocket userSocket = null;
 		ServerSocket chatSocket=null;
-		ServerSocket joinSocket=null;
+
 
 		try {
 			userSocket = new ServerSocket(Ports.USER_PORT );
-			chatSocket=new ServerSocket(Ports.CHAT_PORT);
-			joinSocket=new ServerSocket(Ports.JOINGAME_PORT);
+			chatSocket = new ServerSocket(Ports.CHAT_PORT);
 			ServerLogWriter.getInstance().writeLog("Server is Up!");
+
 		} catch (IOException e) {
 			ServerLogWriter.getInstance().writeLog("Server Ports Are Full!");
 			System.exit(12);
@@ -49,7 +49,6 @@ public class Server {
 		while ( Server.isIsServerUp() ){
 			Socket currentuserSocket = null;
 			Socket currentChatSocket=null;
-			Socket currentJoinSocket=null;
 			try {
 				System.out.println( "Waiting for a client..." );
 				currentuserSocket = userSocket.accept();
@@ -58,14 +57,12 @@ public class Server {
 				currentChatSocket=chatSocket.accept();
 				ChatHandler chatHandler=new ChatHandler(currentChatSocket);
 				chatHandlers.put(userHandler,chatHandler);
-				System.out.println("waiting for the clients joinsocket");
-				currentJoinSocket=joinSocket.accept();
 				ServerLogWriter.getInstance().writeLog("A Client Has Connected");
 				System.out.println("got all the sockets nigga");
 
 
 				new Thread( userHandler ).start();
-				new Thread(chatHandler).start();
+				new Thread( chatHandler ).start();
 
 			} catch (IOException e) {
 				e.printStackTrace();
