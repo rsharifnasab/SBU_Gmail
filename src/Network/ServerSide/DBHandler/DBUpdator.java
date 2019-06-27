@@ -1,4 +1,4 @@
-package Network.ServerSide.SemiDataBase;
+package Network.ServerSide.DBHandler;
 
 import Network.ServerSide.Server;
 

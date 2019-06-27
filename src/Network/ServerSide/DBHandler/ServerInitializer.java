@@ -1,7 +1,7 @@
-package Network.ServerSide.SemiDataBase;
+package Network.ServerSide.DBHandler;
 
 import BasicClasses.Profile;
-import Network.ServerSide.Log.*;
+
 import Network.ServerSide.*;
 
 import java.io.*;
@@ -16,12 +16,14 @@ public class ServerInitializer {
     }
 
   private ServerInitializer() {/* do nothing! */ }
-
+  @SuppressWarnings("unchecked")
   public void initializeServer(){
     try {
       FileInputStream fin=new FileInputStream(address);
       ObjectInputStream inFromFile=new ObjectInputStream(fin);
-      Server.profiles=new ConcurrentHashMap<>((ConcurrentHashMap<String, Profile>)inFromFile.readObject());
+
+
+      Server.profiles=new ConcurrentHashMap<>( (ConcurrentHashMap<String, Profile>) inFromFile.readObject());
       inFromFile.close();
       fin.close();
     }

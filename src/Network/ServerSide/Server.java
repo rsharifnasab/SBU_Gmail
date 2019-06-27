@@ -10,8 +10,8 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-import Network.ServerSide.SemiDataBase.*;
-import Network.ServerSide.Log.*;
+import Network.ServerSide.DBHandler.*;
+
 
 
 public class Server {

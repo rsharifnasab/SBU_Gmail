@@ -1,4 +1,4 @@
-package Network.ServerSide.Log;
+package Network.ServerSide;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,9 +9,7 @@ public class ServerLogWriter {
 
     private static final String address="src/DB/ServerLog";
 
-    private ServerLogWriter(){
-
-    }
+    private ServerLogWriter(){/* */}
 
     public static ServerLogWriter getInstance() {
         if (logWriterInstance==null)
