@@ -1,34 +1,21 @@
 package NetworkStuff.ServerSide.Handlers;
 
 import BasicClasses.LoginInformation;
-import ClientAndHandlerCommunication.Commands.Command;
-import ClientAndHandlerCommunication.Commands.Common.ChangeGameStateCommand;
-import ClientAndHandlerCommunication.Commands.FirstPageCommands.CheckLoginValidnessCommand;
-import ClientAndHandlerCommunication.Commands.FirstPageCommands.CreateProfileCommand;
-import ClientAndHandlerCommunication.Commands.FirstPageCommands.GetProfileCommand;
-import ClientAndHandlerCommunication.Commands.FirstPageCommands.SetProfileCommand;
-import ClientAndHandlerCommunication.Commands.NewChallengeCommands.CreateMatchCommand;
-import ClientAndHandlerCommunication.Commands.NewChallengeCommands.DeleteChallengesCommand;
-import ClientAndHandlerCommunication.Commands.NewChallengeCommands.GetChallengesCommand;
-import ClientAndHandlerCommunication.Commands.ParentCommands.UsernameExistenceCommand;
-import ClientAndHandlerCommunication.Responses.Common.ChangeGameStateResponse;
-import ClientAndHandlerCommunication.Responses.FirstPageResponses.GetProfileResponse;
-import ClientAndHandlerCommunication.Responses.FirstPageResponses.LoginIsValidResponse;
-import ClientAndHandlerCommunication.Responses.FirstPageResponses.ProfileCreationResponse;
-import ClientAndHandlerCommunication.Responses.NewChallengeResponse.GetChallengesResponse;
-import ClientAndHandlerCommunication.Responses.ParentResponds.UsernameExistenceRespond;
-import ClientAndHandlerCommunication.Responses.Response;
-import Enums.GameState;
-import Game.Match;
-import Game.Profile;
-import NetworkStuff.ServerSide.Log.ServerLogWriter;
-import NetworkStuff.ServerSide.SemiDataBase.DataBaseUpdator;
-import NetworkStuff.ServerSide.Server;
+import ClientAndHandlerCommunication.Commands.*;
+import ClientAndHandlerCommunication.Commands.FirstPageCommands.*;
+import ClientAndHandlerCommunication.Commands.ParentCommands.*;
+import ClientAndHandlerCommunication.Responses.*;
+import ClientAndHandlerCommunication.Responses.FirstPageResponses.*;
+import ClientAndHandlerCommunication.Responses.ParentResponds.*;
+import BasicClasses.*;
+import Enums.*;
+import NetworkStuff.ServerSide.Log.*;
+import NetworkStuff.ServerSide.SemiDataBase.*;
+import NetworkStuff.ServerSide.*;
 
 import java.io.*;
-import java.net.Socket;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.net.*;
+import java.util.*;
 
 //Client UserHandler
 public class UserHandler implements Runnable, Serializable {
@@ -153,11 +140,7 @@ public class UserHandler implements Runnable, Serializable {
         return returnValue;
     }
 
-    private Response changeGameStateThings(ChangeGameStateCommand command) {
-        this.gameState = command.getGameState();
-        return new ChangeGameStateResponse(true);
-    }
-
+    
     private ProfileCreationResponse addProfile(Profile profile) {
         ProfileCreationResponse returnValue;
         if (this.isLoginValid(new LoginInformation(profile.getUserName(), profile.getPassword())))

@@ -2,15 +2,11 @@ package NetworkStuff.ServerSide.Handlers;
 
 import ClientAndHandlerCommunication.Commands.RecieveChatCommand;
 import ClientAndHandlerCommunication.Commands.SendChatCommand;
-import Enums.ChatChannelType;
-import Game.Profile;
+import Enums.*;
 import NetworkStuff.ServerSide.Log.ServerLogWriter;
 import NetworkStuff.ServerSide.Server;
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class ChatHandler implements Runnable {
