@@ -16,7 +16,7 @@ import javafx.stage.WindowEvent;
 import java.io.*;
 import java.net.Socket;
 import java.util.Optional;
-@SuppressWarnings()
+
 public class Client extends Application {
 
 //	Stage-e Asli-e Barnaame!

@@ -7,32 +7,18 @@ Har Playeri ye rating daare, oonja miaam az in celass estefaade mikonim
 
 import java.io.Serializable;
 
-public class Rating implements Serializable {
+public class Date implements Serializable {
 
-//	Defaut-e rating-e har kasi in meghdaare...
-	public static final long DEFAULT_RATING = 1200;
-
-//	Meghdaar-e fe'li-e rating
-	private long value;
 
 //	Constructor
-	public Rating( long value ) {
-		this.setValue( value );
+	public Date( ) {
 	}
 
 	@Override
 	public String toString() {
-		return Long.toString( this.getValue() );
+		return "Date:TODO";
 	}
 
 //	Getters and Setters
-
-	public long getValue() {
-		return value;
-	}
-
-	public void setValue(long value) {
-		this.value = value;
-	}
-
+//TODO
 }

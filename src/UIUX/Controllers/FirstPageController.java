@@ -95,21 +95,6 @@ public class FirstPageController extends ParentController implements Initializab
 
 	}
 
-/*	private Response sendUserCommand( Command command ) {
-		try {
-			Client.userOut.writeObject( command );
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Response returnValue = null;
-		try {
-			returnValue = (Response) Client.userIn.readObject();
-		} catch (IOException|ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return returnValue;
-	}*/
-
 	private void setClientProfile( String username ) {
 		Command command = new GetProfileCommand( username );
 		GetProfileResponse response = (GetProfileResponse) this.sendUserCommand( command );
@@ -120,36 +105,13 @@ public class FirstPageController extends ParentController implements Initializab
 
 	private boolean isLoginInformationValid( LoginInformation loginInformation ) {
 		Command loginValidation = new CheckLoginValidnessCommand( loginInformation );
-/*		try {
-			Client.userOut.writeObject( loginValidation );
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
 		LoginIsValidResponse response = (LoginIsValidResponse) this.sendUserCommand( loginValidation );
-/*		LoginIsValidResponse response = null;
-		try {
-			response = (LoginIsValidResponse) Client.userIn.readObject();
-		} catch (IOException|ClassNotFoundException e) {
-			e.printStackTrace();
-		}*/
-//		System.out.println( "UserHandler Response: " + response );
 		return response.getAnswer();
 	}
 
 	private ProfileCreationResponse addProfile( Profile profile ) {
 		CreateProfileCommand command = new CreateProfileCommand( profile );
-/*		try {
-			Client.userOut.writeObject( command );
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
 		ProfileCreationResponse response = (ProfileCreationResponse) this.sendUserCommand( command );
-/*		ProfileCreationResponse response = null;
-		try {
-			response = (ProfileCreationResponse) Client.userIn.readObject();
-		} catch (IOException|ClassNotFoundException e) {
-			e.printStackTrace();
-		}*/
 		return response;
 	}
 
@@ -185,14 +147,6 @@ public class FirstPageController extends ParentController implements Initializab
 		}
 	}
 
-//	Title va Matn-e badane ro migire, va ye alert baa oon mohtaviaat neshoon mide!
-/*	public void makeAndShowInformationDialog( String title, String contentText ) {
-		Alert alert = new Alert( Alert.AlertType.INFORMATION );
-		alert.setTitle( title );
-		alert.setHeaderText( null );
-		alert.setContentText( contentText );
-		alert.showAndWait();
-	}*/
 
 //	AlertHaa-e mokhtalef ro injaa misaazim... bad baa komak-e makeAndShowInformationDialog neshooneshoon midim!
 
