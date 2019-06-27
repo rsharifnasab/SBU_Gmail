@@ -54,14 +54,14 @@ public class Server {
 				//UserHandler userHandler = new UserHandler( currentuserSocket );
 				System.out.println( "waiting for the clients chatsocket" );
 				currentChatSocket=chatSocket.accept();
-				//ChatHandler chatHandler=new ChatHandler(currentChatSocket);
-				//chatHandlers.put(userHandler,chatHandler);
+				ChatHandler chatHandler=new ChatHandler(currentChatSocket);
+				chatHandlers.put(userHandler,chatHandler);
 				ServerLogWriter.getInstance().writeLog("A Client Has Connected");
 				System.out.println("got all the sockets nigga");
 
 
-				//new Thread( userHandler ).start();
-				//new Thread( chatHandler ).start();
+				new Thread( userHandler ).start();
+				new Thread( chatHandler ).start();
 
 			} catch (IOException e) {
 				e.printStackTrace();

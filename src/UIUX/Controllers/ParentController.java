@@ -55,13 +55,6 @@ public class ParentController {
 
 	}
 
-	public void sendjoinGameCommand(Command command){
-		try {
-			Client.joinGameOut.writeObject(command);
-		} catch (IOException e){
-			e.printStackTrace();
-		}
-	}
 
 	public boolean doesUsernameExist( String username ) {
 		UsernameExistenceRespond respond = (UsernameExistenceRespond) this.sendUserCommand( new UsernameExistenceCommand( username ) );

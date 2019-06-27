@@ -1,7 +1,7 @@
+
 package Handlers;
 
-import java.io.*;
+import java.io.Serializable;
 
-public class Response implements Serializable{
-
+public interface Response extends Serializable {
 }

@@ -31,6 +31,7 @@ public class Client extends Application {
 
 	public static void main(String[] args) {
 		try {
+			System.out.println("main ran!");
 			Client.userSocket = new Socket( "localhost", Ports.USER_PORT);
 			Client.userIn = new ObjectInputStream( Client.userSocket.getInputStream() );
 			Client.userOut = new ObjectOutputStream( Client.userSocket.getOutputStream() );
@@ -39,7 +40,7 @@ public class Client extends Application {
 			Client.chatSocket=new Socket("localhost",Ports.CHAT_PORT);
 			Client.chatIn=new ObjectInputStream(Client.chatSocket.getInputStream());
 			Client.chatOut=new ObjectOutputStream(Client.chatSocket.getOutputStream());
-
+			System.out.println("conected to server!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

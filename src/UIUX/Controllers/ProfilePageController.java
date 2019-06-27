@@ -36,7 +36,7 @@ public class ProfilePageController extends ParentController implements Initializ
 		this.usernameField.setText(Client.getProfile().getUserName() );
 		this.nameField.setText( Client.getProfile().getName() );
 		this.passwordField.setText( Client.getProfile().getPassword() );
-		this.ratingField.setText( Long.toString( Client.getProfile().getRating() ) );
+
 		this.profilePicture.setImage( new Image( Client.getProfile().getImageAddress() ) );
 	}
 
