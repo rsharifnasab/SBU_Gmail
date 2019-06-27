@@ -1,4 +1,4 @@
-package NetworkStuff.ClientSide;
+package Network.ClientSide;
 
 import Enums.Ports;
 import BasicClasses.*;

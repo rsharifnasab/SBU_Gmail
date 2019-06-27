@@ -1,15 +1,15 @@
-package NetworkStuff.ServerSide.SemiDataBase;
+package Network.ServerSide.SemiDataBase;
 
 import BasicClasses.Profile;
-import NetworkStuff.ServerSide.Log.*;
-import NetworkStuff.ServerSide.*;
+import Network.ServerSide.Log.*;
+import Network.ServerSide.*;
 
 import java.io.*;
 import java.util.concurrent.*;
 
 public class ServerInitializer {
     private static ServerInitializer ourInstance = new ServerInitializer();
-    private static final String address="src/NetworkShit/ServerSide/SemiDataBase/Data";
+    private static final String address="src/DB/Data";
 
     public static ServerInitializer getInstance() {
         return ourInstance;

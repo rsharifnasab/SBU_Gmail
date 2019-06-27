@@ -1,6 +1,6 @@
 package UIUX.Controllers;
 
-import NetworkStuff.ClientSide.Client;
+import Network.ClientSide.Client;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;

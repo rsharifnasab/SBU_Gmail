@@ -1,17 +1,17 @@
-package NetworkStuff.ServerSide.SemiDataBase;
+package Network.ServerSide.SemiDataBase;
 
-import NetworkStuff.ServerSide.Server;
+import Network.ServerSide.Server;
 
 import java.io.*;
 
 public class DDUpdator {
     private static DBUpdator ourInstance = new DBUpdator();
-    private static final String address="src/NetworkShit/ServerSide/SemiDataBase/Data";
+    private static final String address="src/DB/Data";
     public static DataBaseUpdator getInstance() {
         return ourInstance;
     }
 
-    private DataBaseUpdator() {/*nothing*/ }
+    private DBUpdator() {/*nothing*/ }
 
     public synchronized void updateDataBase(){
       try {

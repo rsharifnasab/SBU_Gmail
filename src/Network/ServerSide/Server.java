@@ -1,18 +1,17 @@
 
-package NetworkStuff.ServerSide;
+package Network.ServerSide;
 
 import Enums.Ports;
 import BasicClasses.*;
-import NetworkStuff.ServerSide.*;
+import Network.ServerSide.*;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
-import NetworkStuff.ServerSide.Handlers.*;
 
-import NetworkStuff.ServerSide.SemiDataBase.*;
-import NetworkStuff.ServerSide.Log.*;
+import Network.ServerSide.SemiDataBase.*;
+import Network.ServerSide.Log.*;
 
 
 public class Server {
@@ -25,8 +24,8 @@ public class Server {
 	public static Map<String, Profile> profiles = new ConcurrentHashMap<String, Profile>();
 // challenge haaE ke ta alan saakhte shodan
 //	Ye map dREm az profileHaa be userHandlerHaa
-	public static Map<Profile, UserHandler> userHandlers = new ConcurrentHashMap<Profile, UserHandler>();
-	public static Map<UserHandler, ChatHandler> chatHandlers = new ConcurrentHashMap<>();
+//	public static Map<Profile, UserHandler> userHandlers = new ConcurrentHashMap<Profile, UserHandler>();
+//	public static Map<UserHandler, ChatHandler> chatHandlers = new ConcurrentHashMap<>();
 
 
 	public static void main(String[] args) {
@@ -52,17 +51,17 @@ public class Server {
 			try {
 				System.out.println( "Waiting for a client..." );
 				currentuserSocket = userSocket.accept();
-				UserHandler userHandler = new UserHandler( currentuserSocket );
+				//UserHandler userHandler = new UserHandler( currentuserSocket );
 				System.out.println( "waiting for the clients chatsocket" );
 				currentChatSocket=chatSocket.accept();
-				ChatHandler chatHandler=new ChatHandler(currentChatSocket);
-				chatHandlers.put(userHandler,chatHandler);
+				//ChatHandler chatHandler=new ChatHandler(currentChatSocket);
+				//chatHandlers.put(userHandler,chatHandler);
 				ServerLogWriter.getInstance().writeLog("A Client Has Connected");
 				System.out.println("got all the sockets nigga");
 
 
-				new Thread( userHandler ).start();
-				new Thread( chatHandler ).start();
+				//new Thread( userHandler ).start();
+				//new Thread( chatHandler ).start();
 
 			} catch (IOException e) {
 				e.printStackTrace();

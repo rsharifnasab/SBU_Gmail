@@ -5,7 +5,7 @@ import ClientAndHandlerCommunication.Commands.*;
 import ClientAndHandlerCommunication.Commands.FirstPageCommands.*;
 import ClientAndHandlerCommunication.Responses.FirstPageResponses.*;
 import BasicClasses.*;
-import NetworkStuff.ClientSide.*;
+import Network.ClientSide.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
