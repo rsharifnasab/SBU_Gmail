@@ -1,7 +1,7 @@
 package ClientAndHandlerCommunication.Commands.FirstPageCommands;
 
 import ClientAndHandlerCommunication.Commands.Command;
-import Game.Profile;
+import BasicClasses.*;
 
 public final class CreateProfileCommand implements Command {
 

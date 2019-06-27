@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 /*
-Marboot be menu-e asli-e har kaarbar
- */
+menu-e asli-e har kaarbar
+*/
 
 public class MainMenuController extends ParentController {
 

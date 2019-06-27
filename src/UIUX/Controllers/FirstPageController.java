@@ -1,15 +1,10 @@
 package UIUX.Controllers;
 
 import BasicClasses.LoginInformation;
-import ClientAndHandlerCommunication.Commands.Command;
-import ClientAndHandlerCommunication.Commands.FirstPageCommands.CheckLoginValidnessCommand;
-import ClientAndHandlerCommunication.Commands.FirstPageCommands.CreateProfileCommand;
-import ClientAndHandlerCommunication.Commands.FirstPageCommands.GetProfileCommand;
-import ClientAndHandlerCommunication.Commands.FirstPageCommands.SetProfileCommand;
-import ClientAndHandlerCommunication.Responses.FirstPageResponses.GetProfileResponse;
-import ClientAndHandlerCommunication.Responses.FirstPageResponses.LoginIsValidResponse;
-import ClientAndHandlerCommunication.Responses.FirstPageResponses.ProfileCreationResponse;
-import Game.Profile;
+import ClientAndHandlerCommunication.Commands.*;
+import ClientAndHandlerCommunication.Commands.FirstPageCommands.*;
+import ClientAndHandlerCommunication.Responses.FirstPageResponses.*;
+import BasicClasses.*;
 import NetworkStuff.ClientSide.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

@@ -1,19 +1,15 @@
 package UIUX.Controllers;
 
-import ClientAndHandlerCommunication.Commands.Command;
-import ClientAndHandlerCommunication.Commands.ParentCommands.UsernameExistenceCommand;
-import ClientAndHandlerCommunication.Commands.SendChatCommand;
-import ClientAndHandlerCommunication.Responses.ParentResponds.UsernameExistenceRespond;
-import ClientAndHandlerCommunication.Responses.Response;
+import ClientAndHandlerCommunication.Commands.*;
+import ClientAndHandlerCommunication.Commands.ParentCommands.*;
+import ClientAndHandlerCommunication.Responses.*;
 import NetworkStuff.ClientSide.Client;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.*;
+import javafx.scene.control.*;
 
-import java.io.IOException;
-import java.util.Optional;
+import java.io.*;
+import java.util.*;
 
 /*
 All Controllers extend this class
@@ -33,10 +29,9 @@ public class ParentController {
 		Scene scene = new Scene( root );
 		Client.pStage.setScene( scene );
 		Client.pStage.show();
-
 	}
 
-	public Response sendUserCommand(Command command ) {
+	public Response sendUserCommand( Command command ) {
 		try {
 			Client.userOut.writeObject( command );
 		} catch (IOException e) {
@@ -55,7 +50,7 @@ public class ParentController {
 
 		try {
 			Client.chatOut.writeObject(sendChatCommand);
-		}catch (IOException e){
+		} catch (IOException e){
 			e.printStackTrace();
 		}
 
@@ -64,17 +59,14 @@ public class ParentController {
 	public void sendjoinGameCommand(Command command){
 		try {
 			Client.joinGameOut.writeObject(command);
-		}catch (IOException e){
+		} catch (IOException e){
 			e.printStackTrace();
 		}
 	}
 
 	public boolean doesUsernameExist( String username ) {
-
 		UsernameExistenceRespond respond = (UsernameExistenceRespond) this.sendUserCommand( new UsernameExistenceCommand( username ) );
-
 		return respond.isAnswer();
-
 	}
 
 //	Title va Matn-e badane ro migire, va ye alert baa oon mohtaviaat neshoon mide!

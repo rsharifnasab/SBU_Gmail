@@ -118,29 +118,11 @@ public class UserHandler implements Runnable, Serializable {
             if (Server.profiles.get(((UsernameExistenceCommand) command).getUsername()) == null)
                 returnValue = new UsernameExistenceRespond(false);
             else returnValue = new UsernameExistenceRespond(true);
-        } else if (command instanceof ChangeGameStateCommand) {
-            returnValue = this.changeGameStateThings((ChangeGameStateCommand) command);
-        } else if (command instanceof GetChallengesCommand) {
-
-            GetChallengesResponse challengesResponse = new GetChallengesResponse();
-            Map<Match, Profile> serverChallenges = new ConcurrentHashMap<>(Server.challenges);
-            challengesResponse.setChallenges(serverChallenges);
-            returnValue = challengesResponse;
-        } else if (command instanceof CreateMatchCommand) {
-            Match match = ((CreateMatchCommand) command).getMatch();
-            ServerLogWriter.getInstance().writeLog("Create match command recieved from: "+match.getHostProfile().getUserName());
-            Server.challenges.put(match, match.getHostProfile());
-
-            returnValue = null;
-        } else if (command instanceof DeleteChallengesCommand) {
-            Server.challenges.keySet().removeAll(((DeleteChallengesCommand) command).getList());
-            if (((DeleteChallengesCommand) command).getActive() != null)
-                Server.challenges.put(((DeleteChallengesCommand) command).getActive(), ((DeleteChallengesCommand) command).getActive().getHostProfile());
         }
         return returnValue;
     }
 
-    
+
     private ProfileCreationResponse addProfile(Profile profile) {
         ProfileCreationResponse returnValue;
         if (this.isLoginValid(new LoginInformation(profile.getUserName(), profile.getPassword())))

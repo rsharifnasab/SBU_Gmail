@@ -47,10 +47,8 @@ public class Profile implements Serializable {
         HBox proTile = new HBox();
         Label proName=new Label(this.getUserName());
         proName.setFont( new Font( 10) );
-        Label proRate=new Label(String.valueOf(this.getRating()));
-        proRate.setFont( new Font( 10 ) );
 
-        proTile.getChildren().addAll(proName,proRate);
+        proTile.getChildren().addAll(proName);
         proTile.setSpacing(30);
 
         proTile.setAlignment(Pos.CENTER);

@@ -1,6 +1,6 @@
 package NetworkStuff.ServerSide.SemiDataBase;
 
-import Game.Profile;
+import BasicClasses.Profile;
 import NetworkStuff.ServerSide.Log.ServerLogWriter;
 import NetworkStuff.ServerSide.Server;
 

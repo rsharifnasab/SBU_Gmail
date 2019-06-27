@@ -53,7 +53,7 @@ public class ChatHandler implements Runnable {
     private void sendChat(SendChatCommand chatCommand)throws IOException{
 
             if (chatCommand.getChatChannelType()== ChatChannelType.AUDIENCES_CHANNEL){
-                ServerLogWriter.getInstance().writeLog("User: "+chatCommand.getSender()+" send a massage in Audiences channel in "+chatCommand.getMatch().getHostProfile().getUserName()+"s match!");
+                // TODO ServerLogWriter.getInstance().writeLog("User: "+chatCommand.getSender()+" send a massage in Audiences channel in "+chatCommand.getMatch().getHostProfile().getUserName()+"s match!");
                 for (Profile audience:chatCommand.getMatch().getAudience()) {
                     if (!audience.getUserName().equals(chatCommand.getSender())) {
                         ChatHandler targetHandler = Server.chatHandlers.get(Server.userHandlers.get(audience));

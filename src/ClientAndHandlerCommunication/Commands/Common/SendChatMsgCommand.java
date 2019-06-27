@@ -1,8 +1,7 @@
 package ClientAndHandlerCommunication.Commands.Common;
 
 import ClientAndHandlerCommunication.Commands.Command;
-import Game.Profile;
-
+import BasicClasses.*;
 import java.util.List;
 
 public final class SendChatMsgCommand implements Command {

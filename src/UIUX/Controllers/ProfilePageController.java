@@ -1,15 +1,11 @@
 package UIUX.Controllers;
 
 import NetworkStuff.ClientSide.Client;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import java.net.*;
+import java.util.*;
 
 public class ProfilePageController extends ParentController implements Initializable{
 
@@ -48,11 +44,9 @@ public class ProfilePageController extends ParentController implements Initializ
 		String newUsername = this.makeAndShowTextInputDialog( "username", "You are about to change your username", "Please enter a username!" );
 		if ( this.doesUsernameExist( newUsername ) ) {
 			this.makeAndShowInformationDialog("Invalid username", "Username already exists!");
-			return;
 		}
 		else {
 			Client.getProfile().setUserName( this.usernameField.getText() );
-
 		}
 	}
 

@@ -1,7 +1,7 @@
 package ClientAndHandlerCommunication.Responses.FirstPageResponses;
 
 import ClientAndHandlerCommunication.Responses.Response;
-import Game.Profile;
+import BasicClasses.*;
 
 public final class GetProfileResponse implements Response {
 

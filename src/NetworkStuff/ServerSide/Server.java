@@ -2,13 +2,18 @@
 package NetworkStuff.ServerSide;
 
 import Enums.Ports;
-import BasicClasses.*;
+import BasicClasses.Profile;
 import NetworkStuff.ServerSide.*;
 
 import java.io.IOException;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.*;
 import NetworkStuff.ServerSide.Handlers.*;
+import BasicClasses.*;
+import NetworkStuff.ServerSide.SemiDataBase.*;
+import NetworkStuff.ServerSide.Log.*;
+
 
 public class Server {
 
@@ -30,12 +35,11 @@ public class Server {
 		ServerSocket userSocket = null;
 		ServerSocket chatSocket=null;
 		ServerSocket joinSocket=null;
-		ServerSocket gameSocket=null;
+
 		try {
 			userSocket = new ServerSocket(Ports.USER_PORT );
 			chatSocket=new ServerSocket(Ports.CHAT_PORT);
 			joinSocket=new ServerSocket(Ports.JOINGAME_PORT);
-			gameSocket=new ServerSocket(Ports.GAME_PORT);
 			ServerLogWriter.getInstance().writeLog("Server is Up!");
 		} catch (IOException e) {
 			ServerLogWriter.getInstance().writeLog("Server Ports Are Full!");
@@ -46,7 +50,6 @@ public class Server {
 			Socket currentuserSocket = null;
 			Socket currentChatSocket=null;
 			Socket currentJoinSocket=null;
-			Socket currentGameSocket=null;
 			try {
 				System.out.println( "Waiting for a client..." );
 				currentuserSocket = userSocket.accept();
@@ -57,20 +60,12 @@ public class Server {
 				chatHandlers.put(userHandler,chatHandler);
 				System.out.println("waiting for the clients joinsocket");
 				currentJoinSocket=joinSocket.accept();
-				JoinGameHandler joinGameHandler=new JoinGameHandler(currentJoinSocket);
-				joinGameHandlers.put(userHandler,joinGameHandler);
-				System.out.println("waiting for the clients gamesocket");
-				currentGameSocket=gameSocket.accept();
-				GameHandler gameHandler=new GameHandler(currentGameSocket);
-				gameHandlers.put( userHandler, gameHandler );
 				ServerLogWriter.getInstance().writeLog("A Client Has Connected");
 				System.out.println("got all the sockets nigga");
 
 
 				new Thread( userHandler ).start();
 				new Thread(chatHandler).start();
-				new Thread(joinGameHandler).start();
-				new Thread(gameHandler).start();
 
 			} catch (IOException e) {
 				e.printStackTrace();
