@@ -1,10 +1,9 @@
 package UIUX.Controllers;
 
-import ClientAndHandlerCommunication.Commands.*;
-import ClientAndHandlerCommunication.Commands.ParentCommands.*;
-import ClientAndHandlerCommunication.Responses.*;
-import Network.ClientSide.Client;
-import javafx.fxml.FXMLLoader;
+import Handlers.*;
+import Network.ClientSide.*;
+
+import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 

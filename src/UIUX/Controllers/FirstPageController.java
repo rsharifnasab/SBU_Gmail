@@ -1,9 +1,8 @@
 package UIUX.Controllers;
 
 import BasicClasses.LoginInformation;
-import ClientAndHandlerCommunication.Commands.*;
-import ClientAndHandlerCommunication.Commands.FirstPageCommands.*;
-import ClientAndHandlerCommunication.Responses.FirstPageResponses.*;
+import Handlers.*;
+
 import BasicClasses.*;
 import Network.ClientSide.*;
 import javafx.fxml.*;
@@ -59,10 +58,9 @@ public class FirstPageController extends ParentController implements Initializab
 	}
 
 //	VaghT taraf dokme-e signup ro mizare, in taabe' sedaa zade mishe
-	public void doSignupStuff() {
+public void doSignupStuff() {
 //		Age yeki az fieldHaa-e mored-e niaaz khaali boodan
-		if (
-					signupUsernameField.getText().isEmpty()
+		if ( signupUsernameField.getText().isEmpty()
 				|| signupPasswordField.getText().isEmpty()
 				|| signupConfirmPasswordField.getText().isEmpty()
 				|| signupNameField.getText().isEmpty() ) {
@@ -80,9 +78,11 @@ public class FirstPageController extends ParentController implements Initializab
 		}
 //		Khob, hamechi OK e... profili ke taraf khaaste besaaze ro besaaz va berizesh too-e justCreatedProfile
 		Profile justCreatedProfile = this.makeProfileFromPageContent();
+//		System.out.println( justCreatedProfile );
+//		Server.profiles.add( justCreatedProfile );	//ProfileE ke saakhT ro too-e Server add kon!
 		ProfileCreationResponse response = this.addProfile( justCreatedProfile );
-		this.showProfileCreatedDialog( response );    //Begoo ke profile ro saakhT 
-		this.clearFields();    //FieldHaa ro paak kon... kaaresh tamoom shode Dge
+		this.showProfileCreatedDialog( response );    //Begoo ke profile ro saakhT baa movaffaghiat
+		this.clearFields();    //FieldHaa ro paak kon... kaaresh tamoom shode Dge mikhaaymeshoon chikar?
 
 	}
 
