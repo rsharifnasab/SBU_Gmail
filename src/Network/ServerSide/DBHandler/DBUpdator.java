@@ -4,10 +4,10 @@ import Network.ServerSide.Server;
 
 import java.io.*;
 
-public class DDUpdator {
+public class DBUpdator {
     private static DBUpdator ourInstance = new DBUpdator();
     private static final String address="src/DB/Data";
-    public static DataBaseUpdator getInstance() {
+    public static DBUpdator getInstance() {
         return ourInstance;
     }
 

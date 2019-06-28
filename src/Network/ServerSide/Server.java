@@ -4,6 +4,8 @@ package Network.ServerSide;
 import Enums.Ports;
 import BasicClasses.*;
 import Network.ServerSide.*;
+import Network.ServerSide.Handlers.*;
+
 
 import java.io.*;
 import java.net.*;
@@ -11,8 +13,6 @@ import java.util.*;
 import java.util.concurrent.*;
 
 import Network.ServerSide.DBHandler.*;
-
-
 
 public class Server {
 
@@ -24,8 +24,8 @@ public class Server {
 	public static Map<String, Profile> profiles = new ConcurrentHashMap<String, Profile>();
 // challenge haaE ke ta alan saakhte shodan
 //	Ye map dREm az profileHaa be userHandlerHaa
-//	public static Map<Profile, UserHandler> userHandlers = new ConcurrentHashMap<Profile, UserHandler>();
-//	public static Map<UserHandler, ChatHandler> chatHandlers = new ConcurrentHashMap<>();
+	public static Map<Profile, UserHandler> userHandlers = new ConcurrentHashMap<>();
+	public static Map<UserHandler, ChatHandler> chatHandlers = new ConcurrentHashMap<>(); //TODO
 
 
 	public static void main(String[] args) {
@@ -51,7 +51,7 @@ public class Server {
 			try {
 				System.out.println( "Waiting for a client..." );
 				currentuserSocket = userSocket.accept();
-				//UserHandler userHandler = new UserHandler( currentuserSocket );
+				UserHandler userHandler = new UserHandler( currentuserSocket );
 				System.out.println( "waiting for the clients chatsocket" );
 				currentChatSocket=chatSocket.accept();
 				ChatHandler chatHandler=new ChatHandler(currentChatSocket);
