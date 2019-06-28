@@ -1,6 +1,5 @@
 package BasicClasses;
 
-
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -9,11 +8,6 @@ import javafx.scene.text.Font;
 import java.io.*;
 import java.util.*;
 
-
-/*
-Profile Dge... ettelaa'aat-e shakhs ro toosh daarim! ChizHaaE mesl-e
-username o password o inaa...
- */
 
 public class Profile implements Serializable {
 
@@ -37,7 +31,7 @@ public class Profile implements Serializable {
       try{
         return this.userName.equals(((Profile)obj).getUserName());
       }
-      finally{
+      catch(Exception e){
         return false;
       }
 
