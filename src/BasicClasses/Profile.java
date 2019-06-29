@@ -15,6 +15,8 @@ public class Profile implements Serializable {
     private String name;
     private String imageAddress;
     private String birthYear;
+    private String phoneNumber;
+    private Gender gender;
 
 
     @Override
@@ -58,6 +60,23 @@ public class Profile implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+
+    public void setGender(Gender gender){
+      this.gender = gender;
+    }
+
+    public Gender getGender(){
+      return gender;
     }
 
     public String getPassword() {

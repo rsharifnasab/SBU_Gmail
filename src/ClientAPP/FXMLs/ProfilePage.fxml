@@ -4,87 +4,91 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientAPP.Controllers.ProfilePageController">
    <children>
-      <Label layoutX="168.0" layoutY="301.0" text="Username">
+      <Label layoutX="168.0" layoutY="171.0" text="Password">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameField" editable="false" layoutX="314.0" layoutY="293.0" promptText="Username">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </TextField>
-      <Label layoutX="168.0" layoutY="378.0" text="Password">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <PasswordField fx:id="passwordField" editable="false" layoutX="314.0" layoutY="371.0" prefHeight="42.0" prefWidth="288.0" promptText="Password">
+      <PasswordField fx:id="passwordField" layoutX="298.0" layoutY="171.0" prefHeight="42.0" prefWidth="288.0" promptText="Password">
          <font>
             <Font size="22.0" />
          </font>
       </PasswordField>
-      <Label layoutX="168.0" layoutY="453.0" text="Name">
+      <Label layoutX="187.0" layoutY="269.0" text="Name">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="nameField" editable="false" layoutX="314.0" layoutY="445.0" promptText="Name">
+      <TextField fx:id="nameField" layoutX="298.0" layoutY="261.0" prefHeight="46.0" prefWidth="599.0" promptText="Name">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <Label layoutX="168.0" layoutY="529.0" text="Rating">
+      <Label layoutX="176.0" layoutY="345.0" prefHeight="30.0" prefWidth="121.0" text="birth year">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="ratingField" editable="false" layoutX="314.0" layoutY="521.0" promptText="Rating">
+      <TextField fx:id="ageField" layoutX="298.0" layoutY="337.0" promptText="birth year">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <ImageView fx:id="profilePicture" fitHeight="285.0" fitWidth="288.0" layoutX="790.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="profilePicture" fitHeight="285.0" fitWidth="288.0" layoutX="948.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <image>
+            <Image url="@../Assets/default_contact.png" />
+         </image>
       </ImageView>
       <Label layoutX="478.0" layoutY="54.0" text="Profile">
          <font>
             <Font name="System Bold" size="85.0" />
          </font>
       </Label>
-      <Button fx:id="usernameChangeButton" layoutX="618.0" layoutY="293.0" mnemonicParsing="false" onAction="#tryChangingUsername" prefHeight="42.0" prefWidth="80.0" text="Change">
+      <Button fx:id="ChangeButton" layoutX="948.0" layoutY="532.0" mnemonicParsing="false" onAction="#changeProfile" prefHeight="108.0" prefWidth="285.0" text="Change">
          <font>
-            <Font size="15.0" />
+            <Font size="30.0" />
          </font>
       </Button>
-      <Button fx:id="passwordChangeButton" layoutX="618.0" layoutY="371.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="80.0" text="Change">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="nameChangeButton" layoutX="618.0" layoutY="445.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="80.0" text="Change">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="ratingChangeButton" disable="true" layoutX="618.0" layoutY="521.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="80.0" text="Change">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="backButton" layoutX="80.0" layoutY="84.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="42.0" prefWidth="96.0" text="Back">
+      <Button fx:id="backButton" layoutX="76.0" layoutY="60.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="53.0" prefWidth="180.0" text="go to main menu">
          <font>
             <Font name="System Italic" size="17.0" />
          </font>
       </Button>
+      <PasswordField fx:id="passwordConfirmField" layoutX="608.0" layoutY="171.0" prefHeight="42.0" prefWidth="288.0" promptText="confirm Password">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </PasswordField>
+      <Label layoutX="110.0" layoutY="434.0" prefHeight="30.0" prefWidth="169.0" text="phone number">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField fx:id="phoneField" layoutX="298.0" layoutY="426.0" promptText="birth year">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <RadioButton fx:id="male" layoutX="344.0" layoutY="550.0" mnemonicParsing="false" text="Male" />
+      <RadioButton fx:id="female" layoutX="434.0" layoutY="550.0" mnemonicParsing="false" text="Female" />
+      <RadioButton fx:id="notBinary" layoutX="535.0" layoutY="550.0" mnemonicParsing="false" text="not Binary" />
+      <Label layoutX="166.0" layoutY="544.0" prefHeight="30.0" prefWidth="106.0" text="gender">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="notSay" layoutX="659.0" layoutY="550.0" mnemonicParsing="false" selected="true" text="prefer not to say" />
    </children>
 </AnchorPane>

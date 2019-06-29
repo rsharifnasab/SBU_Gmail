@@ -15,21 +15,26 @@ import java.util.*;
 
 public class ClientEXE extends Application {
 
-	//TODO
-	public static Profile getProfile(){
-		return null;
-	}
-
 //	Stage-e Asli-e Barnaame!
 	public static Stage pStage;
 
 	public static LoginInformation loginInfo = null;
+	public static Profile profile;
 	static String serverAddress;
 	static final int PORT = 8888;
 
 	public static Socket socket;
 	public static ObjectInputStream socketIn;
 	public static ObjectOutputStream socketOut;
+
+
+	public static Profile getProfile(){
+		return profile;
+	}
+
+	public static void setProfile(Profile profile){
+		ClientEXE.profile = profile;
+	}
 
 	public static Boolean connectToServer(){
 		System.out.println("trying to connect to server");

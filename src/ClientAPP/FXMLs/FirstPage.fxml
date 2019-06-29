@@ -100,7 +100,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <TextField fx:id="signupAgeField" layoutX="719.0" layoutY="542.0" prefHeight="33.0" prefWidth="228.0" promptText="Rating" text="2000">
+      <TextField fx:id="signupAgeField" layoutX="719.0" layoutY="542.0" prefHeight="33.0" prefWidth="228.0" promptText="Birth year" text="">
          <font>
             <Font size="17.0" />
          </font>

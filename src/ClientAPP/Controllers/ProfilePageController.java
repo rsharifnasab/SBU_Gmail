@@ -1,7 +1,7 @@
 package ClientAPP.Controllers;
 
 import ClientAPP.*;
-
+import BasicClasses.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
@@ -11,44 +11,64 @@ import java.util.*;
 public class ProfilePageController extends ParentController implements Initializable{
 
 	@FXML
-	TextField usernameField;
-	@FXML
-	Button usernameChangeButton;
-	@FXML
 	TextField passwordField;
 	@FXML
-	Button passwordChangeButton;
+	TextField passwordConfirmField;
+
 	@FXML
 	TextField nameField;
 	@FXML
-	Button nameChangeButton;
+	TextField ageField;
 	@FXML
-	TextField ratingField;
-	@FXML
-	Button ratingChangeButton;
+	TextField phoneField;
+
 	@FXML
 	ImageView profilePicture;
 
 	@FXML
 	Button backButton;
+	@FXML
+	Button changeButton;
+
+	@FXML
+	RadioButton male;
+	@FXML
+	RadioButton female;
+	@FXML
+	RadioButton notBinary;
+	@FXML
+	RadioButton notSay;
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//this.usernameField.setText(ClientEXE.getProfile().getUserName() );
-		//this.nameField.setText( ClientEXE.getProfile().getName() );
-		//this.passwordField.setText( ClientEXE.getProfile().getPassword() );
-		//this.profilePicture.setImage( new Image( ClientEXE.getProfile().getImageAddress() ) );
+		Profile profile = ClientEXE.getProfile();
+		nameField.setText( profile.getName() );
+		ageField.setText(new Integer(profile.getBirthYear()).toString());
+		phoneField.setText(profile.getPhoneNumber());
+		profilePicture.setImage( new Image( ClientEXE.getProfile().getImageAddress() ) );
+		male.setSelected(false);
+		female.setSelected(false);
+		notBinary.setSelected(false);
+		notSay.setSelected(false);
+		switch(profile.getGender()){
+			case MALE:
+				male.setSelected(true);
+				break;
+			case FEMALE:
+				female.setSelected(true);
+				break;
+			case NOT_BINARY:
+				notBinary.setSelected(true);
+				break;
+			case NOT_SAY:
+				notSay.setSelected(true);
+				break;
+		}
 	}
 
-	public void tryChangingUsername() {
-		String newUsername = this.makeAndShowTextInputDialog( "username", "You are about to change your username", "Please enter a username!" );
-		//TODO : check username existance
-		if (false ) {
-			this.makeAndShowInformationDialog("Invalid username", "Username already exists!");
-		}
-		else {
-			ClientEXE.getProfile().setUserName( this.usernameField.getText() );
-		}
+	public void changeProfile(){
+		System.out.println("profile changed?");
 	}
 
 	public void goToMainMenu() {

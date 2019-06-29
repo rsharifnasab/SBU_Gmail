@@ -58,42 +58,121 @@ public class FirstPageController extends ParentController implements Initializab
 
 
 
-//	VaghT taraf dokme-e signup ro mizare, in taabe' sedaa zade mishe
-public void doSignupStuff() {
+	public boolean hasEmptyField(){
+		if ( signupUsernameField.getText().isEmpty()
+			|| signupPasswordField.getText().isEmpty()
+			|| signupConfirmPasswordField.getText().isEmpty()
+			|| signupNameField.getText().isEmpty()
+			|| signupAgeField.getText().isEmpty()
+			) {
+					showFillRequiredFieldsDialog();
+					return true;
+			}
+		return false;
+	}
 
-		if (
-		 		signupUsernameField.getText().isEmpty()
-				|| signupPasswordField.getText().isEmpty()
-				|| signupConfirmPasswordField.getText().isEmpty()
-				|| signupNameField.getText().isEmpty()
-				|| signupAgeField.getText().isEmpty()
-				) {
-			this.showFillRequiredFieldsDialog();
-			return;
-		}
+	public boolean isValidPassword(){
 
-		// not equals password
+		System.out.println("checking password sameness");
+
 		if ( ! signupPasswordField.getText().equals( signupConfirmPasswordField.getText() ) ) {
-			this.showMismatchPasswordsDialog();
-			return;
+			String title = "Error in sign up";
+			String contentText = "Passwords don't match";
+			makeAndShowInformationDialog( title, contentText );
+			return false;
+		}
+		char[] toCheck = signupPasswordField.getText().toCharArray();
+
+		boolean goodLength = toCheck.length >= 8 ; //check password length
+		boolean hasDigit = false;
+		boolean hasUppercase = false;
+		boolean hasLowercase = false;
+
+		for(Character c : toCheck){
+			if(Character.isUpperCase(c)) hasUppercase = true;
+		}
+		for(Character c : toCheck){
+			if(Character.isDigit(c)) hasDigit = true;
+		}
+		for(Character c : toCheck){
+			if(Character.isLowerCase(c)) hasLowercase = true;
 		}
 
-		if (! Profile.isValidBirthYear(signupAgeField.getText())) {
-			this.showBadYearDialog();
-			return;
+		boolean isValid = goodLength && hasDigit && hasLowercase && hasLowercase ;
+		if (! isValid ){
+			String title = "invalid passwrod";
+			String contentText = "password should be strong!";
+			makeAndShowInformationDialog( title, contentText );
+			return false;
+		}
+		return isValid;
+	}
+	public boolean isValidBirth(){
+		String year = signupAgeField.getText();
+		if (! Profile.isValidBirthYear(year)) {
+			String title = "year should be a valid integer";
+			String contentText = "please check year again";
+			this.makeAndShowInformationDialog( title, contentText );
+			return false;
+		}
+		if (  (2019 - Integer.parseInt(year)) < 13){
+			String title = "you should be at least 13";
+			String contentText = "please wait few years :D";
+			this.makeAndShowInformationDialog( title, contentText );
+			return false;
+		}
+		return true;
+	}
+
+	public boolean isValidUsername(){
+		char[] toCheck = signupUsernameField.getText().toCharArray();
+
+		boolean isValid = true;
+
+		for(Character c : toCheck){
+			boolean flag = false;
+			if(Character.isUpperCase(c)) flag = true;
+			if(Character.isLowerCase(c)) flag = true;
+			if(Character.isDigit(c)) flag = true;
+			if (c == '.') flag = true;
+			if (!flag) isValid = false;
+		}
+		System.out.println("username good is :"+isValid);
+		if (! isValid ){
+			String title = "invalid username";
+			String contentText = "username must only have alphabet and digit  and dot characters!";
+			makeAndShowInformationDialog( title, contentText );
+			return false;
 		}
 
-		//TODO : check username existance
-		if (  false ){
-			this.showUsernameExistsDialog();
-			return;
+		boolean exists = false;
+		//TODO check existance
+
+		if ( exists){
+			String title = "Failed to create profile";
+			String contentText = "Username already exists, choose another one!";
+			this.makeAndShowInformationDialog( title, contentText );
 		}
+
+		return !exists;
+	}
+
+//	VaghT taraf dokme-e signup ro mizare, in taabe' sedaa zade mishe
+	public void doSignupStuff() {
+
+		if ( hasEmptyField() ) return;
+		if (!isValidPassword() ) return;
+		if (!isValidBirth()) return;
+		if (!isValidUsername()) return;
 
 		//profile seems valid
+
 		Profile justCreatedProfile = this.makeProfileFromPageContent();
+		ClientEXE.setProfile(justCreatedProfile);
 		//TODO: send profile to server
-		this.showProfileCreatedDialog();
-		this.clearFields();
+		showProfileCreatedDialog();
+		clearFields();
+		loadPage( "ProfilePage" );
 	}
 
 	private boolean isLoginInformationValid( LoginInformation loginInformation ) {
@@ -108,6 +187,7 @@ public void doSignupStuff() {
 		this.signupPasswordField.setText( null );
 		this.signupConfirmPasswordField.setText( null );
 		this.signupNameField.setText( null );
+		this.signupAgeField.setText( null );
 		Image defaultImage = new Image( FirstPageController.PROFILE_PICTURE_DEFAULT );
 		this.profilePicture.setImage( defaultImage );
 	}
@@ -120,6 +200,8 @@ public void doSignupStuff() {
 		returnValue.setPassword( signupPasswordField.getText() );
 		returnValue.setName( signupNameField.getText() );
 		returnValue.setBirthYear( signupAgeField.getText() );
+		returnValue.setPhoneNumber(null);
+		returnValue.setGender(Gender.NOT_SAY);
 
 		returnValue.setImageAddress( profilePicture.getImage().impl_getUrl().toString() ); //TODO
 		return returnValue;
@@ -127,8 +209,7 @@ public void doSignupStuff() {
 
 //	VaghT taraf roo-e profile picturesh click mikone, ye safheE baaz mishe ke komak mikone ye profile picture entekhaab kone!
 	public void chooseProfilePicture() {
-		System.out.println("ok now choose profile");
-
+		System.out.println("ok now choose profile photo");
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog( ClientEXE.pStage.getScene().getWindow() );
 		if ( file != null ) {
@@ -137,11 +218,6 @@ public void doSignupStuff() {
 		}
 	}
 
-	public void showBadYearDialog(){
-		String title = "year should be a valid integer";
-		String contentText = "please check year again";
-		this.makeAndShowInformationDialog( title, contentText );
-	}
 
 
 	public void profileCreationFailedDialog() {
@@ -150,11 +226,7 @@ public void doSignupStuff() {
 		this.makeAndShowInformationDialog( title, contentText );
 	}
 
-	public void showUsernameExistsDialog() {
-		String title = "Failed to create profile";
-		String contentText = "Username already exists, choose another one!";
-		this.makeAndShowInformationDialog( title, contentText );
-	}
+
 
 	public void showProfileCreatedDialog( ){
 		String title = "Success";
@@ -163,21 +235,16 @@ public void doSignupStuff() {
 	}
 
 	public void showFillRequiredFieldsDialog(){
+		System.out.println("incomplete");
 		String title = "Incomplete information";
 		String contentText = "Please fill all of the required fields";
-		this.makeAndShowInformationDialog( title, contentText );
+		makeAndShowInformationDialog( title, contentText );
 	}
 
 	public void showInvalidLoginDialog() {
 	    String title = "Error in login";
 	    String contentText = "Can not find a user with this information\nTry again or sign up";
 	    this.makeAndShowInformationDialog( title, contentText );
-	}
-
-	public void showMismatchPasswordsDialog() {
-		String title = "Error in sign up";
-		String contentText = "Passwords don't match";
-		this.makeAndShowInformationDialog( title, contentText );
 	}
 
 }
