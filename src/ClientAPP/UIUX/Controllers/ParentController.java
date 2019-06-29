@@ -30,12 +30,6 @@ public class ParentController {
 		Client.pStage.show();
 	}
 
-
-	public boolean doesUsernameExist( String username ) {
-		UsernameExistenceRespond respond = (UsernameExistenceRespond) this.sendUserCommand( new UsernameExistenceCommand( username ) );
-		return respond.isAnswer();
-	}
-
 //	Title va Matn-e badane ro migire, va ye alert baa oon mohtaviaat neshoon mide!
 	public void makeAndShowInformationDialog( String title, String contentText ) {
 		Alert alert = new Alert( Alert.AlertType.INFORMATION );
@@ -45,8 +39,8 @@ public class ParentController {
 		alert.showAndWait();
 	}
 
-	//Title va MatnHaa-e badane ro migire, baahaashoon ye TextInputDialog misaaze!
-	public String makeAndShowTextInputDialog( String title, String headerText, String contentText ) {
+	//	Title va MatnHaa-e badane ro migire, baahaashoon ye TextInputDialog misaaze!
+	public String makeAndShoTextInputDialog( String title, String headerText, String contentText ) {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle( title );
 		dialog.setHeaderText( headerText );

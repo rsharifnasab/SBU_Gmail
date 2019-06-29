@@ -1,4 +1,4 @@
-package Network.ClientSide;
+package ClientAPP
 
 import Enums.Ports;
 import BasicClasses.*;
@@ -22,32 +22,52 @@ public class Client extends Application {
 	private static Profile profile = null;
 	private static String serverAddress;
 
-	public static Socket userSocket;
-	public static ObjectInputStream userIn;
-	public static ObjectOutputStream userOut;
+	public static Socket socket;
+	public static ObjectInputStream socketIn;
+	public static ObjectOutputStream socketOut;
 
-	public static Socket chatSocket;
-	public static ObjectInputStream chatIn;
-	public static ObjectOutputStream chatOut;
-
-	public static void main(String[] args) {
-		try {
-			System.out.println("main ran!");
-			Client.userSocket = new Socket( serverAddress, Ports.PORT);
-			Client.userIn = new ObjectInputStream( Client.userSocket.getInputStream() );
-			Client.userOut = new ObjectOutputStream( Client.userSocket.getOutputStream() );
-
-
+	public static Boolean connectToServer(){
+		System.out.println("trying to connect to server");
+		try{
+			socket = new Socket( serverAddress, Ports.PORT);
+			socketIn = new ObjectInputStream( socket.getInputStream() );
+			socketOut = new ObjectOutputStream( socket.getOutputStream() );
 			System.out.println("conected to server!");
+			return true;
 		} catch (IOException e) {
+			System.out.println("failed to connect to server");
 			e.printStackTrace();
 		}
-		System.out.println( "Launching..." );
+		return false;
+	}
+
+	public static Boolean disconnectFromServer(){
+		try{
+
+			socketIn.close();
+			socketOut.close();
+			socket.close();
+			return true;
+
+		catch( NullPointerException e){
+			System.out.println("wasnt connect BTW")
+		}
+		catch( Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println("main ran!");
 		launch( args );
+
 	}
 
 	@Override
 	public void start(Stage primaryStage) { // Avvalesh, MainMenu ro load mikonim!
+
 		Client.pStage = primaryStage;
 		Parent root = null;
 		try {
@@ -57,44 +77,8 @@ public class Client extends Application {
 		}
 		Client.pStage.setTitle( "Main Menu" );
 		Client.pStage.setScene( new Scene( root, 1280, 720 ) );
-		Client.pStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent event) {
-				createExitAlert(event);
-			}
-		});
 		Client.pStage.show();
 	}
 
-	public static Profile getProfile() {
-		return profile;
-	}
-
-	public static void setProfile(Profile profile) {
-		Client.profile = profile;
-	}
-
-	public void createExitAlert(WindowEvent event){
-
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setTitle("Exit Application");
-		alert.setHeaderText("Are you sure you want to Exit the program? ");
-		alert.setContentText("you won't lose everything!");
-
-		ButtonType yes = new ButtonType("yes");
-		ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-		alert.getButtonTypes().setAll(yes, no);
-
-		Optional<ButtonType> as = alert.showAndWait();
-
-		if (as.get().equals(yes)) {
-			Client.pStage.close();
-			System.exit(0);
-		}
-		else {
-			event.consume();
-		}
-	}
 
 }
