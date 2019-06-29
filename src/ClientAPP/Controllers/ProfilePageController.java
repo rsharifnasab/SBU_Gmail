@@ -71,6 +71,31 @@ public class ProfilePageController extends ParentController implements Initializ
 		System.out.println("profile changed?");
 	}
 
+	public void clearMale(){
+			female.setSelected(false);
+			notBinary.setSelected(false);
+			notSay.setSelected(false);
+	}
+
+	public void clearFemale(){
+			male.setSelected(false);
+			notBinary.setSelected(false);
+			notSay.setSelected(false);
+	}
+
+	public void clearNotBinary(){
+			male.setSelected(false);
+			female.setSelected(false);
+			notSay.setSelected(false);
+	}
+
+	public void clearNotSay(){
+			male.setSelected(false);
+			female.setSelected(false);
+			notBinary.setSelected(false);
+	}
+
+
 	public void goToMainMenu() {
 		this.loadPage( "MainMenu" );
 	}
