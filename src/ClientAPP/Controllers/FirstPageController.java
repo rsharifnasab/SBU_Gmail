@@ -65,6 +65,10 @@ public class FirstPageController extends ParentController implements Initializab
 	}
 
 	public void doLoginStuff() {
+		if (!ClientNetworker.isConnected()){
+			showNotConnectedDialog();
+			return;
+		}
 		if ( loginUsernameField.getText().isEmpty() || loginPasswordField.getText().isEmpty() ) {
 			this.showFillRequiredFieldsDialog();
 			return;
@@ -128,9 +132,19 @@ public class FirstPageController extends ParentController implements Initializab
 	public void chooseProfilePicture(){
 		profilePicture.setImage( chooseImage() );
 	}
+
+	public void showNotConnectedDialog(){
+		String title = "not connected to server";
+		String contentText = "you are not connected to server yet, please use connection panel!";
+		this.makeAndShowInformationDialog( title, contentText );
+
+	}
 //	VaghT taraf dokme-e signup ro mizare, in taabe' sedaa zade mishe
 	public void doSignupStuff() {
-
+		if (!ClientNetworker.isConnected()){
+			showNotConnectedDialog();
+			return;
+		}
 		if ( hasEmptyField() ) return;
 		if (!isValidPassword(signupPasswordField.getText() , signupConfirmPasswordField.getText() ) ) return;
 		if (!isValidBirth(signupAgeField.getText())) return;

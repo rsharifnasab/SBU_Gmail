@@ -33,23 +33,6 @@ public class ClientNetworker{
 			System.out.println("input output stream ok");
 			System.out.println("conected to server!");
 			isConnected = true;
-
-
-			//*************
-			try{
-				Thread.sleep(1000);
-				System.out.println("wrting");
-				socketOut.writeObject(new String("hasti?"));
-				socketOut.flush();
-				System.out.println("sent");
-				System.out.println(socketIn.readObject());
-				System.out.println("that was response");
-			}
-			catch(Exception e){
-				e.printStackTrace();
-			}
-			//***********
-
 			return true;
 
 		}catch (ConnectException e){
