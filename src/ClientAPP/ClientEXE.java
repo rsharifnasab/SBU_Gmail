@@ -19,7 +19,8 @@ public class Client extends Application {
 //	Stage-e Asli-e Barnaame!
 	public static Stage pStage;
 
-	private static Profile profile;
+	private static Profile profile = null;
+	private static String serverAddress;
 
 	public static Socket userSocket;
 	public static ObjectInputStream userIn;
@@ -32,14 +33,11 @@ public class Client extends Application {
 	public static void main(String[] args) {
 		try {
 			System.out.println("main ran!");
-			Client.userSocket = new Socket( "localhost", Ports.USER_PORT);
+			Client.userSocket = new Socket( serverAddress, Ports.PORT);
 			Client.userIn = new ObjectInputStream( Client.userSocket.getInputStream() );
 			Client.userOut = new ObjectOutputStream( Client.userSocket.getOutputStream() );
 
 
-			Client.chatSocket=new Socket("localhost",Ports.CHAT_PORT);
-			Client.chatIn=new ObjectInputStream(Client.chatSocket.getInputStream());
-			Client.chatOut=new ObjectOutputStream(Client.chatSocket.getOutputStream());
 			System.out.println("conected to server!");
 		} catch (IOException e) {
 			e.printStackTrace();

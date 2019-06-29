@@ -1,12 +1,12 @@
-package Network.ServerSide.DBHandler;
+package ServerScript.DB;
 
-import Network.ServerSide.Server;
+import ServerScript.*;
 
 import java.io.*;
 
 public class DBUpdator {
     private static DBUpdator ourInstance = new DBUpdator();
-    private static final String address="src/DB/Data";
+    private static final String address= "src/ServerScript/DB/Data";
     public static DBUpdator getInstance() {
         return ourInstance;
     }
@@ -15,10 +15,10 @@ public class DBUpdator {
 
     public synchronized void updateDataBase(){
       try {
-          FileOutputStream fout=new FileOutputStream(address);
-          ObjectOutputStream outToFile=new ObjectOutputStream(fout);
-          outToFile.writeObject(Server.profiles);
-          outToFile.close();
+          FileOutputStream fout = new FileOutputStream(address);
+          ObjectOutputStream objToFile = new ObjectOutputStream(fout);
+          objToFile.writeObject(ServerEXE.profiles);
+          objToFile.close();
           fout.close();
       } catch (IOException e) {
         e.printStackTrace();

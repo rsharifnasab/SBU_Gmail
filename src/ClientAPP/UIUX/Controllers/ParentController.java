@@ -30,31 +30,6 @@ public class ParentController {
 		Client.pStage.show();
 	}
 
-	public Response sendUserCommand( Command command ) {
-		try {
-			Client.userOut.writeObject( command );
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Response response = null;
-		try {
-			response = (Response) Client.userIn.readObject();
-		} catch (IOException|ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return response;
-	}
-
-	public void sendChatCommand(SendChatCommand sendChatCommand){
-
-		try {
-			Client.chatOut.writeObject(sendChatCommand);
-		} catch (IOException e){
-			e.printStackTrace();
-		}
-
-	}
-
 
 	public boolean doesUsernameExist( String username ) {
 		UsernameExistenceRespond respond = (UsernameExistenceRespond) this.sendUserCommand( new UsernameExistenceCommand( username ) );
@@ -70,7 +45,7 @@ public class ParentController {
 		alert.showAndWait();
 	}
 
-//	Title va MatnHaa-e badane ro migire, baahaashoon ye TextInputDialog misaaze!
+	//Title va MatnHaa-e badane ro migire, baahaashoon ye TextInputDialog misaaze!
 	public String makeAndShowTextInputDialog( String title, String headerText, String contentText ) {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle( title );

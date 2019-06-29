@@ -33,6 +33,10 @@ public class FirstPageController extends ParentController implements Initializab
 	ImageView profilePicture;
 	@FXML
 	TextField signupNameField;
+	@FXML
+	TextField signupAgeField;
+	@FXML
+	TextField serverAddressField;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -40,16 +44,14 @@ public class FirstPageController extends ParentController implements Initializab
 		this.profilePicture.setImage( image );
 	}
 
-	//	VaghT taraf dokme-e login ro mizane, in taabe' sedaa zade mishe
 	public void doLoginStuff() {
-		if ( loginUsernameField.getText().isEmpty() || loginPasswordField.getText().isEmpty() ) { //Age yeki az fieldHaa-e mored-e niaaz khaali boodan
-			this.showFillRequiredFieldsDialog();	//Be taraf befahmoon ke baayad poreshoon kone!
+		if ( loginUsernameField.getText().isEmpty() || loginPasswordField.getText().isEmpty() ) {
+			this.showFillRequiredFieldsDialog();
 			return;
 		}
-//		ChizHaaE ro ke taraf vaared karde, dar ghaaleb-e ye LoginInformation negah midaarim
 		LoginInformation loginInformation = new LoginInformation( loginUsernameField.getText(), loginPasswordField.getText() );
-		if ( ! this.isLoginInformationValid( loginInformation ) ){	//Age ettelaa'aati ke taraf vaared karde bood ghalat boodan
-			this.showInvalidLoginDialog();	//Be taraf befahmoon ke chi shode!
+		if ( ! this.isLoginInformationValid( loginInformation ) ){	
+			this.showInvalidLoginDialog();
 			return;
 		}
 //		age be injaa-e taabe reside baashim ya'ni hamechiz ok boode... LoginInformation ro daashte baash va boro soraagh-e menu!
@@ -59,31 +61,30 @@ public class FirstPageController extends ParentController implements Initializab
 
 //	VaghT taraf dokme-e signup ro mizare, in taabe' sedaa zade mishe
 public void doSignupStuff() {
-//		Age yeki az fieldHaa-e mored-e niaaz khaali boodan
+
 		if ( signupUsernameField.getText().isEmpty()
 				|| signupPasswordField.getText().isEmpty()
 				|| signupConfirmPasswordField.getText().isEmpty()
 				|| signupNameField.getText().isEmpty() ) {
-			this.showFillRequiredFieldsDialog();	//Be taraf befahmoon ke baayad poreshoon kone!
+			this.showFillRequiredFieldsDialog();
 			return;
 		}
-//		Age paswoordi ke vaared shode bood, ba comfirmationesh fargh daasht
+
+		// not equals password
 		if ( ! signupPasswordField.getText().equals( signupConfirmPasswordField.getText() ) ) {
-			this.showMismatchPasswordsDialog();	//Be taraf begoo ke paswoordHaash be ham nemikhoran!
+			this.showMismatchPasswordsDialog();
 			return;
 		}
+
 		if ( this.doesUsernameExist( signupUsernameField.getText() ) ){
 			this.showUsernameExistsDialog();
 			return;
 		}
-//		Khob, hamechi OK e... profili ke taraf khaaste besaaze ro besaaz va berizesh too-e justCreatedProfile
+		//profile seems valid
 		Profile justCreatedProfile = this.makeProfileFromPageContent();
-//		System.out.println( justCreatedProfile );
-//		Server.profiles.add( justCreatedProfile );	//ProfileE ke saakhT ro too-e Server add kon!
 		ProfileCreationResponse response = this.addProfile( justCreatedProfile );
-		this.showProfileCreatedDialog( response );    //Begoo ke profile ro saakhT baa movaffaghiat
-		this.clearFields();    //FieldHaa ro paak kon... kaaresh tamoom shode Dge mikhaaymeshoon chikar?
-
+		this.showProfileCreatedDialog();
+		this.clearFields();
 	}
 
 	private void setClientProfile( String username ) {
@@ -112,8 +113,8 @@ public void doSignupStuff() {
 		this.signupPasswordField.setText( null );
 		this.signupConfirmPasswordField.setText( null );
 		this.signupNameField.setText( null );
-		Image temp = new Image( FirstPageController.PROFILE_PICTURE_DEFAULT );
-		this.profilePicture.setImage( temp );
+		Image defaultImage = new Image( FirstPageController.PROFILE_PICTURE_DEFAULT );
+		this.profilePicture.setImage( defaultImage );
 	}
 
 //	Az chizHaaE ke tooye safhe hastan, ye profile misaaze!
@@ -123,8 +124,9 @@ public void doSignupStuff() {
 		returnValue.setUserName( signupUsernameField.getText() );
 		returnValue.setPassword( signupPasswordField.getText() );
 		returnValue.setName( signupNameField.getText() );
+		returnValue.setAge( signupAgeField.getText() );
 
-		returnValue.setImageAddress( profilePicture.getImage().impl_getUrl().toString() ); // hesabi TODO
+		returnValue.setImageAddress( profilePicture.getImage().impl_getUrl().toString() ); //TODO
 		return returnValue;
 	}
 
@@ -153,9 +155,9 @@ public void doSignupStuff() {
 		this.makeAndShowInformationDialog( title, contentText );
 	}
 
-	public void showProfileCreatedDialog( ProfileCreationResponse response ){
+	public void showProfileCreatedDialog( ){
 		String title = "Success";
-		String contentText = response.getMessage();
+		String contentText = "profile created succesfully!";
 		this.makeAndShowInformationDialog( title, contentText );
 	}
 

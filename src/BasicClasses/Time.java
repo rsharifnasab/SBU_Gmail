@@ -31,4 +31,8 @@ public class Time implements Serializable {
     public void setSeconds(int seconds) {
         this.seconds = seconds;
     }
+
+    public String toString(){
+      return minutes+":"+seconds;
+    }
 }

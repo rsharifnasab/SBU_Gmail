@@ -14,11 +14,8 @@ public class Profile implements Serializable {
     private String userName, password;
     private String name;
     private String imageAddress;
-    private Date date;
+    private int birthYear;
 
-    public Profile() {
-
-    }
 
     @Override
     public int hashCode() {
@@ -87,11 +84,10 @@ public class Profile implements Serializable {
         this.imageAddress = imageAddress;
     }
 
-    public Date getDate() {
-        return date;
+    public int getAge(){
+      return 2019 - birthYear;
     }
-
-    private void setDate(Date date) {
-        this.date = date;
+    public int isLegalAge(){
+      return getAge() > 17;
     }
 }
