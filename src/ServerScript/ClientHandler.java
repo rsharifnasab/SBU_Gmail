@@ -32,11 +32,18 @@ public class ClientHandler implements Runnable {
 
 			try{
 				income = (Map<String,Object>) socketIn.readObject();
+				System.out.println("server got this from user:\n" + income);
 				Map<String,Object> answer = null;
 				Command command = (Command) income.get("command");
 				switch(command){
 					case USERNAME_UNIQUE:
 						answer = API.isUserNameExists(income);
+						break;
+					case LOGIN:
+						answer = API.login(income);
+						break;
+					case SIGNUP:
+						answer = API.signUp(income);
 						break;
 
 

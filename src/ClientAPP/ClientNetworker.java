@@ -69,6 +69,7 @@ public class ClientNetworker{
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> serve(Map<String,Object> toSend){
 		Map<String,Object> recieved = null;
+		System.out.println("sending" + toSend +  " to server from (toserve)");
 		try{
 			socketOut.writeObject(toSend);
 			socketOut.flush();

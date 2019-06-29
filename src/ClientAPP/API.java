@@ -16,4 +16,25 @@ public class API{
 		return (boolean) recieved.get("answer");
 	}
 
+	public static Profile login(String username, String password){
+		Map<String,Object> toSend = new ConcurrentHashMap<>();
+		toSend.put("command", Command.LOGIN);
+		toSend.put("username",username);
+		toSend.put("password",password);
+		Map<String,Object> recieved = ClientNetworker.serve(toSend);
+		if ( recieved.get("answer") == null ) return null;
+		return (Profile) recieved.get("answer");
+	}
+
+	public static Boolean signUp(Profile profile){
+		System.out.println("sending "+profile+ " to server");
+		Map<String,Object> toSend = new ConcurrentHashMap<>();
+		toSend.put("command", Command.SIGNUP);
+		toSend.put("profile", profile);
+		System.out.println(toSend);
+		Map<String,Object> recieved = ClientNetworker.serve(toSend);
+		if ( recieved.get("answer") == null ) return null;
+		return (Boolean) recieved.get("answer");
+	}
+
 }

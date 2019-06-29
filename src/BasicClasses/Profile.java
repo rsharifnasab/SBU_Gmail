@@ -128,4 +128,9 @@ public class Profile implements Serializable {
       }
     }
 
+    public Profile authenticate(String username,String password){
+      if(this.username.equals(username) && this.password.equals(password)) return this;
+      return null;
+    }
+
 }

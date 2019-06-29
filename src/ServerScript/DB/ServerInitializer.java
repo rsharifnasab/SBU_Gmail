@@ -22,6 +22,7 @@ public class ServerInitializer {
       FileInputStream fin=new FileInputStream(address);
       ObjectInputStream inFromFile=new ObjectInputStream(fin);
       ServerEXE.profiles = new ConcurrentHashMap<>( (ConcurrentHashMap<String, Profile>) inFromFile.readObject());
+      System.out.println("server initialized with:\n" + ServerEXE.profiles);
       inFromFile.close();
       fin.close();
     }

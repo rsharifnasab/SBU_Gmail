@@ -69,13 +69,21 @@ public class FirstPageController extends ParentController implements Initializab
 			showNotConnectedDialog();
 			return;
 		}
-		if ( loginUsernameField.getText().isEmpty() || loginPasswordField.getText().isEmpty() ) {
+
+		String username = loginUsernameField.getText();
+		String password = loginPasswordField.getText();
+
+		if ( username.isEmpty() || password.isEmpty() ) {
 			this.showFillRequiredFieldsDialog();
 			return;
 		}
 
-		System.out.println(" TODO : check loginInformation");
-
+		Profile profile = API.login(username,password);
+		if(profile == null){
+			showInvalidLoginDialog();
+			return;
+		}
+		ClientEXE.setProfile(profile);
 		System.out.println("loading main menu");
 		this.loadPage( "MainMenu" );
 	}
@@ -140,20 +148,25 @@ public class FirstPageController extends ParentController implements Initializab
 	}
 //	VaghT taraf dokme-e signup ro mizare, in taabe' sedaa zade mishe
 	public void doSignupStuff() {
+		System.out.println("signing up");
+
 		if (!ClientNetworker.isConnected()){
 			showNotConnectedDialog();
 			return;
 		}
+		System.out.println("server connection ok");
 		if ( hasEmptyField() ) return;
 		if (!isValidPassword(signupPasswordField.getText() , signupConfirmPasswordField.getText() ) ) return;
 		if (!isValidBirth(signupAgeField.getText())) return;
 		if (!isValidUsername()) return;
+		System.out.println("empty fileds ok");
 
 		//profile seems valid
 
 		Profile justCreatedProfile = this.makeProfileFromPageContent();
 		ClientEXE.setProfile(justCreatedProfile);
-		//TODO: send profile to server
+		System.out.println("profile created, sending to server");
+		API.signUp(justCreatedProfile);
 		showProfileCreatedDialog();
 		clearFields();
 		loadPage( "ProfilePage" );
@@ -206,7 +219,7 @@ public class FirstPageController extends ParentController implements Initializab
 
 	public void showInvalidLoginDialog() {
 	    String title = "Error in login";
-	    String contentText = "Can not find a user with this information\nTry again or sign up";
+	    String contentText = "invalid username or password\nTry again or sign up";
 	    this.makeAndShowInformationDialog( title, contentText );
 	}
 
