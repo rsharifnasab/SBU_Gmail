@@ -71,58 +71,6 @@ public class FirstPageController extends ParentController implements Initializab
 		return false;
 	}
 
-	public boolean isValidPassword(){
-
-		System.out.println("checking password sameness");
-
-		if ( ! signupPasswordField.getText().equals( signupConfirmPasswordField.getText() ) ) {
-			String title = "Error in sign up";
-			String contentText = "Passwords don't match";
-			makeAndShowInformationDialog( title, contentText );
-			return false;
-		}
-		char[] toCheck = signupPasswordField.getText().toCharArray();
-
-		boolean goodLength = toCheck.length >= 8 ; //check password length
-		boolean hasDigit = false;
-		boolean hasUppercase = false;
-		boolean hasLowercase = false;
-
-		for(Character c : toCheck){
-			if(Character.isUpperCase(c)) hasUppercase = true;
-		}
-		for(Character c : toCheck){
-			if(Character.isDigit(c)) hasDigit = true;
-		}
-		for(Character c : toCheck){
-			if(Character.isLowerCase(c)) hasLowercase = true;
-		}
-
-		boolean isValid = goodLength && hasDigit && hasLowercase && hasLowercase ;
-		if (! isValid ){
-			String title = "invalid passwrod";
-			String contentText = "password should be strong!";
-			makeAndShowInformationDialog( title, contentText );
-			return false;
-		}
-		return isValid;
-	}
-	public boolean isValidBirth(){
-		String year = signupAgeField.getText();
-		if (! Profile.isValidBirthYear(year)) {
-			String title = "year should be a valid integer";
-			String contentText = "please check year again";
-			this.makeAndShowInformationDialog( title, contentText );
-			return false;
-		}
-		if (  (2019 - Integer.parseInt(year)) < 13){
-			String title = "you should be at least 13";
-			String contentText = "please wait few years :D";
-			this.makeAndShowInformationDialog( title, contentText );
-			return false;
-		}
-		return true;
-	}
 
 	public boolean isValidUsername(){
 		char[] toCheck = signupUsernameField.getText().toCharArray();
@@ -157,12 +105,15 @@ public class FirstPageController extends ParentController implements Initializab
 		return !exists;
 	}
 
+	public void chooseProfilePicture(){
+		profilePicture.setImage( chooseImage() );
+	}
 //	VaghT taraf dokme-e signup ro mizare, in taabe' sedaa zade mishe
 	public void doSignupStuff() {
 
 		if ( hasEmptyField() ) return;
-		if (!isValidPassword() ) return;
-		if (!isValidBirth()) return;
+		if (!isValidPassword(signupPasswordField.getText() , signupConfirmPasswordField.getText() ) ) return;
+		if (!isValidBirth(signupAgeField.getText())) return;
 		if (!isValidUsername()) return;
 
 		//profile seems valid
@@ -195,8 +146,7 @@ public class FirstPageController extends ParentController implements Initializab
 //	Az chizHaaE ke tooye safhe hastan, ye profile misaaze!
 	@SuppressWarnings("deprecation")
 	private Profile makeProfileFromPageContent() {
-		Profile returnValue = new Profile();
-		returnValue.setUserName( signupUsernameField.getText() );
+		Profile returnValue = new Profile(signupUsernameField.getText());
 		returnValue.setPassword( signupPasswordField.getText() );
 		returnValue.setName( signupNameField.getText() );
 		returnValue.setBirthYear( signupAgeField.getText() );
@@ -208,15 +158,6 @@ public class FirstPageController extends ParentController implements Initializab
 	}
 
 //	VaghT taraf roo-e profile picturesh click mikone, ye safheE baaz mishe ke komak mikone ye profile picture entekhaab kone!
-	public void chooseProfilePicture() {
-		System.out.println("ok now choose profile photo");
-		FileChooser fileChooser = new FileChooser();
-		File file = fileChooser.showOpenDialog( ClientEXE.pStage.getScene().getWindow() );
-		if ( file != null ) {
-			Image image = new Image( file.toURI().toString() );
-			this.profilePicture.setImage( image );
-		}
-	}
 
 
 
@@ -232,13 +173,6 @@ public class FirstPageController extends ParentController implements Initializab
 		String title = "Success";
 		String contentText = "profile created succesfully!";
 		this.makeAndShowInformationDialog( title, contentText );
-	}
-
-	public void showFillRequiredFieldsDialog(){
-		System.out.println("incomplete");
-		String title = "Incomplete information";
-		String contentText = "Please fill all of the required fields";
-		makeAndShowInformationDialog( title, contentText );
 	}
 
 	public void showInvalidLoginDialog() {

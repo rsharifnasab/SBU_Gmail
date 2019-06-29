@@ -11,24 +11,28 @@ import java.util.*;
 
 public class Profile implements Serializable {
 
-    private String userName, password;
+    private final String username;
+    private String password;
     private String name;
     private String imageAddress;
     private String birthYear;
     private String phoneNumber;
     private Gender gender;
 
+    public Profile(String username){
+      this.username = username;
+    }
 
     @Override
     public int hashCode() {
-        return userName.hashCode();
+        return username.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
       if(obj == null) return false;
       try{
-        return this.userName.equals(((Profile)obj).getUserName());
+        return this.username.equals(((Profile)obj).getUserName());
       }
       catch(Exception e){
         return false;
@@ -51,15 +55,11 @@ public class Profile implements Serializable {
 
     @Override
     public String toString() {
-        return "[" + userName + ": " + name + " " + birthYear + "]";
+        return "[" + username + ": " + name + " " + birthYear + "]";
     }
 
     public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+        return username;
     }
 
     public String getPhoneNumber() {
