@@ -8,7 +8,6 @@ import java.util.*;
 
 public class ClientNetworker{
 
-	public static Profile profile;
 	static String serverAddress;
 	static final int PORT = 8888;
 
@@ -66,6 +65,21 @@ public class ClientNetworker{
 			e.printStackTrace();
 		}
 		return false;
+	}
+	@SuppressWarnings("unchecked")
+	public static Map<String,Object> serve(Map<String,Object> toSend){
+		Map<String,Object> recieved = null;
+		try{
+			socketOut.writeObject(toSend);
+			socketOut.flush();
+			recieved = (Map<String,Object>) socketIn.readObject();
+			return recieved;
+		} catch (ClassNotFoundException e){
+			System.out.println("invalid answer from server");
+		} catch( IOException e){
+			e.printStackTrace();
+		}
+		return recieved;
 	}
 
 

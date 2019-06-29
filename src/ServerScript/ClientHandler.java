@@ -30,11 +30,18 @@ public class ClientHandler implements Runnable {
 		while(true){
 			Map<String,Object> income = null;
 
-			System.out.println("waiting for object from user");
 			try{
 				income = (Map<String,Object>) socketIn.readObject();
-				System.out.println("i recieved : " + income);
-				socketOut.writeObject("recieved");
+				Map<String,Object> answer = null;
+				Command command = (Command) income.get("command");
+				switch(command){
+					case USERNAME_UNIQUE:
+						answer = API.isUserNameExists(income);
+						break;
+
+
+				}
+				socketOut.writeObject(answer);
 				socketOut.flush();
 			}
 			catch(ClassCastException | ClassNotFoundException e){
@@ -44,6 +51,7 @@ public class ClientHandler implements Runnable {
 				System.out.println("a client has disconncted");
 			}
 			catch(IOException e){
+				System.out.println("ioexepctio happpenddd");
 				e.printStackTrace();
 			}
 			break;

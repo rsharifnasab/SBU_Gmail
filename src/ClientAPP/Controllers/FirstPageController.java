@@ -117,8 +117,7 @@ public class FirstPageController extends ParentController implements Initializab
 			return false;
 		}
 
-		boolean exists = false;
-		//TODO check existance
+		boolean exists = API.isUserNameExists(signupUsernameField.getText());
 
 		if ( exists){
 			String title = "Failed to create profile";
