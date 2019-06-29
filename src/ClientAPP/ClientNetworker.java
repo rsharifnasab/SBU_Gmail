@@ -73,6 +73,8 @@ public class ClientNetworker{
 		try{
 			socketOut.writeObject(toSend);
 			socketOut.flush();
+			socketOut.reset();
+			System.out.println("sent succesfully, waiting for ans");
 			recieved = (Map<String,Object>) socketIn.readObject();
 			return recieved;
 		} catch (ClassNotFoundException e){

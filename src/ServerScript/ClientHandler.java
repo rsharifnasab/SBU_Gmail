@@ -56,12 +56,13 @@ public class ClientHandler implements Runnable {
 			}
 			catch(EOFException e){
 				System.out.println("a client has disconncted");
+				break;
 			}
 			catch(IOException e){
 				System.out.println("ioexepctio happpenddd");
 				e.printStackTrace();
 			}
-			break;
+
 		}
 	}
 
