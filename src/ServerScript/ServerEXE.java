@@ -37,15 +37,14 @@ public class ServerEXE {
 		while ( isServerUp() ){
 			Socket currentUserSocket = null;
 			try {
+
 				System.out.println( "Waiting for a client..." );
+
 				currentUserSocket = serverSocket.accept();
-				ObjectInputStream socketIn = new ObjectInputStream (currentUserSocket.getInputStream());
-				ObjectOutputStream socketOut = new ObjectOutputStream (currentUserSocket.getOutputStream());
-				//ChatHandler chatHandler=new ChatHandler(currentChatSocket);
+				ClientHandler clientHandler=new ClientHandler(currentUserSocket);
+				new Thread( clientHandler ).start();
 
 				System.out.println("A Client Has Connected");
-
-				//new Thread( userHandler ).start();
 
 			} catch (IOException e) {
 				e.printStackTrace();

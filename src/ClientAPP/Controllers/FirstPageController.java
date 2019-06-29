@@ -52,8 +52,8 @@ public class FirstPageController extends ParentController implements Initializab
 
 
 	public void connectToServer(){
-			ClientEXE.connectToServer();
-			if ( ClientEXE.isConnected() ) {
+			ClientNetworker.connectToServer();
+			if ( ClientNetworker.isConnected() ) {
 				System.out.println("making online sphere visible");
 				onlineSphere.setVisible(true);
 				connectButton.setVisible(false);
@@ -69,11 +69,9 @@ public class FirstPageController extends ParentController implements Initializab
 			this.showFillRequiredFieldsDialog();
 			return;
 		}
-		LoginInformation currenLoginInformation = new LoginInformation( loginUsernameField.getText(), loginPasswordField.getText() );
 
 		System.out.println(" TODO : check loginInformation");
 
-    ClientEXE.loginInfo = currenLoginInformation;
 		System.out.println("loading main menu");
 		this.loadPage( "MainMenu" );
 	}
@@ -148,10 +146,6 @@ public class FirstPageController extends ParentController implements Initializab
 		loadPage( "ProfilePage" );
 	}
 
-	private boolean isLoginInformationValid( LoginInformation loginInformation ) {
-		//TODO
-		return true;
-	}
 
 
 //	FieldHaa-e marboot be ghesmat-e signup ro paak mikone

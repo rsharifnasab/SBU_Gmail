@@ -36,7 +36,7 @@ public class ParentController {
 	}
 
 	public boolean connectionToServerCheck(){
-		if ( ClientEXE.isConnected() ) return true;
+		if ( ClientNetworker.isConnected() ) return true;
 		String title = "you are not connected to server";
 		String contentText = "please connect to server";
 		this.makeAndShowInformationDialog( title, contentText );
