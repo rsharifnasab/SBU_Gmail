@@ -14,7 +14,7 @@ public class Profile implements Serializable {
     private String userName, password;
     private String name;
     private String imageAddress;
-    private int birthYear;
+    private String birthYear;
 
 
     @Override
@@ -49,7 +49,7 @@ public class Profile implements Serializable {
 
     @Override
     public String toString() {
-        return "[" + userName + ": " + name + " " + date + "]";
+        return "[" + userName + ": " + name + " " + birthYear + "]";
     }
 
     public String getUserName() {
@@ -84,10 +84,32 @@ public class Profile implements Serializable {
         this.imageAddress = imageAddress;
     }
 
-    public int getAge(){
-      return 2019 - birthYear;
+    public Boolean setBirthYear(String birthYear){
+      if( ! isValidBirthYear(birthYear) ) return false;
+      this.birthYear = birthYear;
+      return true;
     }
-    public int isLegalAge(){
+
+    public int getBirthYear(){
+      return Integer.parseInt(birthYear);
+    }
+
+    public int getAge(){
+      return 2019 - getBirthYear();
+    }
+    public boolean isLegalAge(){
       return getAge() > 17;
     }
+
+    public static boolean isValidBirthYear(String yearStr){
+      try{
+        int yearInt = Integer.parseInt(yearStr);
+        if (yearInt > 2019 || yearInt < 1800 ) return false;
+        return true;
+      }
+      catch(RuntimeException e){
+          return false;
+      }
+    }
+
 }

@@ -9,8 +9,8 @@ public class LoginInformation implements Serializable {
 	private String username, password;
 
 	public LoginInformation(String username, String password) {
-		this.setUsername( username );
-		this.setPassword( password );
+		this.username = username;
+		this.password = password;
 	}
 
 	@Override

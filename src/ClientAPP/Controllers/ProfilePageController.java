@@ -1,6 +1,7 @@
-package UIUX.Controllers;
+package ClientAPP.Controllers;
 
-import Network.ClientSide.Client;
+import ClientAPP.*;
+
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
@@ -33,20 +34,20 @@ public class ProfilePageController extends ParentController implements Initializ
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.usernameField.setText(Client.getProfile().getUserName() );
-		this.nameField.setText( Client.getProfile().getName() );
-		this.passwordField.setText( Client.getProfile().getPassword() );
-
-		this.profilePicture.setImage( new Image( Client.getProfile().getImageAddress() ) );
+		//this.usernameField.setText(ClientEXE.getProfile().getUserName() );
+		//this.nameField.setText( ClientEXE.getProfile().getName() );
+		//this.passwordField.setText( ClientEXE.getProfile().getPassword() );
+		//this.profilePicture.setImage( new Image( ClientEXE.getProfile().getImageAddress() ) );
 	}
 
 	public void tryChangingUsername() {
 		String newUsername = this.makeAndShowTextInputDialog( "username", "You are about to change your username", "Please enter a username!" );
-		if ( this.doesUsernameExist( newUsername ) ) {
+		//TODO : check username existance
+		if (false ) {
 			this.makeAndShowInformationDialog("Invalid username", "Username already exists!");
 		}
 		else {
-			Client.getProfile().setUserName( this.usernameField.getText() );
+			ClientEXE.getProfile().setUserName( this.usernameField.getText() );
 		}
 	}
 

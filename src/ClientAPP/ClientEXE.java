@@ -1,6 +1,5 @@
-package ClientAPP
+package ClientAPP;
 
-import Enums.Ports;
 import BasicClasses.*;
 
 import javafx.event.*;
@@ -14,13 +13,19 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class Client extends Application {
+public class ClientEXE extends Application {
+
+	//TODO
+	public static Profile getProfile(){
+		return null;
+	}
 
 //	Stage-e Asli-e Barnaame!
 	public static Stage pStage;
 
-	private static Profile profile = null;
-	private static String serverAddress;
+	public static LoginInformation loginInfo = null;
+	static String serverAddress;
+	static final int PORT = 8888;
 
 	public static Socket socket;
 	public static ObjectInputStream socketIn;
@@ -29,7 +34,7 @@ public class Client extends Application {
 	public static Boolean connectToServer(){
 		System.out.println("trying to connect to server");
 		try{
-			socket = new Socket( serverAddress, Ports.PORT);
+			socket = new Socket( serverAddress, PORT);
 			socketIn = new ObjectInputStream( socket.getInputStream() );
 			socketOut = new ObjectOutputStream( socket.getOutputStream() );
 			System.out.println("conected to server!");
@@ -47,10 +52,11 @@ public class Client extends Application {
 			socketIn.close();
 			socketOut.close();
 			socket.close();
+			System.out.println("disconncted from server Sucesfully");
 			return true;
-
+		}
 		catch( NullPointerException e){
-			System.out.println("wasnt connect BTW")
+			System.out.println("wasnt connect BTW");
 		}
 		catch( Exception e){
 			e.printStackTrace();
@@ -66,18 +72,20 @@ public class Client extends Application {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void start(Stage primaryStage) { // Avvalesh, MainMenu ro load mikonim!
 
-		Client.pStage = primaryStage;
+		pStage = primaryStage;
 		Parent root = null;
 		try {
-			root = FXMLLoader.load( getClass().getResource( "/UIUX/FXMLs/FirstPage.fxml" ) );
-		} catch (IOException e) {
+			root = FXMLLoader.load( getClass().getResource( "/ClientAPP/FXMLs/FirstPage.fxml" ) );
+			System.out.println("loaded xml");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Client.pStage.setTitle( "Main Menu" );
-		Client.pStage.setScene( new Scene( root, 1280, 720 ) );
-		Client.pStage.show();
+		pStage.setTitle( "Main Menu" );
+		pStage.setScene( new Scene( root, 1280, 720 ) );
+		pStage.show();
 	}
 
 

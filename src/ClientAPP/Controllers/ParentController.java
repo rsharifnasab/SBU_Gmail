@@ -1,7 +1,6 @@
-package UIUX.Controllers;
+package ClientAPP.Controllers;
 
-import Handlers.*;
-import Network.ClientSide.*;
+import ClientAPP.*;
 
 import javafx.fxml.*;
 import javafx.scene.*;
@@ -17,17 +16,17 @@ public class ParentController {
 
 //	Baraa-e Load Kardan-e Safahaat-e Digar
 	public void loadPage( String address ) {
-
+		System.out.println("loading "+address);
 		Parent root = null;
 		try {
-			root = FXMLLoader.load( getClass().getResource( "/UIUX/FXMLs/" + address + ".fxml" ) );
+			root = FXMLLoader.load( getClass().getResource( "/ClientAPP/FXMLs/" + address + ".fxml" ) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		Scene scene = new Scene( root );
-		Client.pStage.setScene( scene );
-		Client.pStage.show();
+		ClientEXE.pStage.setScene( scene );
+		ClientEXE.pStage.show();
 	}
 
 //	Title va Matn-e badane ro migire, va ye alert baa oon mohtaviaat neshoon mide!
@@ -40,7 +39,7 @@ public class ParentController {
 	}
 
 	//	Title va MatnHaa-e badane ro migire, baahaashoon ye TextInputDialog misaaze!
-	public String makeAndShoTextInputDialog( String title, String headerText, String contentText ) {
+	public String makeAndShowTextInputDialog( String title, String headerText, String contentText ) {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle( title );
 		dialog.setHeaderText( headerText );

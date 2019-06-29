@@ -1,4 +1,6 @@
-package UIUX.Controllers;
+package ClientAPP.Controllers;
+
+import ClientAPP.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,10 +13,6 @@ public class MainMenuController extends ParentController {
 
     @FXML
     Button profileButton;
-
-    public void toChallengePage(){
-        this.loadPage("ChallengesPage");
-    }
 
     public void showProfile() {
         this.loadPage( "ProfilePage" );
