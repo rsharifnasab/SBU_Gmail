@@ -81,10 +81,10 @@
             <Font size="22.0" />
          </font>
       </TextField>
-      <RadioButton fx:id="male" layoutX="344.0" layoutY="550.0" mnemonicParsing="false" onAction="#clearMale" text="Male" />
-      <RadioButton fx:id="female" layoutX="434.0" layoutY="550.0" mnemonicParsing="false" onAction="#clearFemale" text="Female" />
-      <RadioButton fx:id="notBinary" layoutX="535.0" layoutY="550.0" mnemonicParsing="false" onAction="#clearNotBinary" text="not Binary" />
-      <Label layoutX="166.0" layoutY="544.0" prefHeight="30.0" prefWidth="106.0" text="gender">
+      <RadioButton fx:id="man" layoutX="344.0" layoutY="550.0" mnemonicParsing="false" onAction="#clearMan" text="Man" />
+      <RadioButton fx:id="woman" layoutX="434.0" layoutY="550.0" mnemonicParsing="false" onAction="#clearWoman" text="Woman" />
+      <RadioButton fx:id="nonBinary" layoutX="534.0" layoutY="550.0" mnemonicParsing="false" onAction="#clearNonBinary" text="Non-binary" />
+      <Label layoutX="166.0" layoutY="544.0" prefHeight="30.0" prefWidth="106.0" text="Gender">
          <font>
             <Font size="22.0" />
          </font>

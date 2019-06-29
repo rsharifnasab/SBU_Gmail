@@ -23,10 +23,15 @@ public class ClientEXE extends Application {
 	static String serverAddress;
 	static final int PORT = 8888;
 
+	private static boolean isConnected = false;
 	public static Socket socket;
 	public static ObjectInputStream socketIn;
 	public static ObjectOutputStream socketOut;
 
+
+	public static boolean isConnected(){
+		return isConnected;
+	}
 
 	public static Profile getProfile(){
 		return profile;
@@ -38,11 +43,15 @@ public class ClientEXE extends Application {
 
 	public static Boolean connectToServer(){
 		System.out.println("trying to connect to server");
+		if(socket != null) return false;
 		try{
 			socket = new Socket( serverAddress, PORT);
+			System.out.println("socket ok");
 			socketIn = new ObjectInputStream( socket.getInputStream() );
 			socketOut = new ObjectOutputStream( socket.getOutputStream() );
+			System.out.println("inpout output stream ok");
 			System.out.println("conected to server!");
+			isConnected = true;
 			return true;
 		} catch (IOException e) {
 			System.out.println("failed to connect to server");
@@ -58,6 +67,10 @@ public class ClientEXE extends Application {
 			socketOut.close();
 			socket.close();
 			System.out.println("disconncted from server Sucesfully");
+			isConnected = false;
+			socket = null;
+			socketIn = null;
+			socketOut = null;
 			return true;
 		}
 		catch( NullPointerException e){

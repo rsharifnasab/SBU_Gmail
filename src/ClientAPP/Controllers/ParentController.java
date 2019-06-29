@@ -35,6 +35,14 @@ public class ParentController {
 		makeAndShowInformationDialog( title, contentText );
 	}
 
+	public boolean connectionToServerCheck(){
+		if ( ClientEXE.isConnected() ) return true;
+		String title = "you are not connected to server";
+		String contentText = "please connect to server";
+		this.makeAndShowInformationDialog( title, contentText );
+		return false;
+	}
+
 	public boolean isValidPassword(String pass1,String pass2){
 
 		System.out.println("checking password sameness");

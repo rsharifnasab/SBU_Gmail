@@ -31,11 +31,11 @@ public class ProfilePageController extends ParentController implements Initializ
 	Button changeButton;
 
 	@FXML
-	RadioButton male;
+	RadioButton man;
 	@FXML
-	RadioButton female;
+	RadioButton woman;
 	@FXML
-	RadioButton notBinary;
+	RadioButton nonBinary;
 	@FXML
 	RadioButton notSay;
 
@@ -49,20 +49,20 @@ public class ProfilePageController extends ParentController implements Initializ
 		phoneField.setText(profile.getPhoneNumber());
 		profilePicture.setImage( new Image( profile.getImageAddress() ) );
 
-		male.setSelected(false);
-		female.setSelected(false);
-		notBinary.setSelected(false);
+		man.setSelected(false);
+		woman.setSelected(false);
+		nonBinary.setSelected(false);
 		notSay.setSelected(false);
 
 		switch(profile.getGender()){
-			case MALE:
-				male.setSelected(true);
+			case MAN:
+				man.setSelected(true);
 				break;
-			case FEMALE:
-				female.setSelected(true);
+			case WOMAN:
+				woman.setSelected(true);
 				break;
-			case NOT_BINARY:
-				notBinary.setSelected(true);
+			case NON_BINARY:
+				nonBinary.setSelected(true);
 				break;
 			case NOT_SAY:
 				notSay.setSelected(true);
@@ -107,9 +107,9 @@ public class ProfilePageController extends ParentController implements Initializ
 	}
 
 	public Gender getGender(){
-		if (male.isSelected()) return Gender.MALE;
-		if (female.isSelected()) return Gender.FEMALE;
-		if (notBinary.isSelected()) return Gender.NOT_BINARY;
+		if (man.isSelected()) return Gender.MAN;
+		if (woman.isSelected()) return Gender.WOMAN;
+		if (nonBinary.isSelected()) return Gender.NON_BINARY;
 		return Gender.NOT_SAY;
 	}
 
@@ -139,28 +139,28 @@ public class ProfilePageController extends ParentController implements Initializ
 		System.out.println("profile changed!");
 	}
 
-	public void clearMale(){
-			female.setSelected(false);
-			notBinary.setSelected(false);
+	public void clearMan(){
+			woman.setSelected(false);
+			nonBinary.setSelected(false);
 			notSay.setSelected(false);
 	}
 
-	public void clearFemale(){
-			male.setSelected(false);
-			notBinary.setSelected(false);
+	public void clearWoman(){
+			man.setSelected(false);
+			nonBinary.setSelected(false);
 			notSay.setSelected(false);
 	}
 
-	public void clearNotBinary(){
-			male.setSelected(false);
-			female.setSelected(false);
+	public void clearNonBinary(){
+			man.setSelected(false);
+			woman.setSelected(false);
 			notSay.setSelected(false);
 	}
 
 	public void clearNotSay(){
-			male.setSelected(false);
-			female.setSelected(false);
-			notBinary.setSelected(false);
+			man.setSelected(false);
+			woman.setSelected(false);
+			nonBinary.setSelected(false);
 	}
 
 

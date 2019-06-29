@@ -6,6 +6,7 @@ import BasicClasses.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.shape.*;
 import javafx.stage.*;
 
 import java.io.File;
@@ -21,25 +22,46 @@ public class FirstPageController extends ParentController implements Initializab
 	TextField loginUsernameField;
 	@FXML
 	PasswordField loginPasswordField;
+
 	@FXML
 	TextField signupUsernameField;
 	@FXML
 	PasswordField signupPasswordField;
 	@FXML
 	PasswordField signupConfirmPasswordField;
+
 	@FXML
 	ImageView profilePicture;
 	@FXML
 	TextField signupNameField;
 	@FXML
 	TextField signupAgeField;
+
 	@FXML
 	TextField serverAddressField;
+	@FXML
+	Button connectButton;
+	@FXML
+	Sphere onlineSphere;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Image image = new Image( FirstPageController.PROFILE_PICTURE_DEFAULT );
 		this.profilePicture.setImage( image );
+	}
+
+
+	public void connectToServer(){
+			ClientEXE.connectToServer();
+			if ( ClientEXE.isConnected() ) {
+				System.out.println("making online sphere visible");
+				onlineSphere.setVisible(true);
+				connectButton.setVisible(false);
+				return;
+			}
+			String title = "server connection peoblem";
+			String contentText = "please check server is running and server ip and all connections";
+			this.makeAndShowInformationDialog( title, contentText );
 	}
 
 	public void doLoginStuff() {

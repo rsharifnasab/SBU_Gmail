@@ -1,8 +1,7 @@
 package ServerScript.DB;
 
-import BasicClasses.Profile;
-
-import Network.ServerSide.*;
+import BasicClasses.*;
+import ServerScript.*;
 
 import java.io.*;
 import java.util.concurrent.*;
@@ -22,14 +21,14 @@ public class ServerInitializer {
     try {
       FileInputStream fin=new FileInputStream(address);
       ObjectInputStream inFromFile=new ObjectInputStream(fin);
-      Server.profiles = new ConcurrentHashMap<>( (ConcurrentHashMap<String, Profile>) inFromFile.readObject());
+      ServerEXE.profiles = new ConcurrentHashMap<>( (ConcurrentHashMap<String, Profile>) inFromFile.readObject());
       inFromFile.close();
       fin.close();
     }
     catch (Exception e){
         if (e instanceof EOFException){
           System.out.println("data base is empty");
-          Server.profiles = new ConcurrentHashMap<>();
+          ServerEXE.profiles = new ConcurrentHashMap<>();
         }
         else e.printStackTrace();
     }

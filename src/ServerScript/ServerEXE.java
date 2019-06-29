@@ -11,35 +11,41 @@ import ServerScript.DB.*;
 
 public class ServerEXE {
 
+	public static final int PORT = 8888;
 	private static boolean isServerUp = true;
 
   public static Map<String, Profile> profiles = null;
 
+	public static boolean isServerUp(){
+		return isServerUp;
+	}
 
 	public static void main(String[] args) {
 		ServerInitializer.getInstance().initializeServer();
 
-		ServerSocket serverSocket=null;
+		ServerSocket serverSocket = null;
 
 		try {
-			serverSocket = new ServerSocket(Ports.CHAT_PORT);
+			serverSocket = new ServerSocket(PORT);
 			System.out.println("Server is Up!");
 
 		} catch (IOException e) {
-			System.out.println("Server Ports Are Full!");
+			System.out.println("server cant open server socket!");
 			System.exit(12);
 		}
 
-		while ( Server.isIsServerUp() ){
-			Socket currentuserSocket = null;
+		while ( isServerUp() ){
+			Socket currentUserSocket = null;
 			try {
 				System.out.println( "Waiting for a client..." );
-				currentuserSocket = serverSocket.accept();
+				currentUserSocket = serverSocket.accept();
+				ObjectInputStream socketIn = new ObjectInputStream (currentUserSocket.getInputStream());
+				ObjectOutputStream socketOut = new ObjectOutputStream (currentUserSocket.getOutputStream());
 				//ChatHandler chatHandler=new ChatHandler(currentChatSocket);
 
 				System.out.println("A Client Has Connected");
 
-				new Thread( userHandler ).start();
+				//new Thread( userHandler ).start();
 
 			} catch (IOException e) {
 				e.printStackTrace();

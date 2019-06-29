@@ -116,9 +116,6 @@ public class Profile implements Serializable {
     public int getAge(){
       return 2019 - getBirthYear();
     }
-    public boolean isLegalAge(){
-      return getAge() > 17;
-    }
 
     public static boolean isValidBirthYear(String yearStr){
       try{

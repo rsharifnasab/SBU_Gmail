@@ -1,5 +1,5 @@
 package BasicClasses;
 
 public enum Gender {
-    MALE,FEMALE,NOT_BINARY,NOT_SAY
+    MAN,WOMAN,NON_BINARY,NOT_SAY
   }
