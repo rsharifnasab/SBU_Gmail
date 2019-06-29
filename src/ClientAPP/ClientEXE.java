@@ -47,8 +47,8 @@ public class ClientEXE extends Application {
 		try{
 			socket = new Socket( serverAddress, PORT);
 			System.out.println("socket ok");
-			socketIn = new ObjectInputStream( socket.getInputStream() );
 			socketOut = new ObjectOutputStream( socket.getOutputStream() );
+			socketIn = new ObjectInputStream( socket.getInputStream() );
 			System.out.println("inpout output stream ok");
 			System.out.println("conected to server!");
 			isConnected = true;
