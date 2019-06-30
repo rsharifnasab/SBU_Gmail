@@ -65,11 +65,9 @@ public class ClientNetworker{
 			socketOut.writeObject(toSend);
 			socketOut.flush();
 			socketOut.reset();
-			if (toSend.get("command")!= Command.SEND_MAIL){
-				recieved = (Map<String,Object>) socketIn.readObject();
-				return recieved;
-			}
-			return null;
+			recieved = (Map<String,Object>) socketIn.readObject();
+			return recieved;
+
 		} catch (ClassNotFoundException e){
 		} catch( IOException e){
 			e.printStackTrace();
