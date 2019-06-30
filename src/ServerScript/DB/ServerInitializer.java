@@ -23,9 +23,6 @@ public class ServerInitializer {
       ServerEXE.profiles = new ConcurrentHashMap<>( (ConcurrentHashMap<String, Profile>) inFromFile.readObject());
       inFromFile.close();
       fin.close();
-
-
-
     }
     catch(EOFException e){
         ServerEXE.profiles = new ConcurrentHashMap<>();

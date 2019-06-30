@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.*;
 
 import ServerScript.DB.*;
 
@@ -98,11 +99,40 @@ public class API {
 		ans.put("command",Command.SEND_MAIL);
 		ans.put("answer",new Boolean(true));
 
-		System.out.println(mail.getSender() + " send");
-		System.out.println("message: "+ mail.getSubject() + " to " + mail.getReciever());
+		System.out.println(mail.getReciever() + " recieve");
+		System.out.println("message: "+ mail.getSender() + " ");
 		System.out.println("time : "+Time.getTime());
+
 		return ans;
 	}
+
+	@SuppressWarnings("unchecked")
+	public static Map<String,Object> checkMail(Map<String,Object> income){
+		Profile profile = (Profile) income.get("profile");
+		String username = profile.getUserName();
+
+		Map<String,Object> ans = new HashMap<>();
+		ans.put("command",Command.CHECK_MAIL);
+
+		List<Mail> sent = ServerEXE
+		.mails
+		.stream()
+		.filter(a-> a.getSender().equals(username))
+		.collect (Collectors.toList());
+
+		List<Mail> inbox = ServerEXE
+		.mails
+		.stream()
+		.filter(a-> a.getReciever().equals(username))
+		.collect (Collectors.toList());
+
+		ans.put("sent",sent);
+		ans.put("inbox",inbox);
+		//TODO add more of this
+
+		return ans;
+	}
+
 
 
 

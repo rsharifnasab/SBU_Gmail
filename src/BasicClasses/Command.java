@@ -27,8 +27,9 @@ public enum Command {
 **/
   SEND_MAIL,
 
-
-  
+/**
+  command : Command , profile : Profile - > answer : List<Mail>
+**/
   CHECK_MAIL,
 
 
