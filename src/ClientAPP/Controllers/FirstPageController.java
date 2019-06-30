@@ -42,7 +42,7 @@ public class FirstPageController extends ParentController implements Initializab
 	@FXML
 	Button connectButton;
 	@FXML
-	Sphere onlineSphere;
+	Circle onlineSphere;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -58,7 +58,7 @@ public class FirstPageController extends ParentController implements Initializab
 				connectButton.setVisible(false);
 				return;
 			}
-			String title = "server connection peoblem";
+			String title = "server connection problem";
 			String contentText = "please check server is running and server ip and all connections";
 			this.makeAndShowInformationDialog( title, contentText );
 	}
@@ -192,6 +192,8 @@ public class FirstPageController extends ParentController implements Initializab
 		returnValue.setImageAddress( profilePicture.getImage().impl_getUrl().toString() ); //TODO
 		return returnValue;
 	}
+
+
 
 //	VaghT taraf roo-e profile picturesh click mikone, ye safheE baaz mishe ke komak mikone ye profile picture entekhaab kone!
 

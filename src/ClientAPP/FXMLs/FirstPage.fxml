@@ -8,10 +8,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Sphere?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientAPP.Controllers.FirstPageController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientAPP.Controllers.FirstPageController">
    <children>
       <Label layoutX="53.0" layoutY="53.0" text="Login">
          <font>
@@ -83,7 +83,7 @@
             <Font size="19.0" />
          </font>
       </PasswordField>
-      <TextField fx:id="signupNameField" layoutX="719.0" layoutY="468.0" prefHeight="33.0" prefWidth="228.0" promptText="Name">
+      <TextField fx:id="signupNameField" layoutX="719.0" layoutY="468.0" prefHeight="33.0" prefWidth="228.0" promptText="Full Name ">
          <font>
             <Font size="18.0" />
          </font>
@@ -101,7 +101,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <TextField fx:id="signupAgeField" layoutX="719.0" layoutY="542.0" prefHeight="33.0" prefWidth="228.0" promptText="Birth year" text="">
+      <TextField fx:id="signupAgeField" layoutX="719.0" layoutY="542.0" prefHeight="33.0" prefWidth="228.0" promptText="Birth year (ex: 2000)" text="">
          <font>
             <Font size="17.0" />
          </font>
@@ -128,9 +128,9 @@
       </TextField>
       <Button fx:id="connectButton" layoutX="193.0" layoutY="577.0" mnemonicParsing="false" onAction="#connectToServer" prefHeight="91.0" prefWidth="228.0" text="connect">
          <font>
-            <Font size="19.0" />
+            <Font size="33.0" />
          </font>
       </Button>
-      <Sphere fx:id="onlineSphere" cullFace="FRONT" layoutX="562.0" layoutY="576.0" opacity="0.75" radius="50" visible="false" />
+      <Circle fx:id="onlineSphere" fill="#13f01d" layoutX="552.0" layoutY="572.0" radius="63.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
    </children>
 </AnchorPane>

@@ -8,8 +8,8 @@ import java.util.*;
 
 public class ClientNetworker{
 
-	static String serverAddress;
-	static final int PORT = 8888;
+	public static String serverAddress;
+	public static final int PORT = 8888;
 
 	private static boolean isConnected = false;
 	public static Socket socket;
