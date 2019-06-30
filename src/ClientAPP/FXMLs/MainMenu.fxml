@@ -13,7 +13,12 @@
             <Image url="@../Assets/Main_Menu.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="profileButton" layoutX="950.0" layoutY="70.0" mnemonicParsing="false" onAction="#showProfile" prefHeight="68.0" prefWidth="194.0" text="edit My Profile">
+      <Button fx:id="profileButton" layoutX="1002.0" layoutY="68.0" mnemonicParsing="false" onAction="#showProfile" prefHeight="68.0" prefWidth="264.0" text="edit Profile">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutButton" layoutX="1002.0" mnemonicParsing="false" onAction="#logout" prefHeight="68.0" prefWidth="264.0" text="logout">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>

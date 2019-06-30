@@ -13,9 +13,15 @@ public class MainMenuController extends ParentController {
 
     @FXML
     Button profileButton;
+    @FXML
+    Button logoutButton;
 
     public void showProfile() {
         this.loadPage( "ProfilePage" );
     }
 
+    public void logout(){
+      ClientEXE.profile = null;
+      this.loadPage ( "FirstPage" );
+    }
 }
