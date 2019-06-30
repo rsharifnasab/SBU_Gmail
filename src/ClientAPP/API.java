@@ -43,12 +43,21 @@ public class API{
 		if ( recieved.get("answer") == null ) return false;
 		return (Boolean) recieved.get("answer");
 	}
+
 	public static Boolean logout(){
 		Map<String,Object> toSend = new HashMap<>();
 		toSend.put("command", Command.LOGOUT);
 		Map<String,Object> recieved = ClientNetworker.serve(toSend);
 		if ( recieved.get("answer") == null ) return false;
 		return (Boolean) recieved.get("answer");
+	}
+
+	public static void sendMail(Mail mail){
+		Map<String,Object> toSend = new HashMap<>();
+		toSend.put("command", Command.SEND_MAIL);
+		toSend.put("mail",mail);
+		//ClientEXE.outbox.add(mail); TODO
+		ClientNetworker.serve(toSend);
 	}
 
 }

@@ -22,7 +22,12 @@ public class Profile implements Serializable {
 
 
     public Profile(String username){
-      this.username = username;
+      this.username = usernameCleaner(username);
+    }
+
+    public static String usernameCleaner(String oldUsername){
+      String[] splited = oldUsername.split("@");
+      return splited[0];
     }
 
     @Override
@@ -62,6 +67,10 @@ public class Profile implements Serializable {
 
     public String getUserName() {
         return username;
+    }
+
+    public String getFullUserName() {
+        return username+"@gmail.com";
     }
 
     public String getPhoneNumber() {

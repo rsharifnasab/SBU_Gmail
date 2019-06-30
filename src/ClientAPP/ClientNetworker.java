@@ -72,8 +72,11 @@ public class ClientNetworker{
 			socketOut.writeObject(toSend);
 			socketOut.flush();
 			socketOut.reset();
-			recieved = (Map<String,Object>) socketIn.readObject();
-			return recieved;
+			if (toSend.get("command")!= Command.SEND_MAIL){
+				recieved = (Map<String,Object>) socketIn.readObject();
+				return recieved;
+			}
+			return null;
 		} catch (ClassNotFoundException e){
 			System.out.println("invalid answer from server");
 		} catch( IOException e){

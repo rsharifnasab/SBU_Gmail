@@ -15,6 +15,8 @@ public class MainMenuController extends ParentController {
     Button profileButton;
     @FXML
     Button logoutButton;
+    @FXML
+    Button composeButton;
 
     public void showProfile() {
         this.loadPage( "ProfilePage" );
@@ -25,5 +27,9 @@ public class MainMenuController extends ParentController {
       ClientNetworker.disconnectFromServer();
       ClientEXE.profile = null;
       this.loadPage ( "FirstPage" );
+    }
+
+    public void composeMail(){
+      this.loadPage("ComposeMail");
     }
 }

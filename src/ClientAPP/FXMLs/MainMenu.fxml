@@ -23,5 +23,10 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
+      <Button fx:id="composeButton" layoutX="1002.0" layoutY="638.0" mnemonicParsing="false" onAction="#composeMail" prefHeight="68.0" prefWidth="264.0" text="compose mail">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

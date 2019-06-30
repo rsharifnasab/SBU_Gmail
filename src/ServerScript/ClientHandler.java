@@ -65,8 +65,8 @@ public class ClientHandler implements Runnable {
 				break;
 			}
 			catch(IOException e){
-				System.out.println("IOExepctio happpenddd");
-				e.printStackTrace();
+				System.out.println("IOExepctio happpend");
+				break;
 			}
 
 		}

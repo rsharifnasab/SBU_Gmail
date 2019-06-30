@@ -12,6 +12,8 @@ import javafx.application.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.*;
+
 
 public class ClientEXE extends Application {
 
@@ -19,6 +21,9 @@ public class ClientEXE extends Application {
 	public static Stage pStage;
 
 	public static Profile profile;
+
+	public static Set<Mail> outbox = new ConcurrentSkipListSet<>();
+
 
 	public static Profile getProfile(){
 		return profile;
