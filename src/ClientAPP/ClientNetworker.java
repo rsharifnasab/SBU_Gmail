@@ -29,7 +29,6 @@ public class ClientNetworker{
 			System.out.println("socket ok");
 			socketOut = new ObjectOutputStream( socket.getOutputStream() );
 			socketIn = new ObjectInputStream( socket.getInputStream() );
-			System.out.println("input output stream ok");
 			System.out.println("conected to server!");
 			isConnected = true;
 			return true;
@@ -69,12 +68,10 @@ public class ClientNetworker{
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> serve(Map<String,Object> toSend){
 		Map<String,Object> recieved = null;
-		System.out.println("sending" + toSend +  " to server from (toserve)");
 		try{
 			socketOut.writeObject(toSend);
 			socketOut.flush();
 			socketOut.reset();
-			System.out.println("sent succesfully, waiting for ans");
 			recieved = (Map<String,Object>) socketIn.readObject();
 			return recieved;
 		} catch (ClassNotFoundException e){

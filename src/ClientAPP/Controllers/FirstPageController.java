@@ -54,7 +54,6 @@ public class FirstPageController extends ParentController implements Initializab
 	public void connectToServer(){
 			ClientNetworker.connectToServer();
 			if ( ClientNetworker.isConnected() ) {
-				System.out.println("making online sphere visible");
 				onlineSphere.setVisible(true);
 				connectButton.setVisible(false);
 				return;
@@ -84,7 +83,6 @@ public class FirstPageController extends ParentController implements Initializab
 			return;
 		}
 		ClientEXE.setProfile(profile);
-		System.out.println("loading main menu");
 		this.loadPage( "MainMenu" );
 	}
 
@@ -148,8 +146,6 @@ public class FirstPageController extends ParentController implements Initializab
 	}
 //	VaghT taraf dokme-e signup ro mizare, in taabe' sedaa zade mishe
 	public void doSignupStuff() {
-		System.out.println("signing up");
-
 		if (!ClientNetworker.isConnected()){
 			showNotConnectedDialog();
 			return;
@@ -159,13 +155,11 @@ public class FirstPageController extends ParentController implements Initializab
 		if (!isValidPassword(signupPasswordField.getText() , signupConfirmPasswordField.getText() ) ) return;
 		if (!isValidBirth(signupAgeField.getText())) return;
 		if (!isValidUsername()) return;
-		System.out.println("empty fileds ok");
 
 		//profile seems valid
 
 		Profile justCreatedProfile = this.makeProfileFromPageContent();
 		ClientEXE.setProfile(justCreatedProfile);
-		System.out.println("profile created, sending to server");
 		API.signUp(justCreatedProfile);
 		showProfileCreatedDialog();
 		clearFields();

@@ -37,9 +37,6 @@ public class ServerEXE {
 		while ( isServerUp() ){
 			Socket currentUserSocket = null;
 			try {
-
-				System.out.println( "Waiting for a client..." );
-
 				currentUserSocket = serverSocket.accept();
 				ClientHandler clientHandler=new ClientHandler(currentUserSocket);
 				new Thread( clientHandler ).start();
