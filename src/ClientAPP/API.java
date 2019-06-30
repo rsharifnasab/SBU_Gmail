@@ -37,4 +37,15 @@ public class API{
 		return (Boolean) recieved.get("answer");
 	}
 
+	public static Boolean updateProfile(Profile profile){
+		System.out.println("sending "+profile+ " to serve for update");
+		Map<String,Object> toSend = new ConcurrentHashMap<>();
+		toSend.put("command", Command.UPDATE_PROFILE);
+		toSend.put("profile", profile);
+		System.out.println(toSend);
+		Map<String,Object> recieved = ClientNetworker.serve(toSend);
+		if ( recieved.get("answer") == null ) return false;
+		return (Boolean) recieved.get("answer");
+	}
+
 }

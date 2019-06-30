@@ -135,7 +135,7 @@ public class ProfilePageController extends ParentController implements Initializ
 		profile.setPhoneNumber( phoneField.getText() );
 		profile.setGender( getGender() );
 		profile.setImageAddress( profilePicture.getImage().impl_getUrl().toString() );
-
+		API.updateProfile(profile);
 		System.out.println("profile changed!");
 	}
 

@@ -13,11 +13,18 @@ public enum Command {
   USERNAME_UNIQUE,
 
   /**
-    command : Command , profile : Profile - > command Command , boolean answer
+    command : Command , profile : Profile - > command Command , answer : Boolean
   **/
   SIGNUP,
+
+
   LOGOUT,
   SEND_MAIL,
   CHECK_MAIL,
+
+  /**
+    command : Command , profile : Profile - > command : Command , answer : Boolean
+
+  **/
   UPDATE_PROFILE
 }

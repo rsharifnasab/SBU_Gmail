@@ -55,5 +55,20 @@ public class API {
 		return ans;
 	}
 
+	@SuppressWarnings("unchecked")
+	public static Map<String,Object> updateProfile(Map<String,Object> income){
+		System.out.println("get update profile request from user");
+		Profile newProfile = (Profile) income.get("profile");
+		String username = newProfile.getUserName();
+		ServerEXE.profiles.remove(username); //TODO ?
+		ServerEXE.profiles.put(username,newProfile);
+		DBUpdator.getInstance().updateDataBase(); // sync local file
+		Map<String,Object> ans = new ConcurrentHashMap<>();
+		ans.put("command",Command.UPDATE_PROFILE);
+		ans.put("answer",new Boolean(true));
+		return ans;
+	}
+
+
 
 }
