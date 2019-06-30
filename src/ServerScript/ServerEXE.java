@@ -28,10 +28,8 @@ public class ServerEXE {
 
 		try {
 			serverSocket = new ServerSocket(PORT);
-			System.out.println("Server is Up!");
 
 		} catch (IOException e) {
-			System.out.println("server cant open server socket!");
 			System.exit(12);
 		}
 
@@ -41,9 +39,6 @@ public class ServerEXE {
 				currentUserSocket = serverSocket.accept();
 				ClientHandler clientHandler=new ClientHandler(currentUserSocket);
 				new Thread( clientHandler ).start();
-
-				System.out.println("A Client Has Connected");
-
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

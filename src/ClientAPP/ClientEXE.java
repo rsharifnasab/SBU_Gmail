@@ -35,7 +35,6 @@ public class ClientEXE extends Application {
 
 	public static void main(String[] args) {
 
-		System.out.println("main ran!");
 		launch( args );
 
 	}

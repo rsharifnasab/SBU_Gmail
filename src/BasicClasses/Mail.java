@@ -25,7 +25,7 @@ public class Mail implements Serializable {
     this.reciever = reciever;
     this.subject = subject;
     this.message = message;
-    createdTime = Instant.now().toEpochMilli();
+    createdTime = Time.getMilli();
   }
 
     @Override

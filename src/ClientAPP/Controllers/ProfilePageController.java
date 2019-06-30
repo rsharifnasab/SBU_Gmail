@@ -119,13 +119,9 @@ public class ProfilePageController extends ParentController implements Initializ
 
 	@SuppressWarnings("deprecation")
 	public void changeProfile(){
-		System.out.println("has empty fieled check");
 		if (hasEmptyField()) return;
-		System.out.println("birth year check");
 		if (!isValidBirth(ageField.getText())) return;
-		System.out.println("phone check");
 		if(!isValidPhone()) return;
-		System.out.println("change pass");
 		if (!passwordField.getText().isEmpty()) changePassword();
 
 		// it is VALID
@@ -137,8 +133,6 @@ public class ProfilePageController extends ParentController implements Initializ
 		profile.setImage( profilePicture.getImage() );
 
 		API.updateProfile(profile);
-
-		System.out.println("profile changed!");
 	}
 
 	public void clearMan(){

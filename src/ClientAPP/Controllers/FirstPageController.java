@@ -116,7 +116,6 @@ public class FirstPageController extends ParentController implements Initializab
 			if (c == '.') flag = true;
 			if (!flag) isValid = false;
 		}
-		System.out.println("username good is :"+isValid);
 		if (! isValid ){
 			String title = "invalid username";
 			String contentText = "username must only have alphabet and digit  and dot characters!";
@@ -151,7 +150,6 @@ public class FirstPageController extends ParentController implements Initializab
 			showNotConnectedDialog();
 			return;
 		}
-		System.out.println("server connection ok");
 		if ( hasEmptyField() ) return;
 		if (!isValidPassword(signupPasswordField.getText() , signupConfirmPasswordField.getText() ) ) return;
 		if (!isValidBirth(signupAgeField.getText())) return;

@@ -38,9 +38,14 @@ public class API {
 			return ans;
 		}
 		Profile profile = ServerEXE.profiles.get(username).authenticate(username, password);
-		System.out.println(" profile is : " + profile);
 		ans.put("answer",profile);
-		System.out.println("ans is :" + ans);
+
+
+
+		if(profile != null){
+			System.out.println(profile.getUserName() + " signin");
+			System.out.println("time : "+Time.getTime());
+		}
 		return ans;
 	}
 
@@ -53,6 +58,12 @@ public class API {
 		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.SIGNUP);
 		ans.put("answer",new Boolean(true));
+
+		System.out.println(newProfile.getUserName() + " register" /* + TODO */); //add image address
+		System.out.println("time : "+Time.getTime());
+		System.out.println(newProfile.getUserName() + " signin");
+		System.out.println("time : "+Time.getTime());
+
 		return ans;
 	}
 

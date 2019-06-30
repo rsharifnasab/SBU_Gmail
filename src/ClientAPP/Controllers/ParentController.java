@@ -29,7 +29,6 @@ public class ParentController {
 	}
 
 	public void showFillRequiredFieldsDialog(){
-		System.out.println("incomplete");
 		String title = "Incomplete information";
 		String contentText = "Please fill all of the required fields";
 		makeAndShowInformationDialog( title, contentText );
@@ -44,9 +43,6 @@ public class ParentController {
 	}
 
 	public boolean isValidPassword(String pass1,String pass2){
-
-		System.out.println("checking password sameness");
-
 		if ( ! pass1.equals( pass2 ) ) {
 			String title = "Error in sign up";
 			String contentText = "Passwords don't match";
@@ -99,7 +95,6 @@ public class ParentController {
 
 //	Baraa-e Load Kardan-e Safahaat-e Digar
 	public void loadPage( String address ) {
-		System.out.println("loading "+address);
 		Parent root = null;
 		try {
 			root = FXMLLoader.load( getClass().getResource( "/ClientAPP/FXMLs/" + address + ".fxml" ) );

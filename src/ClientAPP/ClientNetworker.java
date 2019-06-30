@@ -22,19 +22,15 @@ public class ClientNetworker{
 	}
 
 	public static Boolean connectToServer(){
-		System.out.println("trying to connect to server");
 		if(socket != null) return false;
 		try{
 			socket = new Socket( serverAddress, PORT);
-			System.out.println("socket ok");
 			socketOut = new ObjectOutputStream( socket.getOutputStream() );
 			socketIn = new ObjectInputStream( socket.getInputStream() );
-			System.out.println("conected to server!");
 			isConnected = true;
 			return true;
 
 		}catch (ConnectException e){
-			System.out.println("failed to connect to server");
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -47,8 +43,6 @@ public class ClientNetworker{
 			socketIn.close();
 			socketOut.close();
 			socket.close();
-
-			System.out.println("disconncted from server Sucesfully");
 			isConnected = false;
 
 			socket = null;
@@ -58,7 +52,6 @@ public class ClientNetworker{
 			return true;
 		}
 		catch( NullPointerException e){
-			System.out.println("wasnt connect BTW");
 		}
 		catch( Exception e){
 			e.printStackTrace();
@@ -78,7 +71,6 @@ public class ClientNetworker{
 			}
 			return null;
 		} catch (ClassNotFoundException e){
-			System.out.println("invalid answer from server");
 		} catch( IOException e){
 			e.printStackTrace();
 		}

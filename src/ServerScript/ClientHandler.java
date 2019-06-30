@@ -58,14 +58,11 @@ public class ClientHandler implements Runnable {
 				socketOut.flush();
 			}
 			catch(ClassCastException | ClassNotFoundException e){
-				System.out.println("invalid request from client");
 			}
 			catch(EOFException e){
-				System.out.println("a client has disconncted");
 				break;
 			}
 			catch(IOException e){
-				System.out.println("IOExepctio happpend");
 				break;
 			}
 
@@ -74,9 +71,7 @@ public class ClientHandler implements Runnable {
 			socketIn.close();
 			socketOut.close();
 			userSocket.close();
-		}catch(IOException e){
-			System.out.println("error in closing client socket");
-		}
+		}catch(IOException e){}
 
 	}
 
