@@ -37,12 +37,30 @@ public class ComposeMailController extends ParentController {
 
 
   public void send(){
-    System.out.println("sending..");
+    if (hasEmpty()) return;
     String reciever = recieverField.getText();
     String message = textField.getText();
     String subject = textField.getText();
     Mail mail = new Mail(ClientEXE.getProfile().getUserName(), reciever, subject, message);
     API.sendMail(mail);
+    makeSuccesfullDialog();
+    back();
+  }
+
+  public boolean hasEmpty(){
+    boolean   hasEmpty = (
+      recieverField.getText().isEmpty() ||
+      subjectField.getText().isEmpty() ||
+      textField.getText().isEmpty()
+    );
+    if(hasEmpty) showFillRequiredFieldsDialog();
+    return hasEmpty;
+  }
+
+  public void makeSuccesfullDialog(){
+    String title = "succesfull";
+    String contentText = "email sent";
+    this.makeAndShowInformationDialog( title, contentText );
   }
 
   public void back(){

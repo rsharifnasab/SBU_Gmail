@@ -6,20 +6,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientAPP.Controllers.ComposeMailController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientAPP.Controllers.ComposeMailController">
    <children>
-      <Label layoutX="57.0" layoutY="66.0" text="to:" />
-      <TextField fx:id="recieverField" layoutX="98.0" layoutY="61.0" promptText="enter recepient" />
-      <Label layoutX="42.0" layoutY="105.0" text="subject" />
-      <TextField fx:id="subjectField" layoutX="98.0" layoutY="100.0" promptText="subject" />
-      <Label layoutX="48.0" layoutY="173.0" prefHeight="0.0" prefWidth="54.0" text="text" />
-      <TextField fx:id="textField" layoutX="98.0" layoutY="166.0" prefHeight="88.0" prefWidth="311.0" promptText="enter your text here" />
-      <Button fx:id="sendButton" layoutX="167.0" layoutY="304.0" mnemonicParsing="false" onAction="#send" text="send it!">
+      <Label layoutX="199.0" layoutY="58.0" prefHeight="8.0" prefWidth="43.0" text="to:">
+         <font>
+            <Font size="27.0" />
+         </font></Label>
+      <TextField fx:id="recieverField" layoutX="315.0" layoutY="53.0" prefHeight="26.0" prefWidth="210.0" promptText="enter recepient" />
+      <Label layoutX="168.0" layoutY="112.0" text="subject">
+         <font>
+            <Font size="29.0" />
+         </font></Label>
+      <TextField fx:id="subjectField" layoutX="309.0" layoutY="105.0" prefHeight="49.0" prefWidth="219.0" promptText="subject" />
+      <Label layoutX="48.0" layoutY="197.0" prefHeight="78.0" prefWidth="162.0" text="text">
+         <font>
+            <Font size="32.0" />
+         </font></Label>
+      <TextField fx:id="textField" layoutX="191.0" layoutY="197.0" prefHeight="254.0" prefWidth="419.0" promptText="enter your text here" />
+      <Button fx:id="sendButton" layoutX="333.0" layoutY="575.0" mnemonicParsing="false" onAction="#send" text="send it!">
          <font>
             <Font size="26.0" />
          </font>
       </Button>
-      <Button fx:id="attachButton" layoutX="474.0" layoutY="176.0" mnemonicParsing="false" onAction="#addAttach" text="add attach" />
+      <Button fx:id="attachButton" layoutX="48.0" layoutY="376.0" mnemonicParsing="false" onAction="#addAttach" text="add attach" />
       <Button fx:id="backButton" layoutX="26.0" layoutY="27.0" mnemonicParsing="false" onAction="#back" text="back" />
    </children>
 </AnchorPane>

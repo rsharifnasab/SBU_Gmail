@@ -51,6 +51,9 @@ public class ClientHandler implements Runnable {
 						answer = API.logout(income);
 						clientOnline = false;
 						break;
+					case SEND_MAIL:
+						answer = API.sendMail(income);
+						break;
 
 
 				}
