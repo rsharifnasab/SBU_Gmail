@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+import javafx.scene.image.*;
 
 import java.io.*;
 import java.util.*;
@@ -14,10 +15,11 @@ public class Profile implements Serializable {
     private final String username;
     private String password;
     private String name;
-    private String imageAddress;
+    private Image image;
     private String birthYear;
     private String phoneNumber;
     private Gender gender;
+
 
     public Profile(String username){
       this.username = username;
@@ -95,12 +97,12 @@ public class Profile implements Serializable {
         this.name = name;
     }
 
-    public String getImageAddress() {
-        return imageAddress;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImageAddress(String imageAddress) {
-        this.imageAddress = imageAddress;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public Boolean setBirthYear(String birthYear){
@@ -125,6 +127,7 @@ public class Profile implements Serializable {
       }
       catch(RuntimeException e){
           return false;
+
       }
     }
 

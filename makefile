@@ -19,3 +19,10 @@ compile_server:
 clean:
 	@echo "cleaning .class files"
 	@find . -type f -name '*.class' -delete
+clean_DB:
+	@echo "cleaning DB files"
+	@rm src/ServerScript/DB/MailDB
+	@rm src/ServerScript/DB/ProfilesDB
+	@echo "creating empty DB files"
+	@touch src/ServerScript/DB/MailDB
+	@touch src/ServerScript/DB/ProfilesDB

@@ -189,7 +189,7 @@ public class FirstPageController extends ParentController implements Initializab
 		returnValue.setPhoneNumber(null);
 		returnValue.setGender(Gender.NOT_SAY);
 
-		returnValue.setImageAddress( profilePicture.getImage().impl_getUrl().toString() ); //TODO
+		//returnValue.setImage( profilePicture.getImage() );  TODO
 		return returnValue;
 	}
 
