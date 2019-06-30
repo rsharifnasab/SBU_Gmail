@@ -21,6 +21,7 @@ public enum Command {
   LOGOUT,
   SEND_MAIL,
   CHECK_MAIL,
+  
 
   /**
     command : Command , profile : Profile - > command : Command , answer : Boolean

@@ -17,7 +17,7 @@ public class API {
 		Profile profile = ServerEXE.profiles.get(username2check);
 		Boolean exists = (profile != null);
 
-		Map<String,Object> ans = new ConcurrentHashMap<>();
+		Map<String,Object> ans = new HashMap<>();
 		ans.put("answer",exists);
 		ans.put("command",Command.USERNAME_UNIQUE);
 
@@ -30,15 +30,18 @@ public class API {
 		String username = (String) income.get("username");
 		String password = (String) income.get("password");
 
-		Boolean exists = (ServerEXE.profiles.get(username) != null);
-		Map<String,Object> ans = new ConcurrentHashMap<>();
+		Boolean isNullProfile = (ServerEXE.profiles.get(username) == null);
+		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.LOGIN);
-		ans.put("exists",exists);
-		if(!exists){
+		ans.put("exists",!isNullProfile);
+		if(isNullProfile){
 			return ans;
 		}
+		System.out.println("ok user exists, authenticating");
 		Profile profile = ServerEXE.profiles.get(username).authenticate(username, password);
+		System.out.println(" profile is : " + profile);
 		ans.put("answer",profile);
+		System.out.println("ans is :" + ans);
 		return ans;
 	}
 
@@ -49,7 +52,7 @@ public class API {
 		String username = newProfile.getUserName();
 		ServerEXE.profiles.put(username,newProfile);
 		DBUpdator.getInstance().updateDataBase(); // sync local file
-		Map<String,Object> ans = new ConcurrentHashMap<>();
+		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.SIGNUP);
 		ans.put("answer",new Boolean(true));
 		return ans;
@@ -63,7 +66,7 @@ public class API {
 		ServerEXE.profiles.remove(username); //TODO ?
 		ServerEXE.profiles.put(username,newProfile);
 		DBUpdator.getInstance().updateDataBase(); // sync local file
-		Map<String,Object> ans = new ConcurrentHashMap<>();
+		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.UPDATE_PROFILE);
 		ans.put("answer",new Boolean(true));
 		return ans;
