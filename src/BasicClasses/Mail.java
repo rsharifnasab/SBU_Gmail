@@ -78,7 +78,7 @@ public class Mail implements Serializable , Comparable {
 
     @Override
     public String toString() {
-        return "[ from" + sender + ", to: " + reciever + ", subject : " + subject + ", message : " + message + "]";
+        return "[ from " + sender + ", to: " + reciever + ", subject : " + subject + ", message : " + message + "]";
     }
 
     public String getSender() {
