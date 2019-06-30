@@ -6,7 +6,8 @@ import java.io.*;
 
 public class DBUpdator {
     private static DBUpdator ourInstance = new DBUpdator();
-    private static final String address= "src/ServerScript/DB/Data";
+    public static final String PROFILES_FILE = "src/ServerScript/DB/ProfilesDB";
+    public static final String MAILS_FILE = "src/ServerScript/DB/MailDB";
     public static DBUpdator getInstance() {
         return ourInstance;
     }
@@ -15,11 +16,18 @@ public class DBUpdator {
 
     public synchronized void updateDataBase(){
       try {
-          FileOutputStream fout = new FileOutputStream(address);
+          FileOutputStream fout = new FileOutputStream(PROFILES_FILE);
           ObjectOutputStream objToFile = new ObjectOutputStream(fout);
-          objToFile.writeObject(ServerEXE.profiles);
+          objToFile.writeObject(ServerEXE.profiles); //writing profiles
           objToFile.close();
           fout.close();
+
+          fout = new FileOutputStream(MAILS_FILE);
+          objToFile = new ObjectOutputStream(fout);
+          objToFile.writeObject(ServerEXE.mails); // writing mails
+          objToFile.close();
+          fout.close();
+
       } catch (IOException e) {
         e.printStackTrace();
       }
