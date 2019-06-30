@@ -21,6 +21,8 @@ public class MainMenuController extends ParentController {
     }
 
     public void logout(){
+      API.logout();
+      ClientNetworker.disconnectFromServer();
       ClientEXE.profile = null;
       this.loadPage ( "FirstPage" );
     }

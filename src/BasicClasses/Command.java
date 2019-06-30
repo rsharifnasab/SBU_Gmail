@@ -17,11 +17,14 @@ public enum Command {
   **/
   SIGNUP,
 
-
+/**
+  command : Command - > command Command , answer : Boolean
+**/
   LOGOUT,
+
   SEND_MAIL,
   CHECK_MAIL,
-  
+
 
   /**
     command : Command , profile : Profile - > command : Command , answer : Boolean

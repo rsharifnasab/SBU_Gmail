@@ -37,7 +37,6 @@ public class API {
 		if(isNullProfile){
 			return ans;
 		}
-		System.out.println("ok user exists, authenticating");
 		Profile profile = ServerEXE.profiles.get(username).authenticate(username, password);
 		System.out.println(" profile is : " + profile);
 		ans.put("answer",profile);
@@ -47,11 +46,10 @@ public class API {
 
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> signUp(Map<String,Object> income){
-		System.out.println("get signup request from user");
 		Profile newProfile = (Profile) income.get("profile");
 		String username = newProfile.getUserName();
 		ServerEXE.profiles.put(username,newProfile);
-		DBUpdator.getInstance().updateDataBase(); // sync local file
+		DBUpdator.getInstance().updateDataBase(); // save to local file
 		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.SIGNUP);
 		ans.put("answer",new Boolean(true));
@@ -60,14 +58,23 @@ public class API {
 
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> updateProfile(Map<String,Object> income){
-		System.out.println("get update profile request from user");
+
 		Profile newProfile = (Profile) income.get("profile");
 		String username = newProfile.getUserName();
 		ServerEXE.profiles.remove(username); //TODO ?
 		ServerEXE.profiles.put(username,newProfile);
-		DBUpdator.getInstance().updateDataBase(); // sync local file
+		DBUpdator.getInstance().updateDataBase(); // save to local file
+
 		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.UPDATE_PROFILE);
+		ans.put("answer",new Boolean(true));
+		return ans;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Map<String,Object> logout(Map<String,Object> income){
+		Map<String,Object> ans = new HashMap<>();
+		ans.put("command",Command.LOGOUT);
 		ans.put("answer",new Boolean(true));
 		return ans;
 	}

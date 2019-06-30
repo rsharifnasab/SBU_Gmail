@@ -48,6 +48,7 @@ public class FirstPageController extends ParentController implements Initializab
 	public void initialize(URL location, ResourceBundle resources) {
 		Image image = new Image( FirstPageController.PROFILE_PICTURE_DEFAULT );
 		this.profilePicture.setImage( image );
+		onlineSphere.setVisible(ClientNetworker.isConnected());
 	}
 
 

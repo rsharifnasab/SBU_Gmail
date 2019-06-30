@@ -12,7 +12,7 @@ public class ClientHandler implements Runnable {
 	private Socket userSocket;
 	private ObjectOutputStream socketOut;
 	private ObjectInputStream socketIn;
-
+	public Boolean clientOnline = true;
 	public ClientHandler(Socket socket){
 		try{
 			userSocket = socket;
@@ -27,7 +27,7 @@ public class ClientHandler implements Runnable {
 	@SuppressWarnings("unchecked")
 	public void run(){
 
-		while(true){
+		while(clientOnline){
 			Map<String,Object> income = null;
 
 			try{
@@ -46,6 +46,10 @@ public class ClientHandler implements Runnable {
 						break;
 					case UPDATE_PROFILE:
 						answer = API.updateProfile(income);
+						break;
+					case LOGOUT:
+						answer = API.logout(income);
+						clientOnline = false;
 						break;
 
 
@@ -66,6 +70,14 @@ public class ClientHandler implements Runnable {
 			}
 
 		}
+		try{
+			socketIn.close();
+			socketOut.close();
+			userSocket.close();
+		}catch(IOException e){
+			System.out.println("error in closing client socket");
+		}
+
 	}
 
 
