@@ -40,8 +40,6 @@ public class API {
 		Profile profile = ServerEXE.profiles.get(username).authenticate(username, password);
 		ans.put("answer",profile);
 
-
-
 		if(profile != null){
 			System.out.println(profile.getUserName() + " signin");
 			System.out.println("time : "+Time.getTime());
@@ -72,8 +70,7 @@ public class API {
 
 		Profile newProfile = (Profile) income.get("profile");
 		String username = newProfile.getUserName();
-		ServerEXE.profiles.remove(username); //TODO ?
-		ServerEXE.profiles.put(username,newProfile);
+		ServerEXE.profiles.replace(username,newProfile);
 		DBUpdator.getInstance().updateDataBase(); // save to local file
 
 		Map<String,Object> ans = new HashMap<>();
@@ -89,6 +86,27 @@ public class API {
 		ans.put("answer",new Boolean(true));
 		return ans;
 	}
+
+	@SuppressWarnings("unchecked")
+	public static Map<String,Object> sendMail(Map<String,Object> income){
+
+		Mail mail = (Mail) income.get("mail");
+		ServerEXE.mails.add(mail);
+		DBUpdator.getInstance().updateDataBase(); // save to local file
+
+		Map<String,Object> ans = new HashMap<>();
+		ans.put("command",Command.SEND_MAIL);
+		ans.put("answer",new Boolean(true));
+
+		System.out.println(mail.getSender() + " send");
+		System.out.println("message: "+ mail.getSubject() + " to " + mail.getReciever());
+		System.out.println("time : "+Time.getTime());
+		return ans;
+	}
+
+
+
+
 
 
 

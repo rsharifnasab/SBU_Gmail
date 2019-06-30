@@ -22,7 +22,13 @@ public enum Command {
 **/
   LOGOUT,
 
+/**
+  command : Command , mail : Mail - > command Command , answer : Boolean
+**/
   SEND_MAIL,
+
+
+  
   CHECK_MAIL,
 
 
