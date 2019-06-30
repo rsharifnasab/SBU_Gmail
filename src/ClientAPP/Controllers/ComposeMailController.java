@@ -27,27 +27,26 @@ public class ComposeMailController extends ParentController {
   TextField recieverField;
 
   @FXML
-  TextField senderField;
-
-  @FXML
   Button sendButton;
 
   @FXML
   Button attachButton;
 
   @FXML
-  public void initialize(URL location, ResourceBundle resources) {
-    String sender = ClientEXE.getProfile().getFullUserName();
-    senderField.setText(sender);
+  Button backButton;
 
-  }
 
   public void send(){
+    System.out.println("sending..");
     String reciever = recieverField.getText();
     String message = textField.getText();
     String subject = textField.getText();
     Mail mail = new Mail(ClientEXE.getProfile().getUserName(), reciever, subject, message);
     API.sendMail(mail);
+  }
+
+  public void back(){
+    this.loadPage( "MainMenu" );
   }
 
   public void addAttach(){

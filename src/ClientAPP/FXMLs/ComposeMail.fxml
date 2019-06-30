@@ -8,8 +8,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientAPP.Controllers.ComposeMailController">
    <children>
-      <TextField fx:id="fromTextField" editable="false" layoutX="98.0" layoutY="23.0" />
-      <Label layoutX="50.0" layoutY="28.0" text="from" />
       <Label layoutX="57.0" layoutY="66.0" text="to:" />
       <TextField fx:id="recieverField" layoutX="98.0" layoutY="61.0" promptText="enter recepient" />
       <Label layoutX="42.0" layoutY="105.0" text="subject" />
@@ -22,5 +20,6 @@
          </font>
       </Button>
       <Button fx:id="attachButton" layoutX="474.0" layoutY="176.0" mnemonicParsing="false" onAction="#addAttach" text="add attach" />
+      <Button fx:id="backButton" layoutX="26.0" layoutY="27.0" mnemonicParsing="false" onAction="#back" text="back" />
    </children>
 </AnchorPane>

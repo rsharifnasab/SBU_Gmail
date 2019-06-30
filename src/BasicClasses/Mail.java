@@ -11,7 +11,7 @@ import java.util.*;
 import java.time.*;
 
 
-public class Mail implements Serializable {
+public class Mail implements Serializable , Comparable {
 
     private final String sender;
     private final String reciever;
@@ -67,6 +67,13 @@ public class Mail implements Serializable {
 
         return mailTile;
     }
+
+  @Override
+  public int compareTo(Object o) {
+    if (o instanceof Mail)
+      return createdTime.compareTo( ((Mail)o).createdTime);
+    return -1;
+  }
 
 
     @Override
