@@ -12,13 +12,28 @@ compile_uiux:
 server: compile_server
 	@echo "server is running"
 	@java -cp ".:./src" ServerScript.ServerEXE
+
+
+test: compile_server compile_test
+	@echo "running tests"
+	@java -cp ./src/tests/junit.jar:./src:./src/tests/j2.jar   org.junit.runner.JUnitCore tests.ServerTest
+	@echo "tests complete, deleting class files"
+	@find . -type f -name '*.class' -delete
+
+compile_test:
+	@echo "compiling tests"
+	@javac -cp .:./src:./src/tests/junit.jar src/tests/ServerTest.java
+
+
 compile_server:
 	@echo "compiling server.."
 	@javac -cp ".:./src" src/ServerScript/ServerEXE.java
 
+
 clean:
 	@echo "cleaning .class files"
 	@find . -type f -name '*.class' -delete
+
 clean_DB:
 	@echo "cleaning DB files"
 	@rm src/ServerScript/DB/MailDB
