@@ -82,7 +82,7 @@ public class Mail implements Serializable , Comparable {
     }
 
     public void trash(){
-      trashed = true;
+      trashed = !trashed;
     }
 
     public String getSender() {

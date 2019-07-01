@@ -1,5 +1,6 @@
 profile image
 send and recieve file  (attachment)
 unit test
-replay and frw log on server
-change label and textfiled  to a better thing
+replay and frw  and remove and read , unread log on server
+star messages
+untrash message
