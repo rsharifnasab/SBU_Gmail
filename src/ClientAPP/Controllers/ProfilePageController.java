@@ -47,7 +47,7 @@ public class ProfilePageController extends ParentController implements Initializ
 		nameField.setText( profile.getName() );
 		ageField.setText( profile.getBirthYear()+"" );
 		phoneField.setText(profile.getPhoneNumber());
-		profilePicture.setImage( profile.getImage() );
+//		profilePicture.setImage( profile.getImage() );
 
 		man.setSelected(false);
 		woman.setSelected(false);
@@ -130,7 +130,7 @@ public class ProfilePageController extends ParentController implements Initializ
 		profile.setBirthYear( ageField.getText() );
 		profile.setPhoneNumber( phoneField.getText() );
 		profile.setGender( getGender() );
-		profile.setImage( profilePicture.getImage() );
+	//	profile.setImage( profilePicture.getImage() );
 
 		API.updateProfile(profile);
 	}

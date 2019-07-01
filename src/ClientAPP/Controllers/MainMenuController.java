@@ -119,7 +119,7 @@ public class MainMenuController extends ParentController implements Initializabl
          mail.read();
          API.changeMail(mail);
       }
-      senderLabel.setText(mail.getSender()+"@gmail.com");
+      senderLabel.setText(mail.getSender()+Profile.POST_FIX);
       subjectLabel.setText(mail.getSubject());
       textLabel.setText(mail.getMessage());
       showMail();
