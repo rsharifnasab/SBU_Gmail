@@ -42,7 +42,7 @@ public class MainMenuController extends ParentController implements Initializabl
     @FXML
     Label subjectLabel;
     @FXML
-    Label textLabel;
+    TextArea textLabel;
 
     @FXML
     Button replyButton;

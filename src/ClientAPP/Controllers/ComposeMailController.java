@@ -21,7 +21,7 @@ public class ComposeMailController extends ParentController implements Initializ
   TextField subjectField;
 
   @FXML
-  TextField textField;
+  TextArea textField;
 
   @FXML
   TextField recieverField;
