@@ -18,7 +18,10 @@ public class Mail implements Serializable , Comparable {
     private final String message;
     private final String subject;
     private final Long createdTime;
+    private final String timeString;
     public Object attach = null;
+    public boolean trashed = false;
+    public boolean unread = true;
 
   public Mail(String sender,String reciever,String subject, String message){
     this.sender = sender;
@@ -26,6 +29,7 @@ public class Mail implements Serializable , Comparable {
     this.subject = subject;
     this.message = message;
     createdTime = Time.getMilli();
+    timeString = Time.getTime();
   }
 
     @Override

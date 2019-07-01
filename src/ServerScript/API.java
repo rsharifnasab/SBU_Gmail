@@ -103,6 +103,8 @@ public class API {
 		System.out.println("message: "+ mail.getSender() + " ");
 		System.out.println("time : "+Time.getTime());
 
+		ServerEXE.checkValidMail(mail);
+
 		return ans;
 	}
 

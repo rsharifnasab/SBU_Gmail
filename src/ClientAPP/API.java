@@ -60,4 +60,24 @@ public class API{
 		ClientNetworker.serve(toSend);
 	}
 
+	public static Map<String,Object> checkMail(){
+		Map<String,Object> toSend = new HashMap<>();
+		toSend.put("command", Command.CHECK_MAIL);
+		toSend.put("profile",ClientEXE.getProfile());
+		Map<String,Object> recieved = ClientNetworker.serve(toSend);
+
+		return recieved;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Mail> getInbox(){
+		Map<String,Object> all = checkMail();
+		return (List<Mail>) all.get("inbox");
+	}
+	@SuppressWarnings("unchecked")
+	public static List<Mail> getSent(){
+		Map<String,Object> all = checkMail();
+		return (List<Mail>) all.get("sent");
+	}
+
 }
