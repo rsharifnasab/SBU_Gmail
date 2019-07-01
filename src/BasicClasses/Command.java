@@ -1,5 +1,8 @@
 package BasicClasses;
-
+/**
+  an enum to go from client to server to specify what should server do
+  and also the outgoing map has which fields
+**/
 public enum Command {
   /**
     command : Command , username : String , password:string - > (answer : Profile) command : Command , exists : Boolean

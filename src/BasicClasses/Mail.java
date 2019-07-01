@@ -1,28 +1,34 @@
 package BasicClasses;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
-
 import java.io.*;
 import java.util.*;
 
 import java.time.*;
 
-
+/**
+Mail class is the mail that send and recieve to and from Server
+it save sender and reciever by its username (string)
+is saves date created in long for equals method
+subject and message are absoloutely String :)
+it also save read unread state and trashed state with boolan
+**/
 public class Mail implements Serializable , Comparable {
 
-    private final String sender;
-    private final String reciever;
-    private final String message;
-    private final String subject;
-    private final Long createdTime;
-    private final String timeString;
-    public Object attach = null;
-    public boolean trashed = false;
-    public boolean unread = true;
+  private final String sender;
+  private final String reciever;
+  private final String message;
+  private final String subject;
+  private final Long createdTime;
+  private final String timeString;
+  public Object attach = null;
+  public boolean trashed = false;
+  public boolean unread = true;
 
+  /**
+  defualt and only constructor,
+  it gets final variable: sender, reciever, message and subject
+  it also calculate createation time for future use
+  **/
   public Mail(String sender,String reciever,String subject, String message){
     this.sender = sender;
     this.reciever = reciever;
@@ -32,77 +38,122 @@ public class Mail implements Serializable , Comparable {
     timeString = Time.getTime();
   }
 
-    @Override
-    public int hashCode() {
-        return createdTime.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if(obj == null) return false;
-      if (! (obj instanceof Mail) ) return false;
-
-      Mail other = (Mail) obj;
-
-      try{
-        String thisToCheck = this.createdTime + this.sender + this.reciever + this.subject + this.message;
-        String otherToCheck = other.createdTime + other.sender + other.reciever + other.subject + other.message;
-        return thisToCheck.equals(otherToCheck);
-      }
-      catch(Exception e){
-        return false;
-      }
-    }
-
-
+  /**
+  override hashcode method with returning username hash code (we know its unique :) )
+  **/
   @Override
-  public int compareTo(Object o) {
-    if (o instanceof Mail)
-      return createdTime.compareTo( ((Mail)o).createdTime);
-    return -1;
+  public int hashCode() {
+    return createdTime.hashCode();
+  }
+
+  /**
+  chech equality of two Mail
+  also checking if it is not instance of mail
+  it use creatation time and all other final fields to make sure two mail are equal or not
+  **/
+  @Override
+  public boolean equals(Object obj) {
+    if(obj == null) return false;
+    if (! (obj instanceof Mail) ) return false;
+
+    Mail other = (Mail) obj;
+
+    try{
+      String thisToCheck = this.createdTime + this.sender + this.reciever + this.subject + this.message;
+      String otherToCheck = other.createdTime + other.sender + other.reciever + other.subject + other.message;
+      return thisToCheck.equals(otherToCheck);
+    }
+    catch(Exception e){
+      return false;
+    }
   }
 
 
-    @Override
-    public String toString() {
-        String unreadStatus = unread?"* ":"  ";
-        return unreadStatus + "from " + sender + "\n subject : " + subject ;
-    }
+  /**
+  comparing two mail for display them in correct way
+  it first compare by read and unread status and then compare with cretation time
+  **/
+  @Override
+  public int compareTo(Object o) {
+    if (o instanceof Mail == false) return -1;
+    Mail other = (Mail) o;
+    if(this.isUnRead() &&  !other.isUnRead()) return -1;
+    if(!this.isUnRead() &&  other.isUnRead()) return +1;
+    return createdTime.compareTo( other.createdTime ); //TODO if it sorts bad
+  }
 
-    public void read(){
-      unread = false;
-    }
+  /**
+    override to string method: is is used for showing mail is ListView
+    if mail is unread it add * before sender
+  **/
+  @Override
+  public String toString() {
+    String unreadStatus = unread?"* ":"  ";
+    return unreadStatus + "from " + sender + "\n subject : " + subject ;
+  }
 
-    public boolean isUnRead(){
-      return unread;
-    }
+  /**
+    make mail as read by making unread boolan as false
+  **/
+  public void read(){
+    unread = false;
+  }
 
-    public boolean isTrashed(){
-      return trashed;
-    }
+  /**
+    get unread status (boolean)
+  **/
+  public boolean isUnRead(){
+    return unread;
+  }
 
-    public void trash(){
-      trashed = !trashed;
-    }
+  /**
+    get trashed status (boolan)
+  **/
+  public boolean isTrashed(){
+    return trashed;
+  }
 
-    public String getSender() {
-        return sender;
-    }
+  /**
+    change trash status of mail
+    if it is in trash send it out and if it is in mail box, trash it
+  **/
+  public void trash(){
+    trashed = !trashed;
+  }
 
-    public String getReciever(){
-      return reciever;
-    }
+  /**
+    getter for sender field
+  **/
+  public String getSender() {
+    return sender;
+  }
 
-    public String getSubject() {
-        return subject;
-    }
+  /**
+    getter for reciever field
+  **/
+  public String getReciever(){
+    return reciever;
+  }
 
-    public String getMessage(){
-      return message;
-    }
+  /**
+    getter for subject field
+  **/
+  public String getSubject() {
+    return subject;
+  }
 
-    public String getTimeString(){
-      return timeString;
-    }
+  /**
+    getter for message field
+  **/
+  public String getMessage(){
+    return message;
+  }
+
+  /**
+    get mail cretaiton time in string format
+  **/
+  public String getTimeString(){
+    return timeString;
+  }
 
 }
