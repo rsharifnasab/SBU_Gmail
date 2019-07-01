@@ -18,7 +18,7 @@ public class ServerTest{
   public static Mail m1 = null;
   public static Mail m2 = null;
   public static Mail m3 = null;
-  public Map<String,Object> toSend = new HashMap<>();
+  public Map<String,Object> toSend = null;
   public Map<String,Object> recieved = null;
 
   @BeforeClass
@@ -32,6 +32,8 @@ public class ServerTest{
 
   @Before
   public void before(){
+
+    toSend = new HashMap<>();
 
     A = new Profile("ali");
     A.setGender(Gender.MAN);
@@ -73,8 +75,81 @@ public class ServerTest{
     assertEquals(A2, A3);
   }
 
+
+
   @Test
-  public void updateProfileTest() throws IOException {
+  public void loginTest2(){
+    Profile z = new Profile("zali");
+    toSend.put("username","zali");
+    toSend.put("password","password");
+    recieved = API.login(toSend);
+    Profile z2 = (Profile) recieved.get("answer");
+    assertTrue( ! (boolean) recieved.get("exists"));
+    assertNull(z2);
+  }
+
+
+  @Test
+  public void loginTest3(){
+    Profile A2 = new Profile("ali");
+    toSend.put("username","ali");
+    toSend.put("password","wrong password");
+    recieved = API.login(toSend);
+    Profile A3 = (Profile) recieved.get("answer");
+    assertTrue( (boolean) recieved.get("exists"));
+    assertNull(A3);
+  }
+
+  @Test
+  public void usernameCheckTest1(){
+    String username2test = "ali";
+    toSend.put("username",username2test);
+    recieved = API.isUserNameExists(toSend);
+    Boolean b = (Boolean) recieved.get("answer");
+    assertNotNull(b);
+    assertTrue( b );
+  }
+
+  @Test
+  public void usernameCheckTest2(){
+    String username2test = "zali";
+    toSend.put("username",username2test);
+    recieved = API.isUserNameExists(toSend);
+    Boolean b = (Boolean) recieved.get("answer");
+    assertNotNull(b);
+    assertTrue( !b );
+  }
+
+  @Test
+  public void signupTest(){
+
+    toSend.put("username","pali");
+    recieved = API.isUserNameExists(toSend);
+    boolean b = (boolean) recieved.get("answer");
+    assertTrue( !b );
+
+    toSend = new HashMap<>();
+
+    Profile p = new Profile("pali");
+    p.setPassword("pali password");
+    toSend.put("profile",p);
+    toSend.put("command",Command.SIGNUP);
+    recieved = API.signUp(toSend);
+    assertTrue( (boolean) recieved.get("answer"));
+
+    toSend = new HashMap<>();
+
+    toSend.put("username","pali");
+    recieved = API.isUserNameExists(toSend);
+    b = (boolean) recieved.get("answer");
+    assertTrue( b );
+
+  }
+
+
+
+  @Test
+  public void updateProfileTest() {
     Profile newA = new Profile("ali");
     toSend.put("command",Command.UPDATE_PROFILE);
     toSend.put("profile",newA);
@@ -85,7 +160,7 @@ public class ServerTest{
   }
 
   @Test
-  public void test2() throws InterruptedException {
+  public void test2() {
     ServerEXE.mails.add(m1);
     ServerEXE.mails.add(m2);
     ServerEXE.mails.add(m3);
