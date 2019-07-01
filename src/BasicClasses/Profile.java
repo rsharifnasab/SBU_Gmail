@@ -16,7 +16,7 @@ public class Profile implements Serializable {
     private String birthYear;
     private String phoneNumber;
     private Gender gender;
-    public final String POST_FIX = "@gmail.com";
+    public final static String POST_FIX = "@gmail.com";
 
     /**
       constructor: get username and set it (for ever)
