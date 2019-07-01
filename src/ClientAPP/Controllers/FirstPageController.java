@@ -13,6 +13,10 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+	controll the first page (login and signup)
+	it implements intializable to iverride intialize method and do basic things to make page ready
+**/
 public class FirstPageController extends ParentController implements Initializable {
 
 	private final static String ASSETS_FOLDER = "ClientAPP/Assets/";
@@ -44,6 +48,10 @@ public class FirstPageController extends ParentController implements Initializab
 	@FXML
 	Circle onlineSphere;
 
+	/**
+		initialize the page to load default profile photo for signup page
+		set online sphere visibility from conection to server status
+	**/
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Image image = new Image( FirstPageController.PROFILE_PICTURE_DEFAULT );
@@ -51,7 +59,12 @@ public class FirstPageController extends ParentController implements Initializab
 		onlineSphere.setVisible(ClientNetworker.isConnected());
 	}
 
-
+	/**
+		it handle connect to server button requests
+		after connecting succesfully is make online sphere visible
+		if it cant connect to server, show a dialog for checking server is running and other things
+		also after connecting successfully it hide connect button
+	**/
 	public void connectToServer(){
 			ClientNetworker.connectToServer();
 			if ( ClientNetworker.isConnected() ) {
@@ -64,6 +77,15 @@ public class FirstPageController extends ParentController implements Initializab
 			this.makeAndShowInformationDialog( title, contentText );
 	}
 
+	/**
+		handle logon button
+		first of all it check you are connected to server or not
+		after that it check empty fields
+		if everything is ok, send username and password to server (by API.login) and expect our profile
+		if return value is null, it shows that username is not exists or password doesnt math
+		if everything is ok and we get profile from server, save this profile to ClientEXE static method
+		after succesfull login it redirects to mail menu
+	**/
 	public void doLoginStuff() {
 		if (!ClientNetworker.isConnected()){
 			showNotConnectedDialog();
@@ -88,7 +110,10 @@ public class FirstPageController extends ParentController implements Initializab
 	}
 
 
-
+	/**
+		check if signup page has empty field or Not
+		if is has empty field show a dialog to client that he/she should complete all fields
+	**/
 	public boolean hasEmptyField(){
 		if ( signupUsernameField.getText().isEmpty()
 			|| signupPasswordField.getText().isEmpty()
@@ -102,7 +127,12 @@ public class FirstPageController extends ParentController implements Initializab
 		return false;
 	}
 
-
+	/**
+		check if new username is valid and unique or Not
+		it use API.isUserNameExists to check uniqueness
+		local validation is checking that username only contains lowercase and uppercase and dot
+		it also show user dialog about validness and uniqness of username
+	**/
 	public boolean isValidUsername(){
 		char[] toCheck = signupUsernameField.getText().toCharArray();
 
@@ -134,17 +164,31 @@ public class FirstPageController extends ParentController implements Initializab
 		return !exists;
 	}
 
+	/**
+		it connected to profile phot click to change default profile photo
+		it show a panel to choose image file
+	**/
 	public void chooseProfilePicture(){
 		profilePicture.setImage( chooseImage() );
 	}
 
+	/**
+		a method to create and show not connected to server dialog, it shows up when user try to
+		login or sign up when its not connected to server
+	**/
 	public void showNotConnectedDialog(){
 		String title = "not connected to server";
 		String contentText = "you are not connected to server yet, please use connection panel!";
 		this.makeAndShowInformationDialog( title, contentText );
 
 	}
-//	VaghT taraf dokme-e signup ro mizare, in taabe' sedaa zade mishe
+
+	/**
+		it connected to signup button
+		first of all check if user is connected to server and if not show a dialog
+		after that check empty fields and if there are any empty field in sign up page it forbids to sign up and shwow a dialog
+		
+	**/
 	public void doSignupStuff() {
 		if (!ClientNetworker.isConnected()){
 			showNotConnectedDialog();
