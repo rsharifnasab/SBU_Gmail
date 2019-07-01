@@ -1,9 +1,11 @@
 profile image
 send and recieve file  (attachment)
-unit test
-
-replay and frw 
-remove , read , unread     log on server
-show time of message in main manu
 star messages
+search
+
+
+replay and frw log
+
+show time of message in main manu
+
 email order

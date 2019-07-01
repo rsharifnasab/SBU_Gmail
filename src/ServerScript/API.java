@@ -144,8 +144,28 @@ public class API {
 		return ans;
 	}
 
+	private static void changeMailLogger(Mail newMail){
+		List<Mail> possibleOptions = ServerEXE
+		.mails
+		.stream()
+		.filter(a-> a.toString().equals(newMail.toString()))
+		.collect (Collectors.toList());
+		if(possibleOptions.size() <1) return;
+		Mail oldMail = possibleOptions.get(0);
+		String toPrint1 = newMail.getReciever() + " mark\n + message: " + newMail.getSubject() + " " + newMail.getSender() + " as ";
+		String toPrint2 = "\ntime: " + newMail.getTimeString();
+		if( (newMail.isUnRead()) != ( oldMail.isUnRead() ) )
+			System.out.println(toPrint1 + "read" + toPrint2);
+
+		toPrint1 = newMail.getReciever() + " removemsg\n + message: " + newMail.getSubject() + " " + newMail.getSender() + "\n";
+		if(newMail.isTrashed() != oldMail.isTrashed())
+			System.out.println(toPrint1 + toPrint2);
+	}
+
 	public static Map<String,Object> changeMail(Map<String,Object> income){
 		Mail newMail = (Mail) income.get("mail");
+		changeMailLogger(newMail);
+
 		ServerEXE.mails.remove(newMail);
 		ServerEXE.mails.add(newMail);
 
@@ -154,7 +174,7 @@ public class API {
 		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.CHANGE_MAIL);
 		ans.put("answer",new Boolean(true));
-		
+
 		return ans;
 	}
 

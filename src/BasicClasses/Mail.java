@@ -101,4 +101,8 @@ public class Mail implements Serializable , Comparable {
       return message;
     }
 
+    public String getTimeString(){
+      return timeString;
+    }
+
 }
