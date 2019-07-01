@@ -22,11 +22,31 @@ public class ClientEXE extends Application {
 
 	public static Profile profile;
 
-	public static Set<Mail> outbox = new ConcurrentSkipListSet<>();
+	public static MailFolder mailFolder = MailFolder.INBOX;
 
+	public static List<Mail> outbox = new CopyOnWriteArrayList<>();
+	public static List<Mail> inbox = new CopyOnWriteArrayList<>();
+	public static List<Mail> sent = new CopyOnWriteArrayList<>();
+
+	public static List<Mail> getMailsToShow(){
+		switch(mailFolder){
+			case INBOX:
+				return inbox;
+			case SENT:
+				return sent;
+			case OUTBOX:
+				return outbox;
+		}
+		return new CopyOnWriteArrayList<Mail>();
+	}
 
 	public static Profile getProfile(){
 		return profile;
+	}
+
+	public static void updateMailFromServer(){
+		inbox = new CopyOnWriteArrayList<>(API.getInbox());
+		sent = new CopyOnWriteArrayList<>(API.getSent());
 	}
 
 	public static void setProfile(Profile profile){
