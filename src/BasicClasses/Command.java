@@ -2,7 +2,7 @@ package BasicClasses;
 
 public enum Command {
   /**
-    username : String , password:string - > (answer : Profile) command : Command , exists : Boolean
+    command : Command , username : String , password:string - > (answer : Profile) command : Command , exists : Boolean
   **/
   LOGIN,
 

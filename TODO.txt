@@ -4,6 +4,6 @@ unit test
 
 replay and frw 
 remove , read , unread     log on server
-
+show time of message in main manu
 star messages
-
+email order
