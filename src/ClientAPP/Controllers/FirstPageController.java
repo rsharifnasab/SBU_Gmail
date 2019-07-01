@@ -186,8 +186,11 @@ public class FirstPageController extends ParentController implements Initializab
 	/**
 		it connected to signup button
 		first of all check if user is connected to server and if not show a dialog
-		after that check empty fields and if there are any empty field in sign up page it forbids to sign up and shwow a dialog
-		
+		after that check empty fields and if there are any empty field in sign up page it forbids to sign up and show a dialog
+		it also check validness of username (unique and good characters) and strong password and valid age
+		if age < 13 it forbids you to login
+		if eveything is ok, it create a profile from your content and sent to server with signup api
+		after that it redirect you to profile page to add more info
 	**/
 	public void doSignupStuff() {
 		if (!ClientNetworker.isConnected()){
@@ -205,13 +208,15 @@ public class FirstPageController extends ParentController implements Initializab
 		ClientEXE.setProfile(justCreatedProfile);
 		API.signUp(justCreatedProfile);
 		showProfileCreatedDialog();
-		clearFields();
 		loadPage( "ProfilePage" );
 	}
 
 
 
-//	FieldHaa-e marboot be ghesmat-e signup ro paak mikone
+	/**
+		clear signup fields to make it ready for next signup1
+		this is @deprecated because it was used in last structure, now after login you will go to profile page, not signup again :)
+	**/
 	private void clearFields() {
 		this.signupUsernameField.setText( null );
 		this.signupPasswordField.setText( null );
@@ -222,8 +227,12 @@ public class FirstPageController extends ParentController implements Initializab
 		this.profilePicture.setImage( defaultImage );
 	}
 
-//	Az chizHaaE ke tooye safhe hastan, ye profile misaaze!
-	@SuppressWarnings("deprecation")
+	/**
+		this will create profile from all of signup neccesary fields
+		ir finally retirn the created profile
+
+	**/
+	//@SuppressWarnings("deprecation")
 	private Profile makeProfileFromPageContent() {
 		Profile returnValue = new Profile(signupUsernameField.getText());
 		returnValue.setPassword( signupPasswordField.getText() );
@@ -237,25 +246,18 @@ public class FirstPageController extends ParentController implements Initializab
 	}
 
 
-
-//	VaghT taraf roo-e profile picturesh click mikone, ye safheE baaz mishe ke komak mikone ye profile picture entekhaab kone!
-
-
-
-	public void profileCreationFailedDialog() {
-		String title = "Failed to create profile";
-		String contentText = "please try again!";
-		this.makeAndShowInformationDialog( title, contentText );
-	}
-
-
-
+	/**
+		show the dialog that tell user , profile created successfully
+	**/
 	public void showProfileCreatedDialog( ){
 		String title = "Success";
 		String contentText = "profile created succesfully!";
 		this.makeAndShowInformationDialog( title, contentText );
 	}
 
+	/**
+		tell user that cant login due to username or password wrong
+	**/
 	public void showInvalidLoginDialog() {
 	    String title = "Error in login";
 	    String contentText = "invalid username or password\nTry again or sign up";
