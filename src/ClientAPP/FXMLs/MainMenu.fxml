@@ -56,23 +56,38 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <Label layoutX="599.0" layoutY="86.0" prefHeight="28.0" prefWidth="56.0" text="from:">
+      <Label layoutX="589.0" layoutY="86.0" prefHeight="28.0" prefWidth="56.0" text="from:">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="591.0" layoutY="131.0" prefHeight="28.0" prefWidth="72.0" text="subject:">
+      <Label layoutX="568.0" layoutY="131.0" prefHeight="28.0" prefWidth="72.0" text="subject:">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="604.0" layoutY="191.0" prefHeight="28.0" prefWidth="72.0" text="text:">
+      <Label layoutX="581.0" layoutY="226.0" prefHeight="28.0" prefWidth="72.0" text="text:">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label fx:id="senderLabel" layoutX="667.0" layoutY="86.0" prefHeight="28.0" prefWidth="212.0" />
-      <Label fx:id="subjectLabel" layoutX="686.0" layoutY="136.0" prefHeight="34.0" prefWidth="169.0" />
-      <Label fx:id="textLabel" layoutX="655.0" layoutY="197.0" prefHeight="224.0" prefWidth="343.0" />
+      <Label fx:id="senderLabel" layoutX="667.0" layoutY="86.0" prefHeight="35.0" prefWidth="300.0" />
+      <Label fx:id="subjectLabel" layoutX="686.0" layoutY="136.0" prefHeight="74.0" prefWidth="252.0" />
+      <Label fx:id="textLabel" layoutX="653.0" layoutY="226.0" prefHeight="386.0" prefWidth="345.0" />
+      <Button fx:id="replyButton" layoutX="536.0" layoutY="638.0" mnemonicParsing="false" onAction="#replyMail" prefHeight="68.0" prefWidth="111.0" text="reply">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="forwardButton" layoutX="663.0" layoutY="638.0" mnemonicParsing="false" onAction="#forwardMail" prefHeight="68.0" prefWidth="130.0" text="forward">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="deleteButton" layoutX="806.0" layoutY="638.0" mnemonicParsing="false" onAction="#deleteMail" prefHeight="68.0" prefWidth="147.0" text="delete">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -44,6 +44,13 @@ public class MainMenuController extends ParentController implements Initializabl
     @FXML
     Label textLabel;
 
+    @FXML
+    Button replyButton;
+    @FXML
+    Button forwardButton;
+    @FXML
+    Button deleteButton;
+
 
   	@Override
   	public void initialize(URL location, ResourceBundle resources) {
@@ -96,14 +103,14 @@ public class MainMenuController extends ParentController implements Initializabl
       checkMail();
     }
 
+
+    public Mail showingMail(){
+      String mailStr = mailsListView.getSelectionModel().getSelectedItem().toString();
+      return ClientEXE.findMailByString(mailStr); 
+    }
     @FXML
     public void showOneMail() {
-      String mailStr = mailsListView.getSelectionModel().getSelectedItem().toString();
-      Mail toShow = ClientEXE.findMailByString(mailStr);
-      showSpecificMail(toShow);
-    }
-
-    public void showSpecificMail(Mail mail){
+      Mail mail = showingMail();
       if(ClientEXE.mailFolder == MailFolder.INBOX){
          mail.read();
          API.changeMail(mail);
@@ -112,6 +119,22 @@ public class MainMenuController extends ParentController implements Initializabl
       subjectLabel.setText(mail.getSubject());
       textLabel.setText(mail.getMessage());
       showMail();
+    }
+
+
+    public void deleteMail(){
+      Mail mail = showingMail();
+      mail.trash();
+      API.changeMail(mail);
+      checkMail();
+    }
+
+    public void forwardMail(){
+      //TODO
+    }
+
+    public void replyMail(){
+      //TODO
     }
 
 
