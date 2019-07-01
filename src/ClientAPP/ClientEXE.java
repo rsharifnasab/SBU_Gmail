@@ -22,6 +22,7 @@ public class ClientEXE extends Application {
 
 	public static Profile profile;
 
+	public static Mail showingMail = null;
 	public static MailFolder mailFolder = MailFolder.INBOX;
 
 	public static List<Mail> outbox = new CopyOnWriteArrayList<>();
@@ -41,6 +42,16 @@ public class ClientEXE extends Application {
 				return trash;
 		}
 		return new CopyOnWriteArrayList<Mail>();
+	}
+
+	public static Mail findMailByString(String str){
+		Optional<Mail> optMail = getMailsToShow()
+		.stream()
+		.filter(a -> a.toString().equals(str))
+		.limit(1)
+		.findFirst();
+		Mail mail = optMail.get();
+		return mail;
 	}
 
 	public static Profile getProfile(){

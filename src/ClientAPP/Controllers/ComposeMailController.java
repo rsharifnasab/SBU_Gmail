@@ -49,7 +49,7 @@ public class ComposeMailController extends ParentController {
   }
 
   public boolean hasEmpty(){
-    boolean   hasEmpty = (
+    boolean  hasEmpty = (
       recieverField.getText().isEmpty() ||
       subjectField.getText().isEmpty() ||
       textField.getText().isEmpty()

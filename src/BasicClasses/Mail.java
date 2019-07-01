@@ -98,7 +98,7 @@ public class Mail implements Serializable , Comparable {
     }
 
     public String getMessage(){
-      return subject;
+      return message;
     }
 
 }

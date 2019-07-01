@@ -57,6 +57,9 @@ public class ClientHandler implements Runnable {
 					case CHECK_MAIL:
 						answer = API.checkMail(income);
 						break;
+					case CHANGE_MAIL:
+						answer = API.changeMail(income);
+						break;
 
 
 				}

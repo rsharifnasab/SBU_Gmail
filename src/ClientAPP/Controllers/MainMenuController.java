@@ -6,6 +6,7 @@ import javafx.collections.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.input.*;
 import java.net.*;
 import java.util.*;
 
@@ -23,8 +24,10 @@ public class MainMenuController extends ParentController implements Initializabl
     Button composeButton;
     @FXML
     Button checkMailButton;
+
     @FXML
     ListView mailsListView;
+
     @FXML
     Button goToInboxButton;
     @FXML
@@ -33,6 +36,13 @@ public class MainMenuController extends ParentController implements Initializabl
     Button goToSentButton;
     @FXML
     Button goToTrashButton;
+
+    @FXML
+    Label senderLabel;
+    @FXML
+    Label subjectLabel;
+    @FXML
+    Label textLabel;
 
 
   	@Override
@@ -85,6 +95,25 @@ public class MainMenuController extends ParentController implements Initializabl
       ClientEXE.mailFolder = MailFolder.OUTBOX;
       checkMail();
     }
+
+    @FXML
+    public void showOneMail() {
+      String mailStr = mailsListView.getSelectionModel().getSelectedItem().toString();
+      Mail toShow = ClientEXE.findMailByString(mailStr);
+      showSpecificMail(toShow);
+    }
+
+    public void showSpecificMail(Mail mail){
+      if(ClientEXE.mailFolder == MailFolder.INBOX){
+         mail.read();
+         API.changeMail(mail);
+      }
+      senderLabel.setText(mail.getSender()+"@gmail.com");
+      subjectLabel.setText(mail.getSubject());
+      textLabel.setText(mail.getMessage());
+      showMail();
+    }
+
 
 
 }

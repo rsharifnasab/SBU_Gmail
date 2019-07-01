@@ -32,6 +32,11 @@ public enum Command {
 **/
   CHECK_MAIL,
 
+/**
+  command : Command , mail : Mail -> command : Command , answer : Boolean
+**/
+  CHANGE_MAIL,
+
 
   /**
     command : Command , profile : Profile - > command : Command , answer : Boolean

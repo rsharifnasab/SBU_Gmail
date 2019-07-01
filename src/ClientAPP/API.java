@@ -69,6 +69,14 @@ public class API{
 		return recieved;
 	}
 
+	public static boolean changeMail(Mail mail){
+		Map<String,Object> toSend = new HashMap<>();
+		toSend.put("command", Command.CHANGE_MAIL);
+		toSend.put("mail",mail);
+		Map<String,Object> recieved = ClientNetworker.serve(toSend);
+		return (boolean) recieved.get("answer");
+	}
+
 	@SuppressWarnings("unchecked")
 	public static List<Mail> getInbox(){
 		Map<String,Object> all = checkMail();

@@ -144,6 +144,19 @@ public class API {
 		return ans;
 	}
 
+	public static Map<String,Object> changeMail(Map<String,Object> income){
+		Mail newMail = (Mail) income.get("mail");
+		ServerEXE.mails.remove(newMail);
+		ServerEXE.mails.add(newMail);
+
+		DBUpdator.getInstance().updateDataBase(); // save to local file
+
+		Map<String,Object> ans = new HashMap<>();
+		ans.put("command",Command.CHANGE_MAIL);
+		ans.put("answer",new Boolean(true));
+		
+		return ans;
+	}
 
 
 
