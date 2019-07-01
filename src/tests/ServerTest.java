@@ -159,18 +159,68 @@ public class ServerTest{
   }
 
   @Test
+  public void changeMailTest() {
+    m1.read();
+    toSend.put("command",Command.CHANGE_MAIL);
+    toSend.put("mail",m1);
+    recieved = API.changeMail(toSend);
+    boolean status =  (boolean) recieved.get("answer");
+    assertTrue(status);
+    assertTrue(ServerEXE.mails.contains(m1));
+  }
+
+  @Test
   public void logoutTest(){
     toSend.put("command",Command.LOGOUT);
     recieved = API.logout(toSend);
     assertTrue( (boolean) recieved.get("answer"));
   }
 
-  
   @Test
-  public void test2() {
-    ServerEXE.mails.add(m1);
-    ServerEXE.mails.add(m2);
-    ServerEXE.mails.add(m3);
+  public void sendMailTest(){
+    toSend.put("command",Command.SEND_MAIL);
+    toSend.put("mail",m1);
+    recieved = API.sendMail(toSend);
+    assertTrue( (boolean) recieved.get("answer"));
+  }
+
+  @Test
+  public void sendMailTest2(){
+    toSend.put("command",Command.SEND_MAIL);
+    toSend.put("mail",m1);
+    recieved = API.sendMail(toSend);
+    assertTrue( (boolean) recieved.get("answer"));
+    toSend.put("mail",m2);
+    recieved = API.sendMail(toSend);
+    assertTrue( (boolean) recieved.get("answer"));
+    toSend.put("command",Command.SEND_MAIL);
+    toSend.put("mail",m3);
+    recieved = API.sendMail(toSend);
+    assertTrue( (boolean) recieved.get("answer"));
+  }
+
+  @Test
+  public void checkMailTest(){
+    toSend.put("command",Command.SEND_MAIL);
+    toSend.put("mail",m1);
+    recieved = API.sendMail(toSend);
+
+    toSend = new HashMap<>();
+    toSend.put("command",Command.CHECK_MAIL);
+    toSend.put("profile",A);
+    recieved = API.checkMail(toSend);
+    List<Mail> sent = (List<Mail>) recieved.get("sent");
+    assertEquals(m1,sent.get(0));
+    assertEquals(1,sent.size());
+
+    toSend = new HashMap<>();
+    toSend.put("command",Command.CHECK_MAIL);
+    toSend.put("profile",B);
+    recieved = API.checkMail(toSend);
+    List<Mail> inbox = (List<Mail>) recieved.get("inbox");
+    assertEquals(m1,inbox.get(0));
+    assertEquals(1,inbox.size());
+
   }
 
 }
