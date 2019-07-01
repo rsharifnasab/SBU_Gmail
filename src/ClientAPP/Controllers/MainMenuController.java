@@ -2,15 +2,18 @@ package ClientAPP.Controllers;
 
 import ClientAPP.*;
 import BasicClasses.*;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.collections.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import java.net.*;
+import java.util.*;
 
 /*
 menu-e asli-e har kaarbar
 */
 
-public class MainMenuController extends ParentController {
+public class MainMenuController extends ParentController implements Initializable {
 
     @FXML
     Button profileButton;
@@ -24,7 +27,8 @@ public class MainMenuController extends ParentController {
     ListView mailsListView;
 
 
-    public void MainMenuController(){
+  	@Override
+  	public void initialize(URL location, ResourceBundle resources) {
       checkMail();
     }
 

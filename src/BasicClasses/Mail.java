@@ -82,7 +82,16 @@ public class Mail implements Serializable , Comparable {
 
     @Override
     public String toString() {
-        return "[ from " + sender + ", to: " + reciever + ", subject : " + subject + ", message : " + message + "]";
+        String unreadStatus = unread?"* ":"";
+        return unreadStatus + "from " + sender + "\n subject : " + subject ;
+    }
+
+    public void read(){
+      unread = false;
+    }
+
+    public boolean isUnRead(){
+      return unread;
     }
 
     public String getSender() {
