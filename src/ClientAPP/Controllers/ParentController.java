@@ -15,12 +15,16 @@ import java.util.*;
 import java.net.URL;
 
 
-/*
-All Controllers extend this class
- */
+/**
+	parrent of all controller that will extend this
+	it is not controller of any page
+	it has some good methods for other controllers to use
+**/
 public class ParentController {
 
-
+	/**
+		open a dialog to choose image address and return loaded image
+	**/
 	public Image chooseImage() {
 		System.out.println("ok now choose profile photo");
 		FileChooser fileChooser = new FileChooser();
@@ -28,12 +32,21 @@ public class ParentController {
 		return new Image( file.toURI().toString() );
 	}
 
+	/**
+		show that all fields are not completed and user should fill it All
+		this methid will use in compose mail and login and signup :)
+	**/
 	public void showFillRequiredFieldsDialog(){
 		String title = "Incomplete information";
 		String contentText = "Please fill all of the required fields";
 		makeAndShowInformationDialog( title, contentText );
 	}
 
+	/**
+		check if client is connected to server or Not
+		it will use for login and signup button , they check if we are connected to server and then let user do the stuff
+		if it is not connected to server, it shows a dialog for inform client to he/she is not Connected to server
+	**/
 	public boolean connectionToServerCheck(){
 		if ( ClientNetworker.isConnected() ) return true;
 		String title = "you are not connected to server";
@@ -42,6 +55,13 @@ public class ParentController {
 		return false;
 	}
 
+	/**
+		it is used is sIGNUP Part to check passwrod is good or not
+		first it check if 2 password are same or not
+		if they are not same, it will show a dialog box to inform user
+		after that it estimate if password is string or not
+		if its not string enough it will warn user and force it to choose another password
+	**/
 	public boolean isValidPassword(String pass1,String pass2){
 		if ( ! pass1.equals( pass2 ) ) {
 			String title = "Error in sign up";
@@ -77,6 +97,11 @@ public class ParentController {
 		return isValid;
 	}
 
+	/**
+		check if user birth year is valid or no
+		first of all it use Profile static method to findout if the age is valid or not (from zero to 220 year) and also make sure it is all digits
+		after that it make sure user is above 13
+	**/
 	public boolean isValidBirth(String year){
 		if (! Profile.isValidBirthYear(year)) {
 			String title = "year should be a valid integer";
@@ -93,7 +118,9 @@ public class ParentController {
 		return true;
 	}
 
-//	Baraa-e Load Kardan-e Safahaat-e Digar
+	/**
+		give string address from input and load the fxml page with the spicied addreess
+	**/
 	public void loadPage( String address ) {
 		Parent root = null;
 		try {
@@ -107,7 +134,10 @@ public class ParentController {
 		ClientEXE.pStage.show();
 	}
 
-//	Title va Matn-e badane ro migire, va ye alert baa oon mohtaviaat neshoon mide!
+	/**
+		thats very userful method
+		it get title and content text and show an information dialog to user
+	**/
 	public void makeAndShowInformationDialog( String title, String contentText ) {
 		Alert alert = new Alert( Alert.AlertType.INFORMATION );
 		alert.setTitle( title );
@@ -115,16 +145,4 @@ public class ParentController {
 		alert.setContentText( contentText );
 		alert.showAndWait();
 	}
-
-	//	Title va MatnHaa-e badane ro migire, baahaashoon ye TextInputDialog misaaze!
-	public String makeAndShowTextInputDialog( String title, String headerText, String contentText ) {
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle( title );
-		dialog.setHeaderText( headerText );
-		dialog.setContentText( contentText );
-
-		Optional<String> result = dialog.showAndWait();
-		return ( result.isPresent() ? result.get() : null );
-	}
-
 }

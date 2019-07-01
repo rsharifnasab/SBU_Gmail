@@ -140,7 +140,7 @@ public class MainMenuController extends ParentController implements Initializabl
     /**
       go to out folder
       it will set : curernt mail folder to outbox folder and get out mails from clientEXE (thats local)
-      note that outbox will be always empty because all mails are handled on demand
+      note that outbox will be always empty because all mails are handled at the moment
     **/
     public void goToOutbox(){
       ClientEXE.mailFolder = MailFolder.OUTBOX;
