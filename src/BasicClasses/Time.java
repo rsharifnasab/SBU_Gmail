@@ -28,6 +28,7 @@ public class Time {
   /**
     second Method
     if give you time in milliseconds from 1910/1/1 in long integer format
+
   **/
   public static Long getMilli(){
     return Instant.now().toEpochMilli();
