@@ -133,7 +133,6 @@ public class ServerTest{
     Profile p = new Profile("pali");
     p.setPassword("pali password");
     toSend.put("profile",p);
-    toSend.put("command",Command.SIGNUP);
     recieved = API.signUp(toSend);
     assertTrue( (boolean) recieved.get("answer"));
 
@@ -159,6 +158,14 @@ public class ServerTest{
     assertNull(ServerEXE.profiles.get("ali").getName());
   }
 
+  @Test
+  public void logoutTest(){
+    toSend.put("command",Command.LOGOUT);
+    recieved = API.logout(toSend);
+    assertTrue( (boolean) recieved.get("answer"));
+  }
+
+  
   @Test
   public void test2() {
     ServerEXE.mails.add(m1);
