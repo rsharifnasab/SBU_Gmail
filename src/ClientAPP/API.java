@@ -7,7 +7,12 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+
 public class API{
+	/**
+		give a username and check if it is exists in profile or not
+		it check it from same api in server
+	**/
 	public static boolean isUserNameExists(String username2check){
 		Map<String,Object> toSend = new HashMap<>();
 		toSend.put("command", Command.USERNAME_UNIQUE);

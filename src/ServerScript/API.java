@@ -10,6 +10,15 @@ import java.util.stream.*;
 
 import ServerScript.DB.*;
 
+/**
+	it provide server srevices to client
+	every method is stands for a command in BasicClasses.Command
+	and you can have sheet sheet of each map contents there
+
+	note that server  and client pass a map<String,object> from socket
+	every map have a command value with "command" key
+	with a switch case we can find out which method is needed
+**/
 public class API {
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> isUserNameExists(Map<String,Object> income){
