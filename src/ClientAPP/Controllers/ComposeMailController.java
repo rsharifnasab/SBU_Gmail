@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 
 
-public class ComposeMailController extends ParentController {
+public class ComposeMailController extends ParentController implements Initializable {
 
   @FXML
   TextField subjectField;
@@ -34,6 +34,17 @@ public class ComposeMailController extends ParentController {
 
   @FXML
   Button backButton;
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    Mail mail = ClientEXE.composeTemplete;
+    if (mail == null) return;
+    subjectField.setText(mail.getSubject());
+    recieverField.setText(mail.getReciever());
+    textField.setText(mail.getMessage());
+
+    ClientEXE.composeTemplete = null;
+  }
 
 
   public void send(){

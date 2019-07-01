@@ -105,8 +105,12 @@ public class MainMenuController extends ParentController implements Initializabl
 
 
     public Mail showingMail(){
-      String mailStr = mailsListView.getSelectionModel().getSelectedItem().toString();
-      return ClientEXE.findMailByString(mailStr); 
+      try{
+        String mailStr = mailsListView.getSelectionModel().getSelectedItem().toString();
+        return ClientEXE.findMailByString(mailStr);
+      }catch(NullPointerException e){
+        return new Mail("","","","");
+      }
     }
     @FXML
     public void showOneMail() {
@@ -130,13 +134,23 @@ public class MainMenuController extends ParentController implements Initializabl
     }
 
     public void forwardMail(){
-      //TODO
+      Mail mail = showingMail();
+      String sender = "";
+      String reciever = "";
+      String subject = "frw: " + mail.getSubject();
+      String message = "forwarded text : \n" + mail.getMessage() + " \n ---------------- \n";
+      ClientEXE.composeTemplete = new Mail(sender, reciever, subject, message);
+      composeMail();
     }
 
     public void replyMail(){
-      //TODO
+      Mail mail = showingMail();
+      String sender = "";
+      String reciever = mail.getSender();
+      String subject = "re: " + mail.getSubject();
+      String message = "replied text : \n" +  mail.getMessage() + " \n ---------------- \n";
+      ClientEXE.composeTemplete = new Mail(sender, reciever, subject, message);
+      composeMail();
     }
-
-
 
 }

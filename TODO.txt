@@ -1,5 +1,5 @@
 profile image
 send and recieve file  (attachment)
 unit test
-view mail 
-replay and frw
+replay and frw log on server
+change label and textfiled  to a better thing

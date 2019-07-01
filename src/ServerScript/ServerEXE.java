@@ -16,7 +16,6 @@ public class ServerEXE {
 
   public static Map<String, Profile> profiles = null;
 	public static Set<Mail> mails = null;
-
 	public static boolean isServerUp(){
 		return isServerUp;
 	}
