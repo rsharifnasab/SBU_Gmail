@@ -39,8 +39,9 @@ public class ComposeMailController extends ParentController {
   public void send(){
     if (hasEmpty()) return;
     String reciever = recieverField.getText();
+    reciever = Profile.usernameCleaner(reciever);
     String message = textField.getText();
-    String subject = textField.getText();
+    String subject = subjectField.getText();
     Mail mail = new Mail(ClientEXE.getProfile().getUserName(), reciever, subject, message);
     API.sendMail(mail);
     makeSuccesfullDialog();

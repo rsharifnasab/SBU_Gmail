@@ -47,19 +47,6 @@ public class Profile implements Serializable {
 
     }
 
-    public HBox getProfileTile() {
-        HBox proTile = new HBox();
-        Label proName=new Label(this.getUserName());
-        proName.setFont( new Font( 10) );
-
-        proTile.getChildren().addAll(proName);
-        proTile.setSpacing(30);
-
-        proTile.setAlignment(Pos.CENTER);
-        return proTile;
-    }
-
-
     @Override
     public String toString() {
         return "[" + username + ": " + name + " " + birthYear + "]";

@@ -14,7 +14,7 @@
             <Image url="@../Assets/Main_Menu.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="profileButton" layoutX="1002.0" layoutY="68.0" mnemonicParsing="false" onAction="#showProfile" prefHeight="68.0" prefWidth="264.0" text="edit Profile">
+      <Button fx:id="profileButton" layoutX="1002.0" layoutY="77.0" mnemonicParsing="false" onAction="#showProfile" prefHeight="68.0" prefWidth="264.0" text="edit Profile">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -29,8 +29,28 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <ListView fx:id="mailsListView" layoutX="359.0" layoutY="49.0" prefHeight="469.0" prefWidth="496.0" />
+      <ListView fx:id="mailsListView" layoutX="114.0" layoutY="13.0" prefHeight="694.0" prefWidth="412.0" />
       <Button fx:id="checkMailButton" layoutX="1002.0" layoutY="182.0" mnemonicParsing="false" onAction="#checkMail" prefHeight="143.0" prefWidth="264.0" text="check for new mail">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="goToInboxButton" layoutY="14.0" mnemonicParsing="false" onAction="#goToInbox" prefHeight="172.0" prefWidth="111.0" text="inbox">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="goToSentButton" layoutY="391.0" mnemonicParsing="false" onAction="#goToSent" prefHeight="172.0" prefWidth="111.0" text="sent">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="goToOutboxButton" layoutY="205.0" mnemonicParsing="false" onAction="#goToOutbox" prefHeight="172.0" prefWidth="111.0" text="outbox">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="goToTrashButton" layoutY="577.0" mnemonicParsing="false" onAction="#goToTrash" prefHeight="130.0" prefWidth="111.0" text="trash">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>

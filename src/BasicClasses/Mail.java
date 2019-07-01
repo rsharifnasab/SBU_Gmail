@@ -54,23 +54,6 @@ public class Mail implements Serializable , Comparable {
       }
     }
 
-    public HBox getMailTile() { //TODO
-
-        HBox mailTile = new HBox();
-        Label senderLabel = new Label(this.sender);
-        Label recieverLabel = new Label(this.reciever);
-        Label subjectLabel = new Label(this.subject);
-
-        senderLabel.setFont( new Font( 10) );
-        recieverLabel.setFont (new Font(10) );
-        subjectLabel.setFont( new Font(10) );
-
-        mailTile.getChildren().addAll(senderLabel,recieverLabel,subjectLabel);
-        mailTile.setSpacing(30);
-        mailTile.setAlignment(Pos.CENTER);
-
-        return mailTile;
-    }
 
   @Override
   public int compareTo(Object o) {
@@ -82,7 +65,7 @@ public class Mail implements Serializable , Comparable {
 
     @Override
     public String toString() {
-        String unreadStatus = unread?"* ":"";
+        String unreadStatus = unread?"* ":"  ";
         return unreadStatus + "from " + sender + "\n subject : " + subject ;
     }
 
@@ -92,6 +75,14 @@ public class Mail implements Serializable , Comparable {
 
     public boolean isUnRead(){
       return unread;
+    }
+
+    public boolean isTrashed(){
+      return trashed;
+    }
+
+    public void trash(){
+      trashed = true;
     }
 
     public String getSender() {

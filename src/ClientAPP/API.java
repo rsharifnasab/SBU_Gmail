@@ -56,7 +56,7 @@ public class API{
 		Map<String,Object> toSend = new HashMap<>();
 		toSend.put("command", Command.SEND_MAIL);
 		toSend.put("mail",mail);
-		ClientEXE.outbox.add(mail); //TODO
+	//	ClientEXE.outbox.add(mail); //TODO
 		ClientNetworker.serve(toSend);
 	}
 
@@ -78,6 +78,12 @@ public class API{
 	public static List<Mail> getSent(){
 		Map<String,Object> all = checkMail();
 		return (List<Mail>) all.get("sent");
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Mail> getTrash(){
+		Map<String,Object> all = checkMail();
+		return (List<Mail>) all.get("trash");
 	}
 
 }

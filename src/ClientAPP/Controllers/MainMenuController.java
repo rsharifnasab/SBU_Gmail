@@ -25,6 +25,14 @@ public class MainMenuController extends ParentController implements Initializabl
     Button checkMailButton;
     @FXML
     ListView mailsListView;
+    @FXML
+    Button goToInboxButton;
+    @FXML
+    Button goToOutboxButton;
+    @FXML
+    Button goToSentButton;
+    @FXML
+    Button goToTrashButton;
 
 
   	@Override
@@ -58,6 +66,25 @@ public class MainMenuController extends ParentController implements Initializabl
       mailsListView.setItems(mail2show);
     }
 
+    public void goToTrash(){
+      ClientEXE.mailFolder = MailFolder.TRASH;
+      checkMail();
+    }
+
+    public void goToInbox(){
+      ClientEXE.mailFolder = MailFolder.INBOX;
+      checkMail();
+    }
+
+    public void goToSent(){
+      ClientEXE.mailFolder = MailFolder.SENT;
+      checkMail();
+    }
+
+    public void goToOutbox(){
+      ClientEXE.mailFolder = MailFolder.OUTBOX;
+      checkMail();
+    }
 
 
 }

@@ -120,17 +120,26 @@ public class API {
 		.mails
 		.stream()
 		.filter(a-> a.getSender().equals(username))
+		.filter(a -> a.isTrashed() == false)
 		.collect (Collectors.toList());
 
 		List<Mail> inbox = ServerEXE
 		.mails
 		.stream()
 		.filter(a-> a.getReciever().equals(username))
+		.filter(a -> a.isTrashed() == false)
+		.collect (Collectors.toList());
+
+		List<Mail> trash = ServerEXE
+		.mails
+		.stream()
+		.filter(a-> a.getReciever().equals(username) || a.getSender().equals(username))
+		.filter(a -> a.isTrashed())
 		.collect (Collectors.toList());
 
 		ans.put("sent",sent);
 		ans.put("inbox",inbox);
-		//TODO add more of this
+		ans.put("trash",trash);
 
 		return ans;
 	}
