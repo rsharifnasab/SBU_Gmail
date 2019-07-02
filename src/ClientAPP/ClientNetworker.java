@@ -9,7 +9,7 @@ import java.util.*;
 public class ClientNetworker{
 
 	public static String serverAddress;
-	public static final int PORT = 8888;
+	public static final int PORT = 2222;
 
 	private static boolean isConnected = false;
 	public static Socket socket;
@@ -31,6 +31,8 @@ public class ClientNetworker{
 			return true;
 
 		}catch (ConnectException e){
+			e.printStackTrace();
+
 		}
 		catch (IOException e) {
 			e.printStackTrace();

@@ -11,7 +11,7 @@ import ServerScript.DB.*;
 
 public class ServerEXE {
 
-	public static final int PORT = 8888;
+	public static final int PORT = 2222;
 	private static boolean isServerUp = true;
 
   public static Map<String, Profile> profiles = null;
