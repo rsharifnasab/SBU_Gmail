@@ -20,6 +20,17 @@ import ServerScript.DB.*;
 	with a switch case we can find out which method is needed
 **/
 public class API {
+
+	private static Comparator<Mail> readCompare = (a,b) -> Boolean.compare(a.isUnRead(), b.isUnRead() );
+	private static Comparator<Mail> timeCompare = (a,b) -> Long.compare(a.getTimeLong(), b.getTimeLong()) ;
+	private static Comparator<Mail> mailCompare = readCompare.thenComparing(timeCompare);
+
+
+	/**
+		an serverside api to check if a username exists and client can create a profile with that usetrname or not
+		we know that username must be unique
+		it checks profiles map to check if profile eith that usrename exists or not
+	**/
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> isUserNameExists(Map<String,Object> income){
 
@@ -34,6 +45,15 @@ public class API {
 		return ans;
 	}
 
+	/**
+		login api in server side
+		it give username and passwrod from income map and check if the username Exists
+		if the username doesnt exists it return null profile with the exists boolean : false
+		if the username exists, the exists boolean is true
+		then it use profile.authenticate to make sure that the username and password match ( authenticate could be changed later for improve security)
+		if the username and Password math, we return profile (which is used as token)
+		otherwise we return null as profile
+	**/
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> login(Map<String,Object> income){
 
@@ -57,6 +77,11 @@ public class API {
 		return ans;
 	}
 
+	/**
+		the simple signup api
+		it give a profile from user and save it to database
+		and it pudate the local data base
+	**/
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> signUp(Map<String,Object> income){
 		Profile newProfile = (Profile) income.get("profile");
@@ -75,6 +100,12 @@ public class API {
 		return ans;
 	}
 
+
+	/**
+		update profile method give a profile that is already exists in set
+		it delete old profle and replace new profile
+		it also save changes to DB
+	**/
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> updateProfile(Map<String,Object> income){
 
@@ -89,6 +120,10 @@ public class API {
 		return ans;
 	}
 
+	/**
+		the logout method in server side
+		it doesnt do anything special :))
+	**/
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> logout(Map<String,Object> income){
 		Map<String,Object> ans = new HashMap<>();
@@ -97,6 +132,11 @@ public class API {
 		return ans;
 	}
 
+	/**
+		the api for sending mail
+		it give a Mail object and add it to mails List and update loacal DB
+		after a client want to its new mail, we check mails list so we send him all of his/her mails
+	**/
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> sendMail(Map<String,Object> income){
 
@@ -117,6 +157,12 @@ public class API {
 		return ans;
 	}
 
+	/**
+		the check mails api in clientside
+		first of all we get profile of user as token so that we make sure he/she is authenticated
+			in returning map we return several lists for inbox, sent and trash
+		it will sort mails and then return them
+	**/
 	@SuppressWarnings("unchecked")
 	public static Map<String,Object> checkMail(Map<String,Object> income){
 		Profile profile = (Profile) income.get("profile");
@@ -129,7 +175,7 @@ public class API {
 		.mails
 		.stream()
 		.filter(a-> a.getSender().equals(username))
-		.filter(a -> a.isTrashed() == false)
+		.sorted(mailCompare)
 		.collect (Collectors.toList());
 
 		List<Mail> inbox = ServerEXE
@@ -137,13 +183,15 @@ public class API {
 		.stream()
 		.filter(a-> a.getReciever().equals(username))
 		.filter(a -> a.isTrashed() == false)
+		.sorted(mailCompare)
 		.collect (Collectors.toList());
 
 		List<Mail> trash = ServerEXE
 		.mails
 		.stream()
-		.filter(a-> a.getReciever().equals(username) || a.getSender().equals(username))
+		.filter(a-> a.getReciever().equals(username))
 		.filter(a -> a.isTrashed())
+		.sorted(mailCompare)
 		.collect (Collectors.toList());
 
 		ans.put("sent",sent);
@@ -153,6 +201,10 @@ public class API {
 		return ans;
 	}
 
+	/**
+		a method that get a new mail and comapre to old mail
+		and print logs based on which changes that new mail had
+	**/
 	private static void changeMailLogger(Mail newMail){
 		List<Mail> possibleOptions = ServerEXE
 		.mails
@@ -171,6 +223,11 @@ public class API {
 			System.out.println(toPrint1 + toPrint2);
 	}
 
+	/**
+		an api that get mail and update an old mail in server with new mail
+		it can only change traashed status and read status
+		it also save new db to file
+	**/
 	public static Map<String,Object> changeMail(Map<String,Object> income){
 		Mail newMail = (Mail) income.get("mail");
 		changeMailLogger(newMail);
@@ -186,11 +243,5 @@ public class API {
 
 		return ans;
 	}
-
-
-
-
-
-
 
 }

@@ -159,9 +159,9 @@ public class Mail implements Serializable , Comparable {
 
   /**
     get mail cretaiton time in long inteer format
-    it calculted milliseconds from 1970/1/1 to now 
+    it calculted milliseconds from 1970/1/1 to now
   **/
-  public long getTimeLomg(){
+  public long getTimeLong(){
     return createdTime;
   }
 
