@@ -16,23 +16,39 @@ import java.io.*;
   a J Unit test class for testing server side
 **/
 public class ServerTest{
-  public static Profile A = null;
-  public static Profile B = null;
-  public static Profile C = null;
-  public static Mail m1 = null;
-  public static Mail m2 = null;
-  public static Mail m3 = null;
+  public  Profile A = null;
+  public  Profile B = null;
+  public  Profile C = null;
+  public  Mail m1 = null;
+  public  Mail m2 = null;
+  public  Mail m3 = null;
   public Map<String,Object> toSend = null;
   public Map<String,Object> recieved = null;
 
+  private static  Map<String,Profile> profileBKP;
+  private static Set<Mail> MailBKP;
+
 
   /**
-  this will clean DB after all tests
+    this method will clone all databases for prevent change by api Call
+    it save close in mailBKP and profileBKP
+  **/
+  @BeforeBeforeClass
+  public static void copyDB(){
+    profileBKP = new ConcurrentHashMap<>();
+    profileBKP.addAll(ServerEXE.profiles);
+    MailBKP = new new ConcurrentSkipListSet<>();
+    MailBKP.addAll(ServerEXE.mails);
+  }
+
+
+  /**
+  this will revert DB to main state
   **/
   @AfterClass
   public static void cleanDB(){
-    ServerEXE.profiles = new ConcurrentHashMap<>();
-    ServerEXE.mails = new ConcurrentSkipListSet<>();
+    ServerEXE.profiles = profileBKP;
+    ServerEXE.mails = MailBKP;
     DBUpdator.getInstance().updateDataBase();
   }
 
