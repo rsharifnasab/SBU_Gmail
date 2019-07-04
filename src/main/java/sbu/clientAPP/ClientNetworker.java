@@ -43,11 +43,8 @@ public class ClientNetworker{
 			return true;
 
 		}catch (ConnectException e){
-			e.printStackTrace();
-
 		}
 		catch (IOException e) {
-			e.printStackTrace();
 		}
 		return false;
 	}

@@ -12,7 +12,7 @@ import java.io.*;
 **/
 public class DBUpdator {
     private static DBUpdator ourInstance = new DBUpdator();
-    
+
     public static final String FILE_PREFIX = "./db/";
     public static final String PROFILES_FILE = FILE_PREFIX + "ProfilesDB";
     public static final String MAILS_FILE =  FILE_PREFIX + "MailDB";

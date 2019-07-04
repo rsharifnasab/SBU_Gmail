@@ -19,8 +19,7 @@ import java.util.*;
 **/
 public class FirstPageController extends ParentController implements Initializable {
 
-	private final static String ASSETS_FOLDER = "ClientAPP/Assets/";
-	private final static String PROFILE_PICTURE_DEFAULT = FirstPageController.ASSETS_FOLDER + "default_contact.png";
+	private final static String PROFILE_PICTURE_DEFAULT =  "default_contact.png";
 
 	@FXML
 	TextField loginUsernameField;

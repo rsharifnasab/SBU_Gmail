@@ -124,7 +124,7 @@ public class ParentController {
 	public void loadPage( String address ) {
 		Parent root = null;
 		try {
-			root = FXMLLoader.load( getClass().getResource( "/ClientAPP/FXMLs/" + address + ".fxml" ) );
+			root = FXMLLoader.load(getClass().getClassLoader().getResource( address + ".fxml" ) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
