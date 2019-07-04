@@ -14,23 +14,48 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-
+/**
+	it is mail application of clientside
+	it extends application because it is a javafx program
+	it has exe in name because the executable class that user should run
+**/
 public class ClientEXE extends Application {
 
-//	Stage-e Asli-e Barnaame!
+	/**
+		program current stage
+	**/
 	public static Stage pStage;
 
+	/**
+		current user profile,
+		it is null until user wignup or login
+	**/
 	public static Profile profile;
 
+	/**
+		a mail template used for composing mail in case of reply or forward
+	**/
 	public static Mail composeTemplete = null;
 
+	/**
+		it saves where aer we in diferent mail folders
+	**/
 	public static MailFolder mailFolder = MailFolder.INBOX;
 
+	/**
+		different lists of mail
+		note that outbox is always empty
+	**/
 	public static List<Mail> outbox = new CopyOnWriteArrayList<>();
 	public static List<Mail> inbox = new CopyOnWriteArrayList<>();
 	public static List<Mail> sent = new CopyOnWriteArrayList<>();
 	public static List<Mail> trash = new CopyOnWriteArrayList<>();
 
+	/**
+		it return list of mail that we have to show to user
+		it uses mailfolder to specify which mail folder we should return
+		it doesnt sort itself, sort will be implemented in server side api
+	**/
 	public static List<Mail> getMailsToShow(){
 		switch(mailFolder){
 			case INBOX:
@@ -45,40 +70,58 @@ public class ClientEXE extends Application {
 		return new CopyOnWriteArrayList<Mail>();
 	}
 
+	/**
+		dont waste your time understanding this Method
+		this method will give a mail String and search in all mails and return the Mail object that its toString equals the unput string
+	**/
 	public static Mail findMailByString(String str){
 		try{
-			Optional<Mail> optMail = getMailsToShow()
+			Mail mail = getMailsToShow()
 			.stream()
-			.filter(a -> a.toString().equals(str))
-			.limit(1)
-			.findFirst();
-			Mail mail = optMail.get();
+			.filter(a -> ( a.toString().contains(str)  || str.contains(a.toString()) ) )
+			.findAny()
+			.get();
 			return mail;
 		} catch(NullPointerException e){
 			return null; // alan masalan error handle shod!
 		}
 	}
 
+	/**
+		it return current user profile
+		that encapsulation btw
+	**/
 	public static Profile getProfile(){
 		return profile;
 	}
 
+	/**
+		it updates all mail boxes from server
+	**/
 	public static void updateMailFromServer(){
 		inbox = new CopyOnWriteArrayList<>(API.getInbox());
 		sent = new CopyOnWriteArrayList<>(API.getSent());
 		trash = new CopyOnWriteArrayList<>(API.getTrash());
 	}
 
+	/**
+		it give a profile and update it in local profile
+		#encapsulation
+	**/
 	public static void setProfile(Profile profile){
 		ClientEXE.profile = profile;
 	}
 
+	/**
+		main method of client program that is run first of All
+	**/
 	public static void main(String[] args) {
-
 		launch( args );
-
 	}
 
+	/**
+		it load the first page fxml in first part of program
+	**/
 	@Override
 	@SuppressWarnings("deprecation")
 	public void start(Stage primaryStage) { // Avvalesh, MainMenu ro load mikonim!
@@ -94,6 +137,5 @@ public class ClientEXE extends Application {
 		pStage.setScene( new Scene( root, 1280, 720 ) );
 		pStage.show();
 	}
-
 
 }
