@@ -36,6 +36,8 @@ public class MainMenuController extends ParentController implements Initializabl
     Button goToSentButton;
     @FXML
     Button goToTrashButton;
+    @FXML
+    Button searchButton;
 
     @FXML
     Label senderLabel;
@@ -43,6 +45,8 @@ public class MainMenuController extends ParentController implements Initializabl
     Label subjectLabel;
     @FXML
     TextArea textLabel;
+    @FXML
+    Label emailTimeLabel;
 
     @FXML
     Button replyButton;
@@ -106,6 +110,9 @@ public class MainMenuController extends ParentController implements Initializabl
     **/
     @SuppressWarnings("unchecked")
     public void showMail(){
+      ObservableList<Mail> empty = FXCollections.observableArrayList();
+      mailsListView.setItems(empty);
+
       ObservableList<Mail> mail2show = FXCollections.observableArrayList(ClientEXE.getMailsToShow());
       mailsListView.setItems(mail2show);
     }
@@ -152,12 +159,9 @@ public class MainMenuController extends ParentController implements Initializabl
       if findMailByString return null it will return an empty mail!
     **/
     public Mail showingMail(){
-      try{
-        String mailStr = mailsListView.getSelectionModel().getSelectedItem().toString();
-        return ClientEXE.findMailByString(mailStr);
-      }catch(NullPointerException e){
-        return new Mail("","","","");
-      }
+      int index = mailsListView.getSelectionModel().getSelectedIndex();
+      //mailStr = mailsListView.getSelectionModel().getSelectedItem().toString();
+      return ClientEXE.findMailByIndex(index);
     }
 
     /**
@@ -169,14 +173,18 @@ public class MainMenuController extends ParentController implements Initializabl
     @FXML
     public void showOneMail() {
       Mail mail = showingMail();
+      if (mail == null) return;
       if(ClientEXE.mailFolder == MailFolder.INBOX){
-         mail.read();
+         mail.read(); // TODO
          API.changeMail(mail);
       }
       senderLabel.setText(mail.getSender()+Profile.POST_FIX);
       subjectLabel.setText(mail.getSubject());
       textLabel.setText(mail.getMessage());
-      showMail();
+      emailTimeLabel.setText(mail.getTimeString());
+
+
+      //showMail();
     }
 
 
@@ -189,6 +197,7 @@ public class MainMenuController extends ParentController implements Initializabl
   **/
   public void deleteMail(){
       Mail mail = showingMail();
+      if (mail == null) return;
       mail.trash();
       API.changeMail(mail);
       checkMail();
@@ -203,6 +212,7 @@ public class MainMenuController extends ParentController implements Initializabl
     **/
     public void forwardMail(){
       Mail mail = showingMail();
+      if (mail == null) return;
       String sender = "";
       String reciever = "";
       String subject = "frw: " + mail.getSubject();
@@ -218,6 +228,7 @@ public class MainMenuController extends ParentController implements Initializabl
     **/
     public void replyMail(){
       Mail mail = showingMail();
+      if (mail == null) return;
       String sender = "";
       String reciever = mail.getSender();
       String subject = "re: " + mail.getSubject();
@@ -226,4 +237,7 @@ public class MainMenuController extends ParentController implements Initializabl
       composeMail();
     }
 
+    public void search(){
+      
+    }
 }

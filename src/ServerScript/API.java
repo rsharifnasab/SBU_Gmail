@@ -21,8 +21,8 @@ import ServerScript.DB.*;
 **/
 public class API {
 
-	private static Comparator<Mail> readCompare = (a,b) -> Boolean.compare(a.isUnRead(), b.isUnRead() );
-	private static Comparator<Mail> timeCompare = (a,b) -> Long.compare(a.getTimeLong(), b.getTimeLong()) ;
+	private static Comparator<Mail> readCompare = (a,b) -> -1 * Boolean.compare(a.isUnRead(), b.isUnRead() );
+	private static Comparator<Mail> timeCompare = (a,b) -> -1 * Long.compare(a.getTimeLong(), b.getTimeLong()) ;
 	private static Comparator<Mail> mailCompare = readCompare.thenComparing(timeCompare);
 
 
@@ -209,7 +209,7 @@ public class API {
 		List<Mail> possibleOptions = ServerEXE
 		.mails
 		.stream()
-		.filter(a-> a.toString().equals(newMail.toString()))
+		.filter(a-> a.toString().substring(3).equals(newMail.toString().substring(3)))
 		.collect (Collectors.toList());
 		if(possibleOptions.size() <1) return;
 		Mail oldMail = possibleOptions.get(0);
@@ -230,9 +230,10 @@ public class API {
 	**/
 	public static Map<String,Object> changeMail(Map<String,Object> income){
 		Mail newMail = (Mail) income.get("mail");
-		changeMailLogger(newMail);
-
-		ServerEXE.mails.remove(newMail);
+	  //changeMailLogger(newMail);
+		System.out.println(" set of mails contain new mail : " + ServerEXE.mails.contains(newMail));
+		System.out.println("removed status:" + ServerEXE.mails.remove(newMail) );
+		System.out.println("adding : " + newMail);
 		ServerEXE.mails.add(newMail);
 
 		DBUpdator.getInstance().updateDataBase(); // save to local file

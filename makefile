@@ -41,3 +41,9 @@ clean_DB:
 	@echo "creating empty DB files"
 	@touch src/ServerScript/DB/MailDB
 	@touch src/ServerScript/DB/ProfilesDB
+
+clean_mails:
+	@echo "deleting mail db file"
+	@rm src/ServerScript/DB/MailDB
+	@echo "creating empty mail DB file"
+	@touch src/ServerScript/DB/MailDB

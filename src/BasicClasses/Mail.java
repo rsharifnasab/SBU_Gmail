@@ -58,14 +58,7 @@ public class Mail implements Serializable , Comparable {
 
     Mail other = (Mail) obj;
 
-    try{
-      String thisToCheck = this.createdTime + this.sender + this.reciever + this.subject + this.message;
-      String otherToCheck = other.createdTime + other.sender + other.reciever + other.subject + other.message;
-      return thisToCheck.equals(otherToCheck);
-    }
-    catch(Exception e){
-      return false;
-    }
+    return this.createdTime.equals(other.createdTime);
   }
 
 

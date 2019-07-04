@@ -25,6 +25,17 @@ public class ServerTest{
   public Map<String,Object> toSend = null;
   public Map<String,Object> recieved = null;
 
+
+  /**
+  this will clean DB after all tests
+  **/
+  @AfterClass
+  public static void cleanDB(){
+    ServerEXE.profiles = new ConcurrentHashMap<>();
+    ServerEXE.mails = new ConcurrentSkipListSet<>();
+    DBUpdator.getInstance().updateDataBase();
+  }
+
   /**
     this will be run before each test
     it will create suitable mail and profiles to make test easy for run

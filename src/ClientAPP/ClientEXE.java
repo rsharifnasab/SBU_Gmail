@@ -70,21 +70,44 @@ public class ClientEXE extends Application {
 		return new CopyOnWriteArrayList<Mail>();
 	}
 
+
+	/**
+		a mthod that concat all lists of mail
+	**/
+	public static List<Mail> getAllMail(){
+		List<Mail> all = new CopyOnWriteArrayList<>();
+		all.addAll(inbox);
+		all.addAll(sent);
+		all.addAll(trash);
+		all.addAll(outbox);
+		return all;
+	}
+
 	/**
 		dont waste your time understanding this Method
 		this method will give a mail String and search in all mails and return the Mail object that its toString equals the unput string
+		@@deprecated
 	**/
 	public static Mail findMailByString(String str){
 		try{
-			Mail mail = getMailsToShow()
+			Mail mail = getAllMail()
 			.stream()
-			.filter(a -> ( a.toString().contains(str)  || str.contains(a.toString()) ) )
+			.filter(a -> ( a.toString().substring(3).equals(str.substring(3))) )
 			.findAny()
 			.get();
 			return mail;
 		} catch(NullPointerException e){
+			System.out.println("email not found fatal error");
 			return null; // alan masalan error handle shod!
 		}
+	}
+
+	/**
+		find mail by index
+	**/
+	public static Mail findMailByIndex(int index){
+			Mail mail = getMailsToShow().get(index);
+			return mail;
 	}
 
 	/**

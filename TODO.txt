@@ -1,16 +1,6 @@
-profile image
-send and recieve file  (attachment)
-star messages
 search
-
 
 replay and frw log
 
-show time of message in main manu
-
-email order
-
-
-delete email from maier daemon
 
 mail eqauls ro change komn ke to list multiple time neshoun nade
