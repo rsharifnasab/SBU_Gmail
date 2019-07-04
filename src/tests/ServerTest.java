@@ -11,6 +11,10 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.io.*;
 
+
+/**
+  a J Unit test class for testing server side
+**/
 public class ServerTest{
   public static Profile A = null;
   public static Profile B = null;
@@ -21,15 +25,10 @@ public class ServerTest{
   public Map<String,Object> toSend = null;
   public Map<String,Object> recieved = null;
 
-  @BeforeClass
-  public static void beforeclass(){
-
-  }
-  @AfterClass
-  public static void afterclass(){
-
-  }
-
+  /**
+    this will be run before each test
+    it will create suitable mail and profiles to make test easy for run
+  **/
   @Before
   public void before(){
 
@@ -57,12 +56,19 @@ public class ServerTest{
 
   }
 
+
+  /**
+    it clear mails and profiles after each tests
+  **/
   @After
   public void after(){
     ServerEXE.mails = null;
     ServerEXE.profiles = null;
   }
 
+  /**
+    it test login api in server which is username and password are true
+  **/
   @Test
   public void loginTest1(){
     Profile A2 = new Profile("ali");
@@ -76,7 +82,9 @@ public class ServerTest{
   }
 
 
-
+  /**
+    it test login api in server which username is not exists
+  **/
   @Test
   public void loginTest2(){
     Profile z = new Profile("zali");
@@ -89,6 +97,9 @@ public class ServerTest{
   }
 
 
+  /**
+    it test login api which username is ok but wrong password
+  **/
   @Test
   public void loginTest3(){
     Profile A2 = new Profile("ali");
@@ -100,6 +111,10 @@ public class ServerTest{
     assertNull(A3);
   }
 
+
+  /**
+    a method for checking usernameecheck which username actually exists
+  **/
   @Test
   public void usernameCheckTest1(){
     String username2test = "ali";
@@ -110,6 +125,9 @@ public class ServerTest{
     assertTrue( b );
   }
 
+  /**
+    second test of usernameCheck api that username is not exists
+  **/
   @Test
   public void usernameCheckTest2(){
     String username2test = "zali";
@@ -120,6 +138,10 @@ public class ServerTest{
     assertTrue( !b );
   }
 
+  /**
+    check signup api in server
+    afeter singin up, it check that the username should be exists
+  **/
   @Test
   public void signupTest(){
 
@@ -144,7 +166,9 @@ public class ServerTest{
     assertTrue( b );
   }
 
-
+  /**
+    it check profile upadte api
+  **/
   @Test
   public void updateProfileTest() {
     Profile newA = new Profile("ali");
@@ -156,6 +180,9 @@ public class ServerTest{
     assertNull(ServerEXE.profiles.get("ali").getName());
   }
 
+  /**
+    it check changemail api
+  **/
   @Test
   public void changeMailTest() {
     m1.read();
@@ -170,6 +197,9 @@ public class ServerTest{
     assertTrue(!other.isUnRead());
   }
 
+  /**
+    it check logout api
+  **/
   @Test
   public void logoutTest(){
     toSend.put("command",Command.LOGOUT);
@@ -177,6 +207,10 @@ public class ServerTest{
     assertTrue( (boolean) recieved.get("answer"));
   }
 
+
+  /**
+    it check send mail api
+  **/
   @Test
   public void sendMailTest(){
     toSend.put("command",Command.SEND_MAIL);
@@ -185,6 +219,9 @@ public class ServerTest{
     assertTrue( (boolean) recieved.get("answer"));
   }
 
+  /**
+    this check send mail api too
+  **/
   @Test
   public void sendMailTest2(){
     toSend.put("command",Command.SEND_MAIL);
@@ -200,6 +237,11 @@ public class ServerTest{
     assertTrue( (boolean) recieved.get("answer"));
   }
 
+  /**
+    this check check mail api
+    it send mail first
+    and the n check if it is in both inboxes of reciever and send box of sender
+  **/
   @Test
   public void checkMailTest(){
     toSend.put("command",Command.SEND_MAIL);
