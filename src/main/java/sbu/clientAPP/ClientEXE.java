@@ -174,9 +174,12 @@ public class ClientEXE extends Application {
 		pStage = primaryStage;
 		Parent root = null;
 		try {
-			root = FXMLLoader.load( getClass().getResource( "/ClientAPP/FXMLs/FirstPage.fxml" ) );
+			final String dir = System.getProperty("user.dir");
+        System.out.println("current dir = " + dir);
+			root = FXMLLoader.load( getClass().getResource( "/src/main/java/sbu/clientAPP/FXMLs/FirstPage.fxml" ) );
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(13);
 		}
 		pStage.setTitle( "SBU GMAIL" );
 		pStage.setScene( new Scene( root, 1280, 720 ) );
