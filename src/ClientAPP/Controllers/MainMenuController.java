@@ -55,6 +55,9 @@ public class MainMenuController extends ParentController implements Initializabl
     @FXML
     Button deleteButton;
 
+    @FXML
+    TextArea searchField;
+
     /**
       first of all before showing page, check mail from server and show it to fill page
     **/
@@ -110,9 +113,6 @@ public class MainMenuController extends ParentController implements Initializabl
     **/
     @SuppressWarnings("unchecked")
     public void showMail(){
-      ObservableList<Mail> empty = FXCollections.observableArrayList();
-      mailsListView.setItems(empty);
-
       ObservableList<Mail> mail2show = FXCollections.observableArrayList(ClientEXE.getMailsToShow());
       mailsListView.setItems(mail2show);
     }
@@ -237,7 +237,16 @@ public class MainMenuController extends ParentController implements Initializabl
       composeMail();
     }
 
+    /**
+      it is connected to search button
+      it filters messages that conatain the enterrd text and show them
+    **/
     public void search(){
-      
+      ClientEXE.mailFolder = MailFolder.SEARCH;
+      String textSearch = searchField.getText();
+      ClientEXE.searchText = textSearch;
+      showMail();
+
+
     }
 }

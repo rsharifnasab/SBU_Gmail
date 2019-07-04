@@ -13,6 +13,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.*;
 
 /**
 	it is mail application of clientside
@@ -36,6 +37,11 @@ public class ClientEXE extends Application {
 		a mail template used for composing mail in case of reply or forward
 	**/
 	public static Mail composeTemplete = null;
+
+	/**
+		a string to keep which text is searching
+	**/
+	public static String searchText = "";
 
 	/**
 		it saves where aer we in diferent mail folders
@@ -66,10 +72,26 @@ public class ClientEXE extends Application {
 				return outbox;
 			case TRASH:
 				return trash;
+			case SEARCH:
+				return creteSearchedList();
 		}
 		return new CopyOnWriteArrayList<Mail>();
 	}
 
+	public static List<Mail> creteSearchedList(){
+		List<Mail> result = new CopyOnWriteArrayList<>();
+		getAllMail()
+			.stream()
+			.filter( a->
+			    a.getSender().contains(searchText) ||
+					a.getReciever().contains(searchText) ||
+					a.getSubject().contains(searchText) ||
+					a.getMessage().contains(searchText)
+			)
+
+			.collect(Collectors.toCollection( () -> result));
+		return result;
+	}
 
 	/**
 		a mthod that concat all lists of mail

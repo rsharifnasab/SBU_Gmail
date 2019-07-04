@@ -8,5 +8,6 @@ public enum MailFolder {
   INBOX,
   SENT,
   OUTBOX,
-  TRASH
+  TRASH,
+  SEARCH
 }

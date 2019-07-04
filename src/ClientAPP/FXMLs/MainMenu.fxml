@@ -97,5 +97,6 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
+      <TextArea fx:id="searchField" layoutX="117.0" layoutY="19.0" prefHeight="60.0" prefWidth="399.0" promptText="type here to search" wrapText="true" />
    </children>
 </AnchorPane>
