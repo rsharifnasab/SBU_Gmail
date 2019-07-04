@@ -7,12 +7,23 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+/**
+	client handler class that handle every client with uts new instace
+	when a client connected new instance (and new thread) of this class will be created
+	it saves socket and onput output stream in itself
+	it needs socket for instansiaction
+**/
 public class ClientHandler implements Runnable {
 
 	private Socket userSocket;
 	private ObjectOutputStream socketOut;
 	private ObjectInputStream socketIn;
 	public Boolean clientOnline = true;
+
+	/**
+		only constructor of this class
+		it give socket and create object input output stream and save them
+	**/
 	public ClientHandler(Socket socket){
 		try{
 			userSocket = socket;
@@ -23,6 +34,16 @@ public class ClientHandler implements Runnable {
 		}
 	}
 
+
+	/**
+		main method if this class that handle eveything
+		it is run method that runs in parallel when we call .start()
+		it give a map from socketint and read its command
+		and call api based on which command it should call
+		it use a swtich case that wich api should be called
+		after calling api it send answer to socketOut
+		if command is logout, it break the while and close the sockets
+	**/
 	@Override
 	@SuppressWarnings("unchecked")
 	public void run(){
@@ -61,7 +82,6 @@ public class ClientHandler implements Runnable {
 						answer = API.changeMail(income);
 						break;
 
-
 				}
 				socketOut.writeObject(answer);
 				socketOut.flush();
@@ -76,6 +96,7 @@ public class ClientHandler implements Runnable {
 			}
 
 		}
+		// after loggin out!
 		try{
 			socketIn.close();
 			socketOut.close();
@@ -83,7 +104,4 @@ public class ClientHandler implements Runnable {
 		}catch(IOException e){}
 
 	}
-
-
-
 }
