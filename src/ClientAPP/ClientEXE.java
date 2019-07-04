@@ -108,7 +108,7 @@ public class ClientEXE extends Application {
 	/**
 		dont waste your time understanding this Method
 		this method will give a mail String and search in all mails and return the Mail object that its toString equals the unput string
-		@@deprecated
+		@deprecated
 	**/
 	public static Mail findMailByString(String str){
 		try{
@@ -178,7 +178,7 @@ public class ClientEXE extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		pStage.setTitle( "Main Menu" );
+		pStage.setTitle( "SBU GMAIL" );
 		pStage.setScene( new Scene( root, 1280, 720 ) );
 		pStage.show();
 	}
