@@ -65,6 +65,7 @@ public class FirstPageController extends ParentController implements Initializab
 		also after connecting successfully it hide connect button
 	**/
 	public void connectToServer(){
+			ClientNetworker.serverAddress = serverAddressField.getText();
 			ClientNetworker.connectToServer();
 			if ( ClientNetworker.isConnected() ) {
 				onlineSphere.setVisible(true);

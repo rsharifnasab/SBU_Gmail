@@ -36,6 +36,7 @@ public class ClientNetworker{
 	public static Boolean connectToServer(){
 		if(socket != null) return false;
 		try{
+			System.out.println("server ip : " + serverAddress);
 			socket = new Socket( serverAddress, PORT);
 			socketOut = new ObjectOutputStream( socket.getOutputStream() );
 			socketIn = new ObjectInputStream( socket.getInputStream() );
