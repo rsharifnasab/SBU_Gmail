@@ -68,11 +68,14 @@ public class ClientNetworker{
 
 			return true;
 		}
-		catch( NullPointerException e){
+		catch (SocketException | NullPointerException e ){
 		}
 		catch( Exception e){
 			e.printStackTrace();
 		}
+		socket = null;
+		socketIn = null;
+		socketOut = null;
 		return false;
 	}
 

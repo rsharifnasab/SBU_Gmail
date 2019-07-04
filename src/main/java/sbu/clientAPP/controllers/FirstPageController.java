@@ -272,7 +272,7 @@ public class FirstPageController extends ParentController implements Initializab
 	**/
 	public void predictUsername(){
 		if (!ClientNetworker.isConnected())	return;
-
+		if(signupNameField.getText().length() > 1) return;
 		String predictedUsername = "";
 		int counter = 0;
 		final int MAX_TRY = 2;

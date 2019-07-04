@@ -83,7 +83,7 @@ public class MainMenuController extends ParentController implements Initializabl
       it also make current user profile in ClientEXE.profile empty
     **/
     public void logout(){
-      API.logout();
+      //API.logout();
       ClientNetworker.disconnectFromServer();
       ClientEXE.profile = null;
       this.loadPage ( "FirstPage" );
