@@ -174,10 +174,8 @@ public class ClientEXE extends Application {
 		pStage = primaryStage;
 		Parent root = null;
 		try {
-			final String dir = System.getProperty("user.dir");
-        System.out.println("current dir = " + dir);
 
-			root = FXMLLoader.load( getClass().getResource( "./clientAPP/FXMLs/FirstPage.fxml" ) );
+			root = FXMLLoader.load(getClass().getClassLoader().getResource( "FirstPage.fxml" ) );
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(13);

@@ -1,7 +1,7 @@
 
 client:
 	@echo "running client"
-	@java -cp target/gmail-1.0.jar  sbu.clientAPP.ClientEXE
+	@java -cp "target/gmail-1.0.jar:taget/classes"  sbu.clientAPP.ClientEXE
 
 server:
 	@echo "running server"

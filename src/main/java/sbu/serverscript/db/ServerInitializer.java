@@ -39,7 +39,7 @@ public void initializeServer(){
     inFromFile.close();
     fin.close();
   }
-  catch(EOFException e){
+  catch(EOFException | StreamCorruptedException e){
     ServerEXE.profiles = new ConcurrentHashMap<>();
   }catch (Exception e){
     e.printStackTrace();
