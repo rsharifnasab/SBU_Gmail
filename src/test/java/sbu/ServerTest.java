@@ -1,7 +1,6 @@
 package sbu;
 
 import sbu.serverscript.*;
-import sbu.serverscript.db.*;
 import sbu.common.*;
 
 import org.junit.*;
@@ -25,19 +24,21 @@ public class ServerTest{
   public Map<String,Object> toSend = null;
   public Map<String,Object> recieved = null;
 
-  private static  Map<String,Profile> profileBKP;
-  private static Set<Mail> MailBKP;
+  public static Map<String,Profile> profileBKP;
+  public static Set<Mail> MailBKP;
 
 
   /**
     this method will clone all databases for prevent change by api Call
     it save close in mailBKP and profileBKP
   **/
-  @BeforeBeforeClass
+  @BeforeClass
   public static void copyDB(){
+    DBManager.getInstance().initializeServer();
     profileBKP = new ConcurrentHashMap<>();
-    profileBKP.addAll(ServerEXE.profiles);
-    MailBKP = new new ConcurrentSkipListSet<>();
+    System.out.println("serverexex profiles : "  + ServerEXE.profiles);
+    profileBKP.putAll(ServerEXE.profiles);
+    MailBKP = new ConcurrentSkipListSet<>();
     MailBKP.addAll(ServerEXE.mails);
   }
 
@@ -49,7 +50,7 @@ public class ServerTest{
   public static void cleanDB(){
     ServerEXE.profiles = profileBKP;
     ServerEXE.mails = MailBKP;
-    DBUpdator.getInstance().updateDataBase();
+    DBManager.getInstance().updateDataBase();
   }
 
   /**

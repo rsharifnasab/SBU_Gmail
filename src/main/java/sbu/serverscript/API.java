@@ -1,7 +1,6 @@
 package sbu.serverscript;
 
 import sbu.common.*;
-import sbu.serverscript.db.*;
 
 import java.io.*;
 import java.net.*;
@@ -87,7 +86,7 @@ public class API {
 		Profile newProfile = (Profile) income.get("profile");
 		String username = newProfile.getUserName();
 		ServerEXE.profiles.put(username,newProfile);
-		DBUpdator.getInstance().updateDataBase(); // save to local file
+		DBManager.getInstance().updateDataBase(); // save to local file
 		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.SIGNUP);
 		ans.put("answer",new Boolean(true));
@@ -112,7 +111,7 @@ public class API {
 		Profile newProfile = (Profile) income.get("profile");
 		String username = newProfile.getUserName();
 		ServerEXE.profiles.replace(username,newProfile);
-		DBUpdator.getInstance().updateDataBase(); // save to local file
+		DBManager.getInstance().updateDataBase(); // save to local file
 
 		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.UPDATE_PROFILE);
@@ -142,7 +141,7 @@ public class API {
 
 		Mail mail = (Mail) income.get("mail");
 		ServerEXE.mails.add(mail);
-		DBUpdator.getInstance().updateDataBase(); // save to local file
+		DBManager.getInstance().updateDataBase(); // save to local file
 
 		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.SEND_MAIL);
@@ -236,7 +235,7 @@ public class API {
 		System.out.println("adding : " + newMail);
 		ServerEXE.mails.add(newMail);
 
-		DBUpdator.getInstance().updateDataBase(); // save to local file
+		DBManager.getInstance().updateDataBase(); // save to local file
 
 		Map<String,Object> ans = new HashMap<>();
 		ans.put("command",Command.CHANGE_MAIL);

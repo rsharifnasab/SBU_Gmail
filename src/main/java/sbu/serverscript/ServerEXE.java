@@ -1,7 +1,6 @@
 package sbu.serverscript;
 
 import sbu.common.*;
-import sbu.serverscript.db.*;
 
 import java.io.*;
 import java.net.*;
@@ -55,7 +54,7 @@ public class ServerEXE {
 		after every client is connected, it create a new client handler thread to manage it
 	**/
 	public static void main(String[] args) {
-		ServerInitializer.getInstance().initializeServer();
+		DBManager.getInstance().initializeServer();
 
 		ServerSocket serverSocket = null;
 

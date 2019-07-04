@@ -9,14 +9,16 @@
   <version>1.0</version>
 
   <name>gmail</name>
-  
+
   <url>http://sbu.ac.ir</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+  <!--  <exec.mainClass>sbu.clientAPP.ClientEXE</exec.mainClass> -->
   </properties>
+
 
   <dependencies>
     <dependency>
