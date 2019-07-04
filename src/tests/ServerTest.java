@@ -142,9 +142,7 @@ public class ServerTest{
     recieved = API.isUserNameExists(toSend);
     b = (boolean) recieved.get("answer");
     assertTrue( b );
-
   }
-
 
 
   @Test
@@ -167,6 +165,9 @@ public class ServerTest{
     boolean status =  (boolean) recieved.get("answer");
     assertTrue(status);
     assertTrue(ServerEXE.mails.contains(m1));
+    assertTrue(!m1.isUnRead());
+    Mail other = ServerEXE.mails.stream().filter(a-> a.equals(m1)).findFirst().get();
+    assertTrue(!other.isUnRead());
   }
 
   @Test
