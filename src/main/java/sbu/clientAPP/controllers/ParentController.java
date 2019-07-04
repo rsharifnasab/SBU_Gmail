@@ -26,7 +26,6 @@ public class ParentController {
 		open a dialog to choose image address and return loaded image
 	**/
 	public Image chooseImage() {
-		System.out.println("ok now choose profile photo");
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog( ClientEXE.pStage.getScene().getWindow() );
 		return new Image( file.toURI().toString() );

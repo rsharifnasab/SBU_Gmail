@@ -119,7 +119,6 @@ public class ClientEXE extends Application {
 			.get();
 			return mail;
 		} catch(NullPointerException e){
-			System.out.println("email not found fatal error");
 			return null; // alan masalan error handle shod!
 		}
 	}

@@ -62,10 +62,6 @@ public synchronized void initializeServer(){
   }catch (Exception e){
     e.printStackTrace();
   }
-  System.out.println(ServerEXE.mails.size());
-  for(Mail mail : ServerEXE.mails){
-    System.out.println(mail);
-  }
 }
 
 /**

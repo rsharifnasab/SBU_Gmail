@@ -36,7 +36,6 @@ public class ServerTest{
   public static void copyDB(){
     DBManager.getInstance().initializeServer();
     profileBKP = new ConcurrentHashMap<>();
-    System.out.println("serverexex profiles : "  + ServerEXE.profiles);
     profileBKP.putAll(ServerEXE.profiles);
     MailBKP = new ConcurrentSkipListSet<>();
     MailBKP.addAll(ServerEXE.mails);
