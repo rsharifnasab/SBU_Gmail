@@ -53,47 +53,47 @@
             <Font size="19.0" />
          </font>
       </Button>
-      <TextField fx:id="signupUsernameField" layoutX="721.0" layoutY="190.0" prefHeight="40.0" prefWidth="443.0" promptText="Username">
+      <TextField fx:id="signupUsernameField" layoutX="716.0" layoutY="320.0" prefHeight="40.0" prefWidth="457.0" promptText="Username">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Label layoutX="721.0" layoutY="160.0" text="Username">
+      <Label layoutX="716.0" layoutY="287.0" text="Username">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="720.0" layoutY="247.0" text="Password">
+      <Label layoutX="720.0" layoutY="360.0" text="Password">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <PasswordField fx:id="signupPasswordField" layoutX="720.0" layoutY="285.0" prefHeight="40.0" prefWidth="443.0" promptText="Password">
+      <PasswordField fx:id="signupPasswordField" layoutX="719.0" layoutY="388.0" prefHeight="40.0" prefWidth="302.0" promptText="Password">
          <font>
             <Font size="19.0" />
          </font>
       </PasswordField>
-      <Label layoutX="718.0" layoutY="346.0" text="Confirm Password">
+      <Label layoutX="718.0" layoutY="432.0" text="Confirm Password">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <PasswordField fx:id="signupConfirmPasswordField" layoutX="718.0" layoutY="384.0" prefHeight="40.0" prefWidth="443.0" promptText="Confirm Password">
+      <PasswordField fx:id="signupConfirmPasswordField" layoutX="719.0" layoutY="469.0" prefHeight="40.0" prefWidth="302.0" promptText="Confirm Password">
          <font>
             <Font size="19.0" />
          </font>
       </PasswordField>
-      <TextField fx:id="signupNameField" layoutX="719.0" layoutY="468.0" prefHeight="33.0" prefWidth="228.0" promptText="Full Name ">
+      <TextField fx:id="signupNameField" layoutX="715.0" layoutY="217.0" onAction="#predictUsername" onInputMethodTextChanged="#predictUsername" onKeyTyped="#predictUsername" prefHeight="40.0" prefWidth="457.0" promptText="Full Name ">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Label layoutX="722.0" layoutY="440.0" text="Name">
+      <Label layoutX="722.0" layoutY="167.0" text="Name and LastName">
          <font>
-            <Font size="17.0" />
+            <Font size="22.0" />
          </font>
       </Label>
-      <ImageView fx:id="profilePicture" fitHeight="125.0" fitWidth="129.0" layoutX="1029.0" layoutY="451.0" onMouseClicked="#chooseProfilePicture" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="profilePicture" fitHeight="125.0" fitWidth="129.0" layoutX="1078.0" layoutY="451.0" onMouseClicked="#chooseProfilePicture" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Assets/default_contact.png" />
          </image>
@@ -101,7 +101,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <TextField fx:id="signupAgeField" layoutX="719.0" layoutY="542.0" prefHeight="33.0" prefWidth="228.0" promptText="Birth year (ex: 2000)" text="">
+      <TextField fx:id="signupAgeField" layoutX="716.0" layoutY="541.0" prefHeight="39.0" prefWidth="302.0" promptText="Birth year (ex: 2000)" text="">
          <font>
             <Font size="17.0" />
          </font>

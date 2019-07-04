@@ -11,7 +11,7 @@ import javafx.stage.*;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
 	controll the first page (login and signup)
@@ -133,8 +133,9 @@ public class FirstPageController extends ParentController implements Initializab
 		local validation is checking that username only contains lowercase and uppercase and dot
 		it also show user dialog about validness and uniqness of username
 	**/
-	public boolean isValidUsername(){
-		char[] toCheck = signupUsernameField.getText().toCharArray();
+	public boolean isValidUsername(String username){
+
+		char[] toCheck = username.toCharArray();
 
 		boolean isValid = true;
 
@@ -200,7 +201,7 @@ public class FirstPageController extends ParentController implements Initializab
 		if ( hasEmptyField() ) return;
 		if (!isValidPassword(signupPasswordField.getText() , signupConfirmPasswordField.getText() ) ) return;
 		if (!isValidBirth(signupAgeField.getText())) return;
-		if (!isValidUsername()) return;
+		if (!isValidUsername(signupUsernameField.getText())) return;
 
 		//profile seems valid
 
@@ -232,7 +233,6 @@ public class FirstPageController extends ParentController implements Initializab
 		ir finally retirn the created profile
 
 	**/
-	//@SuppressWarnings("deprecation")
 	private Profile makeProfileFromPageContent() {
 		Profile returnValue = new Profile(signupUsernameField.getText());
 		returnValue.setPassword( signupPasswordField.getText() );
@@ -262,6 +262,31 @@ public class FirstPageController extends ParentController implements Initializab
 	    String title = "Error in login";
 	    String contentText = "invalid username or password\nTry again or sign up";
 	    this.makeAndShowInformationDialog( title, contentText );
+	}
+
+	/**
+		connected to change signup fullname Field
+		it will predict a good usrename based on current typed fullname
+		it also checks that predicted username is valid :)
+		it only work if you are connected to server for checking username validness
+	**/
+	public void predictUsername(){
+		if (!ClientNetworker.isConnected())	return;
+
+		String predictedUsername = "";
+		int counter = 0;
+		final int MAX_TRY = 2;
+		do {
+			String fullName = signupNameField.getText();
+			String firstName = fullName.split(" ")[0];
+			Random rnd = new Random();
+			String postFix = rnd.nextInt(1000) + "";
+			predictedUsername = firstName + postFix;
+			counter++;
+			if(counter > MAX_TRY) return;
+		} while (!isValidUsername(predictedUsername));
+
+		signupUsernameField.setText(predictedUsername);
 	}
 
 }
