@@ -127,6 +127,7 @@ public class ClientEXE extends Application {
 		find mail by index
 	**/
 	public static Mail findMailByIndex(int index){
+		if(index == -1) return null; //TODO
 			Mail mail = getMailsToShow().get(index);
 			return mail;
 	}

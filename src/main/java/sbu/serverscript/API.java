@@ -229,7 +229,7 @@ public class API {
 
 		DBManager.getInstance().updateDataBase(); // save to local file
 
-		String toPrint1 = newMail.getReciever() + " removemsg\n + message: " + newMail.getSubject() + " " + newMail.getSender() + "\n";
+		String toPrint1 = newMail.getReciever() + " removemsg\n + message: " + newMail.getSubject() + " " + newMail.getSender();
 		String toPrint2 = "\ntime: " + newMail.getTimeString();
 		System.out.println(toPrint1 + toPrint2);
 

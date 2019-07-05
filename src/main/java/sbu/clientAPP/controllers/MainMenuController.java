@@ -114,8 +114,12 @@ public class MainMenuController extends ParentController implements Initializabl
     **/
     @SuppressWarnings("unchecked")
     public void showMail(){
+      ObservableList<Mail> nothing = FXCollections.observableArrayList();
+      mailsListView.setItems(nothing);
+
       ObservableList<Mail> mail2show = FXCollections.observableArrayList(ClientEXE.getMailsToShow());
       mailsListView.setItems(mail2show);
+      mailsListView.refresh();
     }
 
     /**
@@ -180,10 +184,13 @@ public class MainMenuController extends ParentController implements Initializabl
       textLabel.setText(mail.getMessage());
       emailTimeLabel.setText(mail.getTimeString());
 
-      if(ClientEXE.mailFolder == MailFolder.INBOX){
-         API.readMail(mail);
-         checkMail();
-      }
+      if(!mail.isUnRead()) return;
+      if(ClientEXE.mailFolder != MailFolder.INBOX) return;
+
+      API.readMail(mail);
+      checkMail();
+      mail.read(); //TODO
+
     }
 
 
@@ -196,7 +203,10 @@ public class MainMenuController extends ParentController implements Initializabl
   public void deleteMail(){
       Mail mail = showingMail();
       if (mail == null) return;
-      if(ClientEXE.mailFolder == MailFolder.INBOX){
+      if(
+        ClientEXE.mailFolder == MailFolder.INBOX ||
+        ClientEXE.mailFolder == MailFolder.TRASH
+        ){
          API.trashMail(mail);
          checkMail();
       }
