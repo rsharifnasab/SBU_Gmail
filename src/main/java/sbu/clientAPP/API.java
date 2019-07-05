@@ -115,16 +115,31 @@ public class API{
 
 	/**
 		it updates a mail status
-		you can change trash and read status
-		you cant change subhect and text and sender and reciever because they are final
+		it will mark mail as send in server side
 	**/
-	public static boolean changeMail(Mail mail){
+	public static boolean readMail(Mail mail){
 		Map<String,Object> toSend = new HashMap<>();
-		toSend.put("command", Command.CHANGE_MAIL);
+		toSend.put("command", Command.READ_MAIL);
 		toSend.put("mail",mail);
 		Map<String,Object> recieved = ClientNetworker.serve(toSend);
 		return (boolean) recieved.get("answer");
 	}
+
+
+	/**
+		it updates a mail status
+		the mail will be marked as read
+	**/
+	public static boolean trashMail(Mail mail){
+		Map<String,Object> toSend = new HashMap<>();
+		toSend.put("command", Command.TRASH_MAIL);
+		toSend.put("mail",mail);
+		Map<String,Object> recieved = ClientNetworker.serve(toSend);
+		return (boolean) recieved.get("answer");
+	}
+
+
+
 
 	/**
 		this is not a pure api

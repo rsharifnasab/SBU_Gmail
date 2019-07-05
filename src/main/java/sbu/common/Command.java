@@ -38,8 +38,14 @@ public enum Command {
 /**
   command : Command , mail : Mail -> command : Command , answer : Boolean
 **/
-  CHANGE_MAIL,
+  READ_MAIL,
 
+  /**
+    command : Command , mail : Mail -> command : Command , answer : Boolean
+  **/
+  TRASH_MAIL,
+
+  
 
   /**
     command : Command , profile : Profile - > command : Command , answer : Boolean

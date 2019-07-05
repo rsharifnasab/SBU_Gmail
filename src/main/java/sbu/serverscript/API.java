@@ -200,46 +200,74 @@ public class API {
 		return ans;
 	}
 
+
 	/**
-		a method that get a new mail and comapre to old mail
-		and print logs based on which changes that new mail had
+		an api that get mail and delete it from Receiver inbox
+		it also save new db to file and print a log
 	**/
-	private static void changeMailLogger(Mail newMail){
-		List<Mail> possibleOptions = ServerEXE
+	public static Map<String,Object> trashMail(Map<String,Object> income){
+
+		Map<String,Object> ans = new HashMap<>();
+		ans.put("command",Command.TRASH_MAIL);
+
+		Mail newMail = (Mail) income.get("mail");
+
+		Mail oldMail = ServerEXE
 		.mails
 		.stream()
-		.filter(a-> a.toString().substring(3).equals(newMail.toString().substring(3)))
-		.collect (Collectors.toList());
-		if(possibleOptions.size() <1) return;
-		Mail oldMail = possibleOptions.get(0);
-		String toPrint1 = newMail.getReciever() + " mark\n + message: " + newMail.getSubject() + " " + newMail.getSender() + " as ";
-		String toPrint2 = "\ntime: " + newMail.getTimeString();
-		if( (newMail.isUnRead()) != ( oldMail.isUnRead() ) )
-			System.out.println(toPrint1 + "read" + toPrint2);
+		.filter( a -> a.equals(newMail) )
+		.findAny()
+		.get();
 
-		toPrint1 = newMail.getReciever() + " removemsg\n + message: " + newMail.getSubject() + " " + newMail.getSender() + "\n";
-		if(newMail.isTrashed() != oldMail.isTrashed())
-			System.out.println(toPrint1 + toPrint2);
-	}
+		if (oldMail == null) {
+			ans.put("answer",new Boolean(false));
+			return ans;
+		}
 
-	/**
-		an api that get mail and update an old mail in server with new mail
-		it can only change traashed status and read status
-		it also save new db to file
-	**/
-	public static Map<String,Object> changeMail(Map<String,Object> income){
-		Mail newMail = (Mail) income.get("mail");
-	  //changeMailLogger(newMail);
-		System.out.println(" set of mails contain new mail : " + ServerEXE.mails.contains(newMail));
-		System.out.println("removed status:" + ServerEXE.mails.remove(newMail) );
-		System.out.println("adding : " + newMail);
-		ServerEXE.mails.add(newMail);
+		oldMail.trash();
+		ans.put("answer",new Boolean(true));
 
 		DBManager.getInstance().updateDataBase(); // save to local file
 
+		String toPrint1 = newMail.getReciever() + " removemsg\n + message: " + newMail.getSubject() + " " + newMail.getSender() + "\n";
+		String toPrint2 = "\ntime: " + newMail.getTimeString();
+		System.out.println(toPrint1 + toPrint2);
+
+		return ans;
+	}
+
+
+	/**
+		an api that get mail and mark it as read
+		it also save new db to file and print a log
+	**/
+	public static Map<String,Object> readMail(Map<String,Object> income){
+
 		Map<String,Object> ans = new HashMap<>();
-		ans.put("command",Command.CHANGE_MAIL);
+		ans.put("command",Command.READ_MAIL);
+
+		Mail newMail = (Mail) income.get("mail");
+
+		Mail oldMail = ServerEXE
+		.mails
+		.stream()
+		.filter( a -> a.equals(newMail) )
+		.findAny()
+		.get();
+
+		if (oldMail == null) {
+			ans.put("answer",new Boolean(false));
+			return ans;
+		}
+
+		oldMail.read();
 		ans.put("answer",new Boolean(true));
+
+		DBManager.getInstance().updateDataBase(); // save to local file
+
+		String toPrint1 = newMail.getReciever() + " mark\n + message: " + newMail.getSubject() + " " + newMail.getSender() + " as ";
+		String toPrint2 = "\ntime: " + newMail.getTimeString();
+		System.out.println(toPrint1 + "read" + toPrint2);
 
 		return ans;
 	}

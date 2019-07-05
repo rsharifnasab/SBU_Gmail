@@ -168,40 +168,38 @@ public class MainMenuController extends ParentController implements Initializabl
     /**
       connected to every mail on click
       if user click on each mail, this  method will called
-      if we are in inbox, this will set showing mail to red and update it in server with updateMail api
-      it will find current showing mail by help of toString (explained in showingMail() )
+      if we are in inbox, this will set showing mail to red and update it in server with readMail api
     **/
     @FXML
     public void showOneMail() {
       Mail mail = showingMail();
       if (mail == null) return;
-      if(ClientEXE.mailFolder == MailFolder.INBOX){
-         mail.read(); // TODO
-         API.changeMail(mail);
-      }
+
       senderLabel.setText(mail.getSender()+Profile.POST_FIX);
       subjectLabel.setText(mail.getSubject());
       textLabel.setText(mail.getMessage());
       emailTimeLabel.setText(mail.getTimeString());
 
-
-      //showMail();
+      if(ClientEXE.mailFolder == MailFolder.INBOX){
+         API.readMail(mail);
+         checkMail();
+      }
     }
 
 
   /**
     connected to delete Button
     make an email trash ( and untrash if it is in trash folder )
-    it uses API.changeMail
-    changed mail is old mail but just called .trash()
-    it will call checkmail again to get new list from server
+    it uses API.trashMail
+    it will ask server to make mail as trashed and send new mail list back
   **/
   public void deleteMail(){
       Mail mail = showingMail();
       if (mail == null) return;
-      mail.trash();
-      API.changeMail(mail);
-      checkMail();
+      if(ClientEXE.mailFolder == MailFolder.INBOX){
+         API.trashMail(mail);
+         checkMail();
+      }
     }
 
     /**

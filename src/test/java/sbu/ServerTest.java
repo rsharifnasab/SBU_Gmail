@@ -208,21 +208,40 @@ public class ServerTest{
   }
 
   /**
-    it check changemail api
+    it check readmail api
   **/
   @Test
-  public void changeMailTest() {
-    m1.read();
-    toSend.put("command",Command.CHANGE_MAIL);
+  public void readMailTest() {
+    ServerEXE.mails.add(m1);
+    toSend.put("command",Command.READ_MAIL);
     toSend.put("mail",m1);
-    recieved = API.changeMail(toSend);
+    recieved = API.readMail(toSend);
     boolean status =  (boolean) recieved.get("answer");
     assertTrue(status);
     assertTrue(ServerEXE.mails.contains(m1));
-    assertTrue(!m1.isUnRead());
+    assertTrue(m1.isUnRead() == false);
     Mail other = ServerEXE.mails.stream().filter(a-> a.equals(m1)).findFirst().get();
     assertTrue(!other.isUnRead());
   }
+
+
+  /**
+    it check trashmail api
+  **/
+  @Test
+  public void trashMailTest() {
+    ServerEXE.mails.add(m2);
+    toSend.put("command",Command.TRASH_MAIL);
+    toSend.put("mail",m2);
+    recieved = API.trashMail(toSend);
+    boolean status =  (boolean) recieved.get("answer");
+    assertTrue(status);
+    assertTrue(ServerEXE.mails.contains(m2));
+    assertTrue(m2.isTrashed());
+    Mail other = ServerEXE.mails.stream().filter(a-> a.equals(m2)).findFirst().get();
+    assertTrue(other.isTrashed());
+  }
+
 
   /**
     it check logout api
