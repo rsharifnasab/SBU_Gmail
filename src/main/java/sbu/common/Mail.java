@@ -67,12 +67,12 @@ public class Mail implements Serializable , Comparable {
   it first compare by read and unread status and then compare with cretation time
   **/
   @Override
-  public int compareTo(Object o) {
+  public int compareTo(Object o) { // i dont even use this :)
     if (o instanceof Mail == false) return -1;
     Mail other = (Mail) o;
     if(this.isUnRead() &&  !other.isUnRead()) return -1;
     if(!this.isUnRead() &&  other.isUnRead()) return +1;
-    return createdTime.compareTo( other.createdTime ); //TODO if it sorts bad
+    return createdTime.compareTo( other.createdTime );
   }
 
   /**

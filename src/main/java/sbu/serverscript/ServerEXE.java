@@ -45,7 +45,7 @@ public class ServerEXE {
 		outcome.put("mail",answer);
 		outcome.put("command",Command.SEND_MAIL);
 		API.sendMail(outcome);
-		ServerEXE.mails.remove(mail); // delete invalid mail from server! //TODO
+		ServerEXE.mails.remove(mail); // delete invalid mail from server! 
 	}
 
 	/**
